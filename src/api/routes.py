@@ -20,3 +20,16 @@ def handle_hello():
     }
 
     return jsonify(response_body), 200
+
+@api.route('/user', methods=['GET'])
+def get_user():
+    user_list = user_service.get_list()
+
+    return jsonify(user_list), 200
+
+@api.route('/user', methods=['POST'])
+def add_user():
+    new_user = request.get_json()
+    user_service.add(new_user)
+
+    return jsonify(user), 200

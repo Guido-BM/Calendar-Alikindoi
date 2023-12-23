@@ -6,7 +6,14 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
+    name = db.Column(db.String(80), unique=False, nullable=False)
+    last_name = db.Column(db.String(80), unique=False, nullable=False)
+    phone_number = db.Column(db.String(80), unique=False, nullable=False)
+    username = db.Column(db.String(80), unique=False, nullable=False)
+    birth_date = db.Column(db.String(80), unique=False, nullable=False)
+    location = db.Column(db.String(80), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
+    tasks = db.relationship('Task', backpopulate='user')
 
     def __repr__(self):
         return f'<User {self.email}>'
