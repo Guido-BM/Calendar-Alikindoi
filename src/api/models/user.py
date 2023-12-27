@@ -1,4 +1,5 @@
 from .db import db
+from .event import Event
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
