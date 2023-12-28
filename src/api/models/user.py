@@ -22,7 +22,7 @@ class User(db.Model):
             "id": self.id,
             "name": self.name,
             "email": self.email,
-           "last_name": self.last_name, 
+            "last_name": self.last_name, 
             "phone_number": self.phone_number,
             "username": self.username,
             "birth_date": self.birth_date,
