@@ -1,5 +1,6 @@
 from .db import db
 from .event import Event
+from .transaction import Transaction
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -13,6 +14,7 @@ class User(db.Model):
     location = db.Column(db.String(80), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), nullable=False)
     events = db.relationship('Event', backref='user', lazy=True, cascade='all, delete-orphan')
+    transactions = db.relationship('Transaction', back_populates='user', lazy=True, cascade='all, delete-orphan') 
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -28,6 +30,4 @@ class User(db.Model):
             "birth_date": self.birth_date,
             "location": self.location,
             "is_active": self.is_active
-            
-
         }
