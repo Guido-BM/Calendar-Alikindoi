@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { ConfigProvider, Calendar } from "antd";
-import moment from "moment";
+import { Context } from "../store/appContext";
 import DateCellRender from "./dateCellRender";
 import PreviewLeft from "./previewLeft";
 
 const CalendarView = () => {
-  const [selectedDate, setSelectedDate] = useState(moment());
-  const [selectedEvents, setSelectedEvents] = useState([]);
-  const [savedMonthlyEvents, setSavedMonthlyEvents] = useState([]);
+  const { store, actions } = useContext(Context);
+  const selectedDate = store.selectedDate;
+  const selectedEvents = store.selectedEvents;
+  const savedMonthlyEvents = store.savedMonthlyEvents;
+  const setSelectedDate = actions.setSelectedDate;
+  const setSelectedEvents = actions.setSelectedEvents;
+  const setSavedMonthlyEvents = actions.setSavedMonthlyEvents;
 
   const getListData = (value) => {
     console.log(selectedEvents);
