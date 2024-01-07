@@ -82,6 +82,7 @@
 		"react-dom": "^16.8.4",
 		"react-polyfills": "0.0.1",
 		"react-router-dom": "^6.3.0",
+		"sass": "^1.69.7",
 		"sqlite3": "^5.1.6"
 	}
 }
