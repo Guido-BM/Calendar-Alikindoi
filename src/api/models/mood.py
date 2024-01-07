@@ -1,7 +1,8 @@
 from sqlalchemy import Enum
 from .db import db
+from sqlalchemy.orm import relationship
 
-class EmotionType(Enum):
+class MoodType(Enum):
     HAPPY = "happy"
     SAD = "sad"
     ANGRY = "angry"
@@ -20,12 +21,18 @@ class EmotionType(Enum):
     
 
 
-
-
-class Emotion(db.Model):
+class Mood(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    emotion_type = db.Column(Enum(EmotionType), nullable=False)
+    mood_type = db.Column(Enum(MoodType.HAPPY, MoodType.SAD, MoodType.ANGRY, MoodType.SURPRISED, MoodType.NEUTRAL, MoodType.RELAXED, MoodType.EXHAUSTED, MoodType.TIRED, MoodType.MOTIVATED, MoodType.THANKFUL, MoodType.STRESSED, MoodType.LOST, MoodType.FRIGHTENED, MoodType.EXCITED, MoodType.CONFUSED), nullable=False)
     event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False)
+    event = relationship("Event", back_populates="mood")
 
-    def __repr__(self):
-        return f'<Emotion {self.emotion_type}>'
+
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'mood_type': self.mood_type.value,
+            'event_id': self.event_id
+        }
+        
