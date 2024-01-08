@@ -12,6 +12,7 @@ from flask_sqlalchemy import SQLAlchemy
 from api.admin import setup_admin
 from api.commands import setup_commands
 from api.routes.transaction_route import transaction_api
+from api.routes.mood_route import mood_api
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 static_file_dir = os.path.join(os.path.dirname(
@@ -37,6 +38,7 @@ setup_commands(app)
 app.register_blueprint(event_api, url_prefix='/api')
 app.register_blueprint(user_api, url_prefix='/api')
 app.register_blueprint(transaction_api, url_prefix='/api')
+app.register_blueprint(mood_api, url_prefix='/api')
 
 # Handle/serialize errors like a JSON object
 @app.errorhandler(APIException)

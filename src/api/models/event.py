@@ -1,5 +1,6 @@
 from .db import db
 from datetime import datetime
+from .mood import Mood
 
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -8,6 +9,7 @@ class Event(db.Model):
     start_time = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     end_time = db.Column(db.DateTime, nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    mood = db.relationship('Mood', back_populates='event', lazy=True, cascade='all, delete-orphan')
 
     def __repr__(self):
         return f'<Event {self.title}>'
