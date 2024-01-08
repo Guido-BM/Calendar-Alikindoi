@@ -104,3 +104,47 @@ Upcoming features and improvements include:
 - **Documentation:** Maintain thorough documentation for code, APIs, and project setup. 
 - **Testing:** Implement unit testing for both frontend and backend components. 
 - **Deployment:** Plan for deployment strategies, considering platforms like Heroku, AWS, or others.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## ARREGLOS
+## 1. Scope and Functionality:
+- [DB+] Are there any specific user roles and permissions to be implemented in the app (e.g., admin, regular user)?
+- [DB+] How should the app handle recurring events in the calendar?
+- [DB+] What specific graphical representations of time usage are required (e.g., pie charts, bar graphs)?
+- [DB+] How should the application handle different time zones for users?
+## 3. Integration and APIs:
+- [DB+] What specific features should be integrated with Google Calendar (e.g., sync events, import/export)?
+- Are there any other third-party services or APIs (besides Nordigen) that the app should integrate with?
+## 4. User Interface and Experience:
+- Are there any specific UI/UX design guidelines or wireframes available for the application?
+- How should the event tagging feature interact with the user interface?
+## 5. Data Management and Storage:
+- [DB+] What specific data should be stored in the SQLite database, and are there any schema requirements?
+- [DB+] How should the app handle data backup and restoration?
+## 6. Security and Privacy:
+- What security measures are required for user data, especially financial information?
+- Are there any specific compliance standards (e.g., GDPR) that the app needs to adhere to?
+## 7. Performance and Scalability:
+- Are there any specific performance requirements or expected loads the application should support?
+- Should the architecture be scalable to accommodate future enhancements?
+## 8. Testing and Deployment:
+- What are the requirements for testing the application (e.g., unit tests, integration tests)?
+- Are there specific deployment strategies or environments in mind (e.g., cloud, on-premises)?
+## 9. Documentation and Support:
+- Is comprehensive documentation required for the code and user manuals?
+- What level of post-deployment support and maintenance is expected?
+## 10. Miscellaneous:
+- Are there any specific libraries or frameworks (besides React, Flask, SQLite) that should or should not be used?
