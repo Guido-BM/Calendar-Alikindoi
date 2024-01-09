@@ -23,7 +23,11 @@ export const Home = () => {
         </a>
       </p>
       <Link to="/demo">
-        <button className="btn btn-success">Check the Context in action</button>
+        <button className="btn btn-success">Calendar</button>
+      </Link>
+      <br />
+      <Link to="/about">
+        <button className="btn btn-primary">About</button>
       </Link>
       <br />
       <Link to="/login">
