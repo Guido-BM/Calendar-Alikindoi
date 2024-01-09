@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "src"
+version = "0.1.0"
+description = "Calendar-alikindoi poetry dependencies and packages"
+authors = ["El Muelas, Martilla, EloraDana, D0GM4D"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.6.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

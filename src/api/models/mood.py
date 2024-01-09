@@ -18,7 +18,7 @@ class MoodType(Enum):
     FRIGHTENED = "frightened"
     EXCITED = "excited"
     CONFUSED = "confused"
-    
+
 
 
 class Mood(db.Model):
@@ -28,7 +28,7 @@ class Mood(db.Model):
     event = relationship("Event", back_populates="mood")
 
 
-    
+
     def to_dict(self):
         return {
             'id': self.id,

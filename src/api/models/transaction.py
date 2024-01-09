@@ -8,7 +8,7 @@ class Transaction(db.Model):
     category = db.Column(db.String(50), nullable=True)
     type = db.Column(db.String(10), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    
+
     user = relationship("User", back_populates="transactions")
 
     def __repr__(self):
