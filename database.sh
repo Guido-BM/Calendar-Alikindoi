@@ -1,11 +1,11 @@
-creating_migration () 
+creating_migration ()
 {
   pipenv run init
   pipenv run migrate
   pipenv run upgrade
 }
 
-migrate_upgrade () 
+migrate_upgrade ()
 {
   pipenv run migrate
   pipenv run upgrade
