@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 
@@ -21,6 +22,17 @@ export const Home = () => {
           Read documentation
         </a>
       </p>
+      <Link to="/demo">
+        <button className="btn btn-success">Check the Context in action</button>
+      </Link>
+      <br />
+      <Link to="/login">
+        <button className="btn btn-primary">Login</button>
+      </Link>
+      <br />
+      <Link to="/signup">
+        <button className="btn btn-primary">Signup</button>
+      </Link>
     </div>
   );
 };
