@@ -13,12 +13,14 @@ from api.admin import setup_admin
 from api.commands import setup_commands
 from api.routes.transaction_route import transaction_api
 from api.routes.mood_route import mood_api
+from api.routes.auth_routes import auth_api
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 static_file_dir = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), '../public/')
 app = Flask(__name__)
 app.url_map.strict_slashes = False
+app.register_blueprint(auth_api)
 
 # Configuración de la base de datos para SQLite
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///app.db"
@@ -41,11 +43,15 @@ app.register_blueprint(transaction_api, url_prefix='/api')
 app.register_blueprint(mood_api, url_prefix='/api')
 
 # Handle/serialize errors like a JSON object
+
+
 @app.errorhandler(APIException)
 def handle_invalid_usage(error):
     return jsonify(error.to_dict()), error.status_code
 
 # generate sitemap with all your endpoints
+
+
 @app.route('/')
 def sitemap():
     if ENV == "development":
@@ -53,6 +59,8 @@ def sitemap():
     return send_from_directory(static_file_dir, 'index.html')
 
 # any other endpoint will try to serve it like a static file
+
+
 @app.route('/<path:path>', methods=['GET'])
 def serve_any_other_file(path):
     if not os.path.isfile(os.path.join(static_file_dir, path)):
@@ -60,6 +68,7 @@ def serve_any_other_file(path):
     response = send_from_directory(static_file_dir, path)
     response.cache_control.max_age = 0  # avoid cache memory
     return response
+
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
