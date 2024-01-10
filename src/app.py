@@ -13,7 +13,7 @@ from api.admin import setup_admin
 from api.commands import setup_commands
 from api.routes.transaction_route import transaction_api
 from api.routes.mood_route import mood_api
-from api.routes.auth_routes import auth_api
+from api.routes.auth_todoist_route import auth_api
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 static_file_dir = os.path.join(os.path.dirname(
