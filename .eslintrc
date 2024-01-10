@@ -13,7 +13,7 @@
     "no-unused-vars": 0,
     "no-console": 1,
     "no-mixed-spaces-and-tabs": 0,
-    "no-debugger": 0, 
+    "no-debugger": 0,
     "semi": ["error", "always"],
     "allowImportExportEverywhere": false,
     "indent": "off",
