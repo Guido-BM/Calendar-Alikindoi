@@ -1,6 +1,5 @@
 from flask import Blueprint, redirect, request
 import requests
-from requests.auth import HTTPBasicAuth
 
 auth_api = Blueprint('auth_api', __name__)
 
@@ -21,16 +20,22 @@ def callback():
     if not code:
         return 'Error: No code provided', 400
     try:
-        token_response = requests.post('https://todoist.com/oauth/access_token', auth=HTTPBasicAuth(client_id, client_secret), data={
+        data = {
+            'client_id': client_id,
+            'client_secret': client_secret,
             'code': code,
-            'redirect_uri': redirect_uri,
-            'grant_type': 'authorization_code'
-        }, timeout=10)  # Add timeout argument with a value of 10 seconds
-        token_response.raise_for_status()
-    except requests.exceptions.RequestException as e:
+            'redirect_uri': redirect_uri
+        }
+        response = requests.post(
+            'https://todoist.com/oauth/access_token', data=data)
+        token = response.json()
+        print(f"Token response: {token}")  # Print out the entire response
+    except Exception as e:
+        print(f"Error during fetch_token: {str(e)}")
         return f"Error: {str(e)}", 500
-    if token_response.text:
-        access_token = token_response.json().get('access_token')
+    if token:
+        access_token = token.get('access_token')
+        print(f"Access token: {access_token}")
     else:
         return "Error: Empty response from Todoist", 500
     return 'Successfully authenticated'
