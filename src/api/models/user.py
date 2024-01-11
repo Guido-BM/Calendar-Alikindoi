@@ -2,6 +2,7 @@ from .db import db
 from .event import Event
 from .transaction import Transaction
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), nullable=True)
@@ -13,8 +14,11 @@ class User(db.Model):
     birth_date = db.Column(db.String(80), unique=False, nullable=False)
     location = db.Column(db.String(80), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), nullable=False)
-    events = db.relationship('Event', backref='user', lazy=True, cascade='all, delete-orphan')
-    transactions = db.relationship('Transaction', back_populates='user', lazy=True, cascade='all, delete-orphan')
+    events = db.relationship('Event', backref='user',
+                             lazy=True, cascade='all, delete-orphan')
+    transactions = db.relationship(
+        'Transaction', back_populates='user', lazy=True, cascade='all, delete-orphan')
+    access_token = db.Column(db.String(255), nullable=True)
 
     def __repr__(self):
         return f'<User {self.email}>'

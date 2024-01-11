@@ -1,6 +1,13 @@
 const { TodoistApi } = require("@doist/todoist-api-typescript");
 
-const api = new TodoistApi({ authToken: "c5c356739009ab8b9e769aec7bee0585c1df546f" });
+// La función 'createApi' acepta un 'access_token' como parámetro
+function createApi(access_token) {
+      // Crea una nueva instancia de 'TodoistApi' con el 'access_token' proporcionado
+      const api = new TodoistApi({ authToken: access_token });
+
+      // Devuelve la instancia de 'api'
+      return api;
+}
 
 api.getProjects()
       .then((projects) => console.log(projects))
@@ -26,4 +33,4 @@ api.deleteProject("2203306141")
       .then((isSuccess) => console.log(isSuccess))
       .catch((error) => console.log(error))
 
-module.exports = api;
+module.exports = createApi;
