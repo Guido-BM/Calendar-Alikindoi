@@ -1,4 +1,6 @@
 from flask import Blueprint, redirect, request
+from api.services.todoist_service import TodoistServiceProjects
+from flask.json import jsonify
 import requests
 
 auth_api = Blueprint('auth_api', __name__)
@@ -36,6 +38,16 @@ def callback():
     if token:
         access_token = token.get('access_token')
         print(f"Access token: {access_token}")
+        # Assumning the user is logged in, we can get the user from the database
+
     else:
         return "Error: Empty response from Todoist", 500
     return 'Successfully authenticated'
+
+
+@auth_api.route('/todoist/projects')
+def get_projects():
+    access_token = request.args.get('access_token')
+    todoist_service = TodoistServiceProjects(access_token)
+    projects = todoist_service.get_projects()
+    return jsonify(projects)
