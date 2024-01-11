@@ -4,10 +4,13 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+api = TodoistAPI('8ce5618c71961c8f596f7dc06dd0e6466881b51d')
 
-class TodoistService:
+
+class TodoistServiceProjects:
     def __init__(self, access_token):
-        self.api = TodoistAPI(access_token)
+        self.api = api
+        print(access_token)
 
     def get_projects(self):
         try:
@@ -44,5 +47,11 @@ class TodoistService:
     def get_collaborators(self):
         try:
             return self.api.get_collaborators()
+        except Exception as error:
+            print(error)
+
+    def get_sections(self, project_id):
+        try:
+            return self.api.get_sections(project_id)
         except Exception as error:
             print(error)
