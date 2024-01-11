@@ -19,6 +19,13 @@ cloudinary = "*"
 flask-admin = "*"
 typing-extensions = "*"
 colorama = "*"
+apiclient = "*"
+cryptography = "*"
+jsonify = "*"
+pipx = "*"
+pre-commit = "*"
+requests-oauthlib = "*"
+todoist-api-python = "*"
 
 [requires]
 python_version = "3.10"
