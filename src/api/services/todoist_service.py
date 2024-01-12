@@ -4,7 +4,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-api = TodoistAPI('d5137b3c62cc6c9733acc52bb3064fdb40c1e117')
+api = TodoistAPI('0b41420452dd60a56a6dacb4d37f4d259fcd8587')
 
 
 class TodoistServiceProjects:

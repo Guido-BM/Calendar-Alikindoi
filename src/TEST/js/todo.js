@@ -8,7 +8,7 @@ function createApi(access_token) {
   // Devuelve la instancia de 'api'
   return api;
 }
-const api = createApi("d5137b3c62cc6c9733acc52bb3064fdb40c1e117");
+const api = createApi("0b41420452dd60a56a6dacb4d37f4d259fcd8587");
 api
   .getProjects()
   .then((projects) => console.log(projects))
