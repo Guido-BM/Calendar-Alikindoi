@@ -1,6 +1,6 @@
 from todoist_api_python.api import TodoistAPI
 
-api = TodoistAPI("c5c356739009ab8b9e769aec7bee0585c1df546f")
+api = TodoistAPI("d5137b3c62cc6c9733acc52bb3064fdb40c1e117")
 
 # try:
 #     projects = api.get_projects()

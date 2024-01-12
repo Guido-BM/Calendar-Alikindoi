@@ -5,8 +5,8 @@ import requests
 
 auth_api = Blueprint('auth_api', __name__)
 
-client_id = 'cc4d7bb11f96452fa6bcd38956c41ba7'
-client_secret = 'c5c3b2c440604c97938f4d9d2eac3386'
+# client_id = 'cc4d7bb11f96452fa6bcd38956c41ba7'
+# client_secret = 'c5c3b2c440604c97938f4d9d2eac3386'
 redirect_uri = 'http://127.0.0.1:3001/callback'
 
 
