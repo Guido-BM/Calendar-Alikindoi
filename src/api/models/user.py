@@ -4,7 +4,6 @@ from .transaction import Transaction
 from cryptography.fernet import Fernet
 
 
-
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), nullable=True)
@@ -21,8 +20,6 @@ class User(db.Model):
     transactions = db.relationship(
         'Transaction', back_populates='user', lazy=True, cascade='all, delete-orphan')
     access_token = db.Column(db.String(255), nullable=True)
-<<<<<<< HEAD
-=======
 
     @staticmethod
     # Generates a key for encrypting the access token
@@ -47,7 +44,6 @@ class User(db.Model):
 
     def get_encrypted_access_token(self):
         return self.access_token
->>>>>>> e9bd19ee6237193048055832b6dc6ed79446a66c
 
     def __repr__(self):
         return f'<User {self.email}>'
