@@ -21,11 +21,7 @@ def create_user():
     email = data.get('email')
     password = data.get('password')
     username = data.get('username')
-    birth_date = data.get('birth_date')
     location = data.get('location')
-    phone_number = data.get('phone_number')
-    last_name = data.get('last_name')
-    name = data.get('name')
     is_active = data.get('is_active', True)
 
     if email and password:
@@ -39,7 +35,7 @@ def update_user(user_id):
     user = UserService.get_user_by_id(user_id)
     if user:
         data = request.get_json()
-        UserService.update_user(user, email=data.get('email'), password=data.get('password'), is_active=data.get('is_active'), name=data.get('name'),username=data.get('username'), birth_date=data.get('birth_date'), location=data.get('location'), phone_number=data.get('phone_number'), last_name=data.get('last_name'))
+        UserService.update_user(user, email=data.get('email'), password=data.get('password'), is_active=data.get('is_active'),username=data.get('username'), location=data.get('location'))
         return jsonify(user.serialize())
     else:
         return jsonify({"error": "User not found"}), 404
