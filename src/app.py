@@ -11,16 +11,14 @@ from api.routes.user_route import user_api
 from flask_sqlalchemy import SQLAlchemy
 from api.admin import setup_admin
 from api.commands import setup_commands
-from api.routes.transaction_route import transaction_api
-from api.routes.mood_route import mood_api
-from api.routes.auth_todoist_route import auth_api
+from api.routes.expenses_route import expense_api
+
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 static_file_dir = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), '../public/')
 app = Flask(__name__)
 app.url_map.strict_slashes = False
-app.register_blueprint(auth_api)
 
 # Configuración de la base de datos para SQLite
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///app.db"
