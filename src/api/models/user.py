@@ -14,12 +14,12 @@ class User(db.Model):
     is_active = db.Column(db.Boolean(), nullable=False)
     
     # Add relationships
-    events = db.relationship('Event', backref='user', lazy=True)
-    GoogleCalendarEvent = db.relationship('GoogleCalendarEvent', backref='user', lazy=True)
-    expenses = db.relationship('Expenses', backref='user', lazy=True)
-    wallets = db.relationship('Wallet', backref='user', lazy=True)
-    piggybanks = db.relationship('Piggybank', backref='user', lazy=True)
-    tasks = db.relationship('Task', backref='user', lazy=True)
+    # events = db.relationship('Event', backref='user', lazy=True)
+    # GoogleCalendarEvent = db.relationship('GoogleCalendarEvent', backref='user', lazy=True)
+    # expenses = db.relationship('Expenses', backref='user', lazy=True)
+    # wallets = db.relationship('Wallet', backref='user', lazy=True)
+    # piggybanks = db.relationship('Piggybank', backref='user', lazy=True)
+    # tasks = db.relationship('Task', backref='user', lazy=True)
     
     
     
@@ -59,10 +59,10 @@ class User(db.Model):
             # "password": self.password,
             "location": self.location,
             "is_active": self.is_active,
-            "events": [event.serialize() for event in self.events],
-            "google_calendar_events": [google_calendar_event.serialize() for google_calendar_event in self.google_calendar_events],
-            "expenses": [expense.serialize() for expense in self.expenses],
-            "wallets": [wallet.serialize() for wallet in self.wallets],
-            "piggybanks": [piggybank.serialize() for piggybank in self.piggybanks],
-            "tasks": [task.serialize() for task in self.tasks]
+            # "events": [event.serialize() for event in self.events],
+            # "google_calendar_events": [google_calendar_event.serialize() for google_calendar_event in self.google_calendar_events],
+            # "expenses": [expense.serialize() for expense in self.expenses],
+            # "wallets": [wallet.serialize() for wallet in self.wallets],
+            # "piggybanks": [piggybank.serialize() for piggybank in self.piggybanks],
+            # "tasks": [task.serialize() for task in self.tasks]
         }

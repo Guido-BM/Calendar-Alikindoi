@@ -27,11 +27,11 @@ class GoogleCalendarEvent(db.Model):
         return {
             "id": self.id,
             "title": self.title,
-            "description": self.description,
+            "user_id": self.user_id,
             "start_time": self.start_time.isoformat(),
             "end_time": self.end_time.isoformat() if self.end_time else None,
+            "event_id": self.event_id,
+            "description": self.description,
             "sync_status": self.sync_status,
             "last_sync_time": self.last_sync_time.isoformat(),
-            "user_id": self.user_id,
-            "event_id": self.event_id,
         }

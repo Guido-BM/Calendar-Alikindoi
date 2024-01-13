@@ -14,11 +14,11 @@ class Event(db.Model):
     
     # Add relationships
     
-    google_calendar_event = db.relationship('GoogleCalendarEvent', backref='user', lazy=True)
-    expenses = db.relationship('Expenses', backref='user', lazy=True)
-    wallet = db.relationship('Wallet', backref='user', lazy=True)
-    piggybanks = db.relationship('Piggybank', backref='user', lazy=True)
-    event_tags = db.relationship('EventTag', backref='tag', lazy=True)
+    # google_calendar_event = db.relationship('GoogleCalendarEvent', backref='user', lazy=True)
+    # expenses = db.relationship('Expenses', backref='user', lazy=True)
+    # wallet = db.relationship('Wallet', backref='user', lazy=True)
+    # piggybanks = db.relationship('Piggybank', backref='user', lazy=True)
+    # event_tags = db.relationship('EventTag', backref='tag', lazy=True)
     
     def __repr__(self):
         return f'<Event {self.title}>'

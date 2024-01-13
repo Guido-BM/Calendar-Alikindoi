@@ -12,6 +12,7 @@ from flask_sqlalchemy import SQLAlchemy
 from api.admin import setup_admin
 from api.commands import setup_commands
 from api.routes.expenses_route import expense_api
+from api.routes.tag_route import tag_api
 
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
@@ -37,8 +38,8 @@ setup_commands(app)
 # Add all endpoints form the API with a "api" prefix
 app.register_blueprint(event_api, url_prefix='/api')
 app.register_blueprint(user_api, url_prefix='/api')
-app.register_blueprint(transaction_api, url_prefix='/api')
-app.register_blueprint(mood_api, url_prefix='/api')
+app.register_blueprint(expense_api, url_prefix='/api')
+app.register_blueprint(tag_api, url_prefix='/api')
 
 # Handle/serialize errors like a JSON object
 

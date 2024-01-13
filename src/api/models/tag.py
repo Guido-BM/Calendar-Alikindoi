@@ -7,7 +7,7 @@ class Tag(db.Model):
     name = db.Column(db.String(255), nullable=False)
     
     # Add relationships
-    event_tags = db.relationship('EventTag', backref='tag', lazy=True)
+    # event_tags = db.relationship('EventTag', backref='tag', lazy=True)
     
     def __repr__(self):
         return f'<Tag {self.name}>'
