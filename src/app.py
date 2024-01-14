@@ -16,6 +16,7 @@ from api.routes.tag_route import tag_api
 from api.routes.event_tag_route import event_tag_api
 from api.routes.wallet_route import wallet_api
 from api.routes.piggybank_route import piggybank_api
+from api.routes.google_calendar_event_route import get_google_calendar_event_api
 
 
 
@@ -48,6 +49,7 @@ app.register_blueprint(tag_api, url_prefix='/api')
 app.register_blueprint(event_tag_api, url_prefix='/api')
 app.register_blueprint(wallet_api, url_prefix='/api')
 app.register_blueprint(piggybank_api, url_prefix='/api')
+app.register_blueprint(get_google_calendar_event_api, url_prefix='/api')
 
 
 

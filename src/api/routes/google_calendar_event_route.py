@@ -1,14 +1,23 @@
-from flask import Flask, jsonify
-from googleapiclient.discovery import build
-from google_auth_oauthlib.flow import InstalledAppFlow
-from google.auth.transport.requests import Request
+import datetime
+import os.path
 
-app = Flask(__name__)
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
+from flask_cors import CORS
+from flask import Flask, jsonify
+from flask import Blueprint, request
+
+
+get_google_calendar_event_api = Blueprint('get_google_calendar_event_api', __name__)
+CORS(get_google_calendar_event_api)
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
-@app.route('/google_calendar_events', methods=['GET'])
+@get_google_calendar_event_api.route('/google_calendar_events', methods=['GET'])
 def get_google_calendar_events():
     creds = None
     # The file token.pickle stores the user's access and refresh tokens, and is
