@@ -8,7 +8,7 @@ export const LoginForm = () => {
   const { store, actions } = useContext(Context);
 
   const login = () => {
-    console.log(credenciales, { email, password });
+    console.log("credenciales", { email, password });
     actions.setToken(email, password);
   };
   return (
@@ -19,8 +19,7 @@ export const LoginForm = () => {
           <div className="inp">
             <input
               type="text"
-              name=""
-              id=""
+              id="email"
               className="input"
               placeholder="email"
               value={email}
@@ -31,8 +30,7 @@ export const LoginForm = () => {
           <div className="inp">
             <input
               type="password"
-              name=""
-              id=""
+              id="password"
               className="input"
               placeholder="password"
               value={password}

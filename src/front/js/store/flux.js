@@ -19,6 +19,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white",
         },
       ],
+      token: "",
     },
     message: null,
     demo: [
@@ -33,7 +34,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         initial: "white",
       },
     ],
-    token: "",
+
     actions: {
       // Use getActions to call a function within a fuction
       setSelectedDate: (date) => {
