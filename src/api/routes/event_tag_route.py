@@ -10,6 +10,11 @@ CORS(event_tag_api)
 event_tag_service = EventTagService()
 
 # Create
+@event_tag_api.route('/event_tag', methods=['GET'])
+def get_all_event_tags():
+    event_tags = event_tag_service.get_all_event_tags()
+    return jsonify(event_tags)
+
 @event_tag_api.route('/event_tag', methods=['POST'])
 def create_event_tag():
     data = request.get_json()

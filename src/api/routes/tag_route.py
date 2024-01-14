@@ -10,6 +10,11 @@ CORS(tag_api)
 tag_service = TagService()
 
 # Create
+@tag_api.route('/tag', methods=['GET'])
+def get_all_tags():
+    tags = tag_service.get_all_tags()
+    return jsonify(tags)
+
 @tag_api.route('/tag', methods=['POST'])
 def create_tag():
     data = request.get_json()

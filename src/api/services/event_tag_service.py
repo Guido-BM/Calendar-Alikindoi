@@ -3,9 +3,10 @@ from ..models.db import db
 from ..models.tag import Tag
 
 class EventTagService:
-    @staticmethod
-    def get_all_tags():
-        return Tag.query.all()
+    class EventTagService:
+        @staticmethod
+        def get_all_tags():
+            return Tag.query.all()
 
     @staticmethod
     def get_tag_by_id(tag_id):

@@ -1,6 +1,7 @@
 # rutas/event_routes.py
-from flask import request, jsonify, Blueprint
+from flask import request, Blueprint
 from flask_cors import CORS
+from flask import jsonify  # Import the jsonify function from the flask module
 from ..services.event_service import EventService
 
 event_api = Blueprint('event_api', __name__)
