@@ -3,7 +3,6 @@ from .db import db
 from cryptography.fernet import Fernet
 
 
-
 class User(db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
@@ -12,7 +11,7 @@ class User(db.Model):
     password = db.Column(db.String(255), nullable=False)
     location = db.Column(db.Text, nullable=True)
     is_active = db.Column(db.Boolean(), nullable=False)
-    
+
     # Add relationships
     # events = db.relationship('Event', backref='user', lazy=True)
     # GoogleCalendarEvent = db.relationship('GoogleCalendarEvent', backref='user', lazy=True)
