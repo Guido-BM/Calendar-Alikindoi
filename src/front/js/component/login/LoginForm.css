@@ -1,43 +1,46 @@
-*{
+* {
   margin: 0;
   padding: 0;
   font-family: arial;
-  color: #fff;
+  color: #772af8;
+  /* background: url("../../../img/bg-2.png"); */
 }
-body{
+body {
   width: 100vw;
   height: 100vh;
-  background: #081b29;
+  background: #b391e9;
+  /* background: url("../../../img/bg-2.png"); */
   display: grid;
   justify-content: center;
   align-content: center;
 }
-::-webkit-input-placeholder{
+::-webkit-input-placeholder {
   color: #eee;
 }
-.wrapper{
+.wrapper {
   position: relative;
   width: 800px;
   height: 65vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border: 3px solid #00ffff;
-  box-shadow: 0 0 50px 0 #00a6bc;
+  border: 3px solid #772af8;
+  box-shadow: 0 0 50px 0 #772af8;
+  /* border-radius: 10px; */
 }
-.form{
+.form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.title{
+.title {
   font-size: 35px;
 }
-.inp{
+.inp {
   padding-bottom: 10px;
   border-bottom: 2px solid #eee;
 }
-.input{
+.input {
   border: none;
   outline: none;
   background: none;
@@ -46,9 +49,8 @@ body{
   padding-right: 10px;
   font-size: 17px;
   color: #0ef;
-
 }
-.submit{
+.submit {
   border: none;
   outline: none;
   width: 288px;
@@ -58,25 +60,25 @@ body{
   border-radius: 40px;
   letter-spacing: 1px;
   cursor: pointer;
-  background: linear-gradient(45deg, #0ef, #c800ff);
+  background: linear-gradient(45deg, #d4c4e3, #f9cee2);
 }
-.footer{
+.footer {
   margin-top: 30px;
   letter-spacing: 0.5px;
   font-size: 14px;
 }
-.link{
-  color: #0ef;
+.link {
+  color: #772af8;
   text-decoration: none;
 }
-.banner{
+.banner {
   position: absolute;
   top: 0;
   right: 0;
   width: 450px;
   height: 390px;
-  background: linear-gradient(to right,#0ef, #c800ff );
-  clip-path: polygon(0 0,100% 0,100% 100%, 60% 100%);
+  background: linear-gradient(to right, #d4c4e3, #f9cee2);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 60% 100%);
   padding-right: 70px;
   text-align: right;
   display: flex;
@@ -84,12 +86,12 @@ body{
   justify-content: center;
   align-items: flex-end;
 }
-.wel_text{
+.wel_text {
   font-size: 40px;
   margin-top: -50px;
   line-height: 50px;
 }
-.para{
+.para {
   margin-top: 10px;
   font-size: 18px;
   line-height: 24px;
