@@ -2,7 +2,7 @@
 from ..models.db import db
 from ..models.tag import Tag
 
-class TagService:
+class EventTagService:
     @staticmethod
     def get_all_tags():
         return Tag.query.all()
