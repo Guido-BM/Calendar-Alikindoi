@@ -4,9 +4,9 @@ from datetime import datetime
 class GoogleCalendarEvent(db.Model):
     __tablename__ = 'google_calendar_event'
 
-    GoogleEvent_ID = db.Column(db.Integer, primary_key=True)
-    User_ID = db.Column(db.Integer, db.ForeignKey('users.User_ID'))
-    Event_ID = db.Column(db.Integer, db.ForeignKey('events.Event_ID'))
+    id = db.Column(db.Integer, primary_key=True)
+    User_ID = db.Column(db.Integer, db.ForeignKey('user.id'))
+    event_id = db.Column(db.Integer, db.ForeignKey('event.id'))  
     Title = db.Column(db.String(255))
     Description = db.Column(db.Text)
     Start_DateTime = db.Column(db.DateTime)
@@ -14,24 +14,18 @@ class GoogleCalendarEvent(db.Model):
     Sync_Status = db.Column(db.Boolean)
     Last_Sync_Time = db.Column(db.DateTime)
 
-    # Add relationships
-    events = db.relationship('Event', backref='user', lazy=True)
-    User_ID = db.relationship('User', backref='user', lazy=True)
-
-    
-
     def __repr__(self):
-        return f'<GoogleCalendarEvent {self.title}>'
+        return f'<GoogleCalendarEvent {self.Title}>'
 
     def serialize(self):
         return {
-            "id": self.id,
-            "title": self.title,
-            "user_id": self.user_id,
-            "start_time": self.start_time.isoformat(),
-            "end_time": self.end_time.isoformat() if self.end_time else None,
-            "event_id": self.event_id,
-            "description": self.description,
-            "sync_status": self.sync_status,
-            "last_sync_time": self.last_sync_time.isoformat(),
+            "id": self.GoogleEvent_ID,
+            "title": self.Title,
+            "user_id": self.User_ID,
+            "start_time": self.Start_DateTime.isoformat(),
+            "end_time": self.End_DateTime.isoformat() if self.End_DateTime else None,
+            "event_id": self.Event_ID,
+            "description": self.Description,
+            "sync_status": self.Sync_Status,
+            "last_sync_time": self.Last_Sync_Time.isoformat(),
         }

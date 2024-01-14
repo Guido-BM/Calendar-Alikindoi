@@ -3,7 +3,6 @@ from datetime import datetime
 
 
 class Event(db.Model):
-
     __tablename__ = 'event'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255), nullable=False)
@@ -13,12 +12,8 @@ class Event(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     
     # Add relationships
-    
-    # google_calendar_event = db.relationship('GoogleCalendarEvent', backref='user', lazy=True)
-    # expenses = db.relationship('Expenses', backref='user', lazy=True)
-    # wallet = db.relationship('Wallet', backref='user', lazy=True)
-    # piggybanks = db.relationship('Piggybank', backref='user', lazy=True)
-    # event_tags = db.relationship('EventTag', backref='tag', lazy=True)
+    google_calendar_event = db.relationship('GoogleCalendarEvent', backref='event', lazy=True)
+    event_tags = db.relationship('EventTag', back_populates='event')
     
     def __repr__(self):
         return f'<Event {self.title}>'

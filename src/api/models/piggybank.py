@@ -11,17 +11,16 @@ class Piggybank(db.Model):
     Deadline = db.Column(db.Date, nullable=False)
 
     # Add relationships
-    user = db.relationship('User', backref='user', lazy=True)
+    user = db.relationship('User', backref='piggybanks', lazy=True)  # Changed backref to 'piggybanks'
 
     def __repr__(self):
         return f'<Piggybank {self.Goal_ID}>'
 
-    def serialize(self):
+    def serialize(self):  # This should be an instance method, not a standalone function
         return {
-            "id": self.id,
-            "goal_id": self.goal_id,
-            "user_id": self.user_id,
-            "target_amount": self.target_amount,
-            "current_amount": self.current_amount,
-            "deadline": self.deadline,
+            "goal_id": self.Goal_ID,
+            "user_id": self.User_ID,
+            "target_amount": str(self.Target_Amount),
+            "current_amount": str(self.Current_Amount),
+            "deadline": self.Deadline.isoformat(),
         }

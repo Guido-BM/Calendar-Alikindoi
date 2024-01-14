@@ -26,6 +26,9 @@ pipx = "*"
 pre-commit = "*"
 requests-oauthlib = "*"
 todoist-api-python = "*"
+google-auth-oauthlib = "*"
+google-auth = "*"
+google-api-python-client = "*"
 
 [requires]
 python_version = "3.11"

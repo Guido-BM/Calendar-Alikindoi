@@ -5,6 +5,10 @@ from .models.db import db
 from .models.user import User
 from .models.event import Event
 from .models.expenses import Expenses
+from .models.event_tag import EventTag
+from .models.google_calendar_event import GoogleCalendarEvent
+from .models.piggybank import Piggybank
+from .models.wallet import Wallet
 from .models.tag import Tag
 from flask_admin.contrib.sqla import ModelView
 
@@ -19,6 +23,11 @@ def setup_admin(app):
     admin.add_view(ModelView(Event, db.session))
     admin.add_view(ModelView(Expenses, db.session))
     admin.add_view(ModelView(Tag, db.session))
+    admin.add_view(ModelView(EventTag, db.session))
+    admin.add_view(ModelView(GoogleCalendarEvent, db.session))
+    admin.add_view(ModelView(Piggybank, db.session))
+    admin.add_view(ModelView(Wallet, db.session))
+    
 
     # You can duplicate that line to add mew models
     # admin.add_view(ModelView(YourModelName, db.session))

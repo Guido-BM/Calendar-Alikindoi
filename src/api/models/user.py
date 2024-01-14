@@ -12,16 +12,6 @@ class User(db.Model):
     location = db.Column(db.Text, nullable=True)
     is_active = db.Column(db.Boolean(), nullable=False)
 
-    # Add relationships
-    # events = db.relationship('Event', backref='user', lazy=True)
-    # GoogleCalendarEvent = db.relationship('GoogleCalendarEvent', backref='user', lazy=True)
-    # expenses = db.relationship('Expenses', backref='user', lazy=True)
-    # wallets = db.relationship('Wallet', backref='user', lazy=True)
-    # piggybanks = db.relationship('Piggybank', backref='user', lazy=True)
-    # tasks = db.relationship('Task', backref='user', lazy=True)
-    
-    
-    
     @staticmethod
     # Generates a key for encrypting the access token
     def generate_key():

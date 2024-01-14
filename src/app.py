@@ -15,6 +15,7 @@ from api.routes.expenses_route import expense_api
 from api.routes.tag_route import tag_api
 
 
+
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 static_file_dir = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), '../public/')
@@ -40,6 +41,7 @@ app.register_blueprint(event_api, url_prefix='/api')
 app.register_blueprint(user_api, url_prefix='/api')
 app.register_blueprint(expense_api, url_prefix='/api')
 app.register_blueprint(tag_api, url_prefix='/api')
+
 
 # Handle/serialize errors like a JSON object
 

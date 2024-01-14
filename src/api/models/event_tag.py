@@ -4,12 +4,12 @@ from datetime import datetime
 class EventTag(db.Model):
     __tablename__ = 'event_tag'
     id = db.Column(db.Integer, primary_key=True)
-    event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False)
     tag_id = db.Column(db.Integer, db.ForeignKey('tag.id'), nullable=False)
     
-    # Add relationships
-    event = db.relationship('Event', backref='event', lazy=True)
     tag = db.relationship('Tag', backref='tag', lazy=True)
+    # Add relationships
+    event_id = db.Column(db.Integer, db.ForeignKey('event.id'))
+    event = db.relationship('Event', back_populates='event_tags')
     
     def __repr__(self):
         return f'<EventTag {self.id}>'
