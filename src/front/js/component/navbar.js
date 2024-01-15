@@ -8,12 +8,13 @@ export const Navbar = () => {
         <Link to="/about">
           <span className="navbar-brand mb-0 h1">About</span>
         </Link>
-
+        <br />
         <Link to="/login">
-          <button className="btn btn-primary">Login</button>
+          <span className="navbar-brand mb-0 h1">Login</span>
         </Link>
+        <br />
         <Link to="/signup">
-          <button className="btn btn-primary">Signup</button>
+          <span className="navbar-brand mb-0 h1">Signup</span>
         </Link>
       </div>
     </nav>
