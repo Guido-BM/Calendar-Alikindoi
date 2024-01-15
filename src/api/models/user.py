@@ -42,16 +42,9 @@ class User(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "username": self.username,
             "email": self.email,
-            # do not serialize the password, its a security breach
-            # "password": self.password,
+            "password": self.password,
+            "username": self.username,
             "location": self.location,
-            "is_active": self.is_active,
-            # "events": [event.serialize() for event in self.events],
-            # "google_calendar_events": [google_calendar_event.serialize() for google_calendar_event in self.google_calendar_events],
-            # "expenses": [expense.serialize() for expense in self.expenses],
-            # "wallets": [wallet.serialize() for wallet in self.wallets],
-            # "piggybanks": [piggybank.serialize() for piggybank in self.piggybanks],
-            # "tasks": [task.serialize() for task in self.tasks]
+            "is_active": self.is_active
         }

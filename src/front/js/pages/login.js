@@ -5,7 +5,7 @@ export const Login = () => {
   return (
     <>
       <div className="container">
-        <h1>Signup</h1>
+        <h1>Login</h1>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet
           libero vel nunc finibus ullamcorper. Nullam euismod, nisl vitae

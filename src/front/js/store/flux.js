@@ -6,6 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       selectedDate: moment(),
       selectedEvents: [],
       savedMonthlyEvents: [],
+      token: "",
       // other state variables...
       demo: [
         {
@@ -33,6 +34,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         initial: "white",
       },
     ],
+
     actions: {
       // Use getActions to call a function within a fuction
       setSelectedDate: (date) => {
@@ -73,6 +75,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         //reset the global store
         setStore({ demo: demo });
+      },
+      setToken: async (email, password) => {
+        const store = getStore();
+        const response = await fetch(`${process.env.BACKEND_URL}/api/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: email, password: password }),
+        });
+        const data = await response.json();
+        setStore({ ...store, token: data.token });
+        console.log(data.token);
+      },
+      clearToken: () => {
+        const store = getStore();
+        setStore({ ...store, token: "" });
       },
     },
   };

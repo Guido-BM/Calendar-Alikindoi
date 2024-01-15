@@ -3,7 +3,8 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 import os
 from flask import Flask, request, jsonify, url_for, send_from_directory
-from flask_migrate import Migrate  # Agrega esta línea
+from flask_migrate import Migrate
+from flask_jwt_extended import JWTManager
 from api.utils import APIException, generate_sitemap
 from api.models.db import db
 from api.routes.event_route import event_api
@@ -20,12 +21,19 @@ from api.routes.google_calendar_event_route import get_google_calendar_event_api
 
 
 
+from api.routes.auth_jwt_route import auth_jwt_api
+from flask_cors import CORS
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 static_file_dir = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), '../public/')
 app = Flask(__name__)
+CORS(app)
 app.url_map.strict_slashes = False
+
+# Configuracion de JWT
+app.config["JWT_SECRET_KEY"] = "1234"  # Change this "super secret" to something else!
+jwt = JWTManager(app)
 
 # Configuración de la base de datos para SQLite
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///app.db"
@@ -52,6 +60,7 @@ app.register_blueprint(piggybank_api, url_prefix='/api')
 app.register_blueprint(get_google_calendar_event_api, url_prefix='/api')
 
 
+app.register_blueprint(auth_jwt_api, url_prefix='/api')
 
 # Handle/serialize errors like a JSON object
 

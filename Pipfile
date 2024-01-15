@@ -30,6 +30,9 @@ google-auth-oauthlib = "*"
 google-auth = "*"
 google-api-python-client = "*"
 google-auth-httplib2 = "*"
+requests = "*"
+
+flask-jwt-extended = "*"
 
 [requires]
 python_version = "3.11"
