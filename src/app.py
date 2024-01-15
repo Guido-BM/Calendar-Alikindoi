@@ -2,6 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 import os
+from api.models.diagram_generator import Diagram
 from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_migrate import Migrate  # Agrega esta línea
 from api.utils import APIException, generate_sitemap
@@ -40,6 +41,8 @@ setup_admin(app)
 
 # add the admin
 setup_commands(app)
+
+Diagram.draw_diagram()
 
 # Add all endpoints form the API with a "api" prefix
 app.register_blueprint(event_api, url_prefix='/api')
