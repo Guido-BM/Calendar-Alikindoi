@@ -42,7 +42,10 @@ setup_admin(app)
 # add the admin
 setup_commands(app)
 
-Diagram.draw_diagram()
+
+# run this command first:   sudo apt update && sudo apt install -y graphviz libgraphviz-dev pkg-config
+# and include this package in pipfile eralchemy2 = "*"
+# Diagram.draw_diagram()
 
 # Add all endpoints form the API with a "api" prefix
 app.register_blueprint(event_api, url_prefix='/api')
