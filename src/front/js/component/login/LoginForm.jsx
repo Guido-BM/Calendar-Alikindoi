@@ -7,15 +7,14 @@ export const LoginForm = () => {
   const [password, setPassword] = useState("");
   const { store, actions } = useContext(Context);
 
-  const login = (event) => {
-    event.preventDefault();
+  const login = () => {
     console.log("credenciales", { email, password });
     actions.setToken(email, password);
   };
   return (
     <>
       <div className="wrapper">
-        <form action="" className="form">
+        <div className="form">
           <h1 className="title">Inicio</h1>
           <div className="inp">
             <input
@@ -48,7 +47,7 @@ export const LoginForm = () => {
               Por favor, Registrate
             </a>
           </p>
-        </form>
+        </div>
         <div></div>
         <div className="banner">
           <h1 className="wel_text">Bienvenid@</h1>
