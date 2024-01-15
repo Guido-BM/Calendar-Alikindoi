@@ -12,8 +12,7 @@ import { Signup } from "./pages/signup";
 
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
-import { TodoistView } from "./todoistView";
-
+// import { TodoistView } from "./todoistView";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -39,7 +38,7 @@ const Layout = () => {
             <Route element={<Login />} path="/login" />
             <Route element={<Signup />} path="/signup" />
             <Route element={<Single />} path="/single/:theid" />
-            <Route element={<TodoistView />} path="/todoist" />
+            {/* <Route element={<TodoistView />} path="/todoist" /> */}
             <Route element={<h1>Not found!</h1>} />
           </Routes>
           <Footer />
