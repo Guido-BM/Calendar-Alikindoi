@@ -7,7 +7,8 @@ export const LoginForm = () => {
   const [password, setPassword] = useState("");
   const { store, actions } = useContext(Context);
 
-  const login = () => {
+  const login = (event) => {
+    event.preventDefault();
     console.log("credenciales", { email, password });
     actions.setToken(email, password);
   };

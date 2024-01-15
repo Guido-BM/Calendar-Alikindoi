@@ -1,16 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-// import rigoImageUrl from "../../img/rigo-baby.jpg";
 import { LoginForm } from "../component/login/LoginForm";
-
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
+  const navigate = useNavigate();
 
-  return (
-    <div className="Home">
-      <LoginForm />
-    </div>
-  );
+  useEffect(() => {
+    if (store.token) {
+      navigate("/demo");
+    }
+  }, [store.token]);
+
+  return <div className="Home">{store.token ? null : <LoginForm />}</div>;
 };
