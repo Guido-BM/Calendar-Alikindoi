@@ -6,6 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       selectedDate: moment(),
       selectedEvents: [],
       savedMonthlyEvents: [],
+      token: "",
       // other state variables...
       demo: [
         {
@@ -19,7 +20,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white",
         },
       ],
-      token: "",
     },
     message: null,
     demo: [
@@ -83,12 +83,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            email: email,
-            password: password,
-          }),
+          body: JSON.stringify({ email: email, password: password }),
         });
-
         const data = await response.json();
         setStore({ ...store, token: data.token });
       },

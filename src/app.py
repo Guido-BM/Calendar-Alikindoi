@@ -16,11 +16,13 @@ from api.routes.transaction_route import transaction_api
 from api.routes.mood_route import mood_api
 from api.routes.auth_todoist_route import auth_api
 from api.routes.auth_jwt_route import auth_jwt_api
+from flask_cors import CORS
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 static_file_dir = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), '../public/')
 app = Flask(__name__)
+CORS(app)
 app.url_map.strict_slashes = False
 
 # Configuracion de JWT
