@@ -1,0 +1,68 @@
+/* Card.css */
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,400i,700");
+* {
+  font-family: Raleway, sans-serif;
+}
+
+.cardContainer {
+}
+.cardBack {
+}
+
+.flipperContainer {
+  border-radius:35px;
+}
+.flipperContainer, .cardFront, .cardBack {
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+	width: 300px;
+	height: 500px;
+  position: relative;
+  margin: 0 auto;
+}
+.flipperContainer:hover .flipper, .flipperContainer.hover .flipper {
+		-webkit-transform: rotateY(180deg);
+		transform: rotateY(180deg);
+}
+.flipper {
+	-webkit-transition: 1s;
+	-o-transition: 1s;
+	transition: 1s;
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+  border-radius:35px;
+  position: absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  margin:auto;
+}
+/* hide back of pane during swap */
+.cardFront, .cardBack {
+/* 	-webkit-backface-visibility: hidden; */
+/* 	        backface-visibility: hidden; */
+}
+
+/* front pane, placed above back */
+.cardFront {
+	z-index: 99;
+	/* for firefox 31 */
+	-webkit-transform: rotateY(0deg);
+	transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.cardBack {
+	-webkit-transform: rotateY(180deg);
+	transform: rotateY(180deg);
+}
+
+
+
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 10px;
+}
