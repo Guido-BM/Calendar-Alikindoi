@@ -1,20 +1,28 @@
 import React, { useContext, useState } from "react";
 import "./LoginForm.css";
 import { Context } from "../../store/appContext";
+import { Link, useNavigate } from "react-router-dom";
 
 export const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { store, actions } = useContext(Context);
+  const navigate = useNavigate();
 
   const login = () => {
     console.log("credenciales", { email, password });
-    actions.setToken(email, password);
+    const loginSuccessful = actions.setToken(email, password);
+    if (loginSuccessful) {
+      alert("Bienvenido");
+      navigate("/home");
+    } else {
+      alert("Usuario o contraseña incorrectos");
+    }
   };
   return (
     <>
       <div className="wrapper">
-        <div className="form">
+        <div>
           <h1 className="title">Inicio</h1>
           <div className="inp">
             <input
@@ -46,6 +54,10 @@ export const LoginForm = () => {
             <a href="#" className="link">
               Por favor, Registrate
             </a>
+            ¿No tienes cuenta?{" "}
+            <Link to="/signup" className="link">
+              Por favor, Registrate
+            </Link>
           </p>
         </div>
         <div></div>
