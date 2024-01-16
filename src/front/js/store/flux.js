@@ -7,6 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       selectedEvents: [],
       savedMonthlyEvents: [],
       token: "",
+      tokenTodoist: "",
       // other state variables...
       demo: [
         {
@@ -78,20 +79,47 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       setToken: async (email, password) => {
         const store = getStore();
-        const response = await fetch(`${process.env.BACKEND_URL}/api/login`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email: email, password: password }),
-        });
-        const data = await response.json();
-        setStore({ ...store, token: data.token });
-        console.log(data.token);
+        try {
+          const response = await fetch(`${process.env.BACKEND_URL}/api/login`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email: email, password: password }),
+          });
+          const data = await response.json();
+          setStore({ ...store, token: data.token });
+          console.log(data.token);
+        } catch (error) {
+          console.error("Error during authentication", error);
+        }
       },
       clearToken: () => {
         const store = getStore();
         setStore({ ...store, token: "" });
+      },
+      setTokenTodoist: async (code) => {
+        const store = getStore();
+        try {
+          const response = await fetch(`${process.env.BACKEND_URL}/api/todoist`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ code: code }),
+          });
+          const data = await response.json();
+          if (data.token) {
+            setStore({ ...store, tokenTodoist: data.token });
+            console.log("User is authenticated");
+          } else {
+            setStore({ ...store, tokenTodoist: "" });
+            console.log("User is not authenticated");
+          }
+        } catch (error) {
+          console.error("Error during authentication", error);
+          setStore({ ...store, tokenTodoist: "" });
+        }
       },
     },
   };

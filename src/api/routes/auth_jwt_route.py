@@ -1,4 +1,5 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, redirect, url_for
+from flask_cors import cross_origin
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from api.models.user import User
 
@@ -6,6 +7,7 @@ auth_jwt_api = Blueprint('auth_jwt_api', __name__)
 
 
 @auth_jwt_api.route('/login', methods=['POST', 'GET'])
+@cross_origin()
 def create_token():
     email = request.json.get('email', None)
     print(email)
@@ -16,7 +18,11 @@ def create_token():
         return jsonify({"msg": "Bad email or password"}), 401
 
     access_token = create_access_token(identity=email)
+
+    if user is not None:
+        return redirect(url_for('auth_todoist_api.todoist_auth'))
     return jsonify({"token": access_token, "user_id": user.id})
+    pass
 
 
 @auth_jwt_api.route("/protected", methods=["GET"])
