@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import "./LoginForm.css";
 import { Context } from "../../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
+
 export const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,7 +14,7 @@ export const LoginForm = () => {
     const loginSuccessful = actions.setToken(email, password);
     if (loginSuccessful) {
       alert("Bienvenido");
-      navigate("/demo");
+      navigate("/home");
     } else {
       alert("Usuario o contraseña incorrectos");
     }
