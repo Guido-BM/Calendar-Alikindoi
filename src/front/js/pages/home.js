@@ -1,18 +1,17 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { Context } from "../store/appContext";
-import { LoginForm } from "../component/login/LoginForm";
-import { useNavigate } from "react-router-dom";
+import Sidebar from "../layout/Sidebar/Sidebar";
+import {Content} from "../layout/Content/Content";
+import "./home.scss";
 
 export const Home = () => {
-  const { store, actions } = useContext(Context);
-  const navigate = useNavigate();
+  
 
-  useEffect(() => {
-    if (store.token) {
-      navigate("/demo");
-    }
-  }, [store.token]);
-
-  return <div className="Home">{store.token ? null : <LoginForm />}</div>;
+  return (
+  <>
+    <div className='home'>
+      {/* <Sidebar /> */}
+      <Content />
+    </div>
+  </>)
 };
