@@ -6,7 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       selectedDate: moment(),
       selectedEvents: [],
       savedMonthlyEvents: [],
-      token: "",
+      token: false,
       // other state variables...
       demo: [
         {
@@ -86,12 +86,17 @@ const getState = ({ getStore, getActions, setStore }) => {
           body: JSON.stringify({ email: email, password: password }),
         });
         const data = await response.json();
-        setStore({ ...store, token: data.token });
-        console.log(data.token);
+        if (data.token) {
+          setStore({ ...store, token: true });
+          console.log("User is authenticated");
+        } else {
+          setStore({ ...store, token: false });
+          console.log("User is not authenticated");
+        }
       },
       clearToken: () => {
         const store = getStore();
-        setStore({ ...store, token: "" });
+        setStore({ ...store, token: false });
       },
     },
   };
