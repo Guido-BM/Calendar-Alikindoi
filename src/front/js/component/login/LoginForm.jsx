@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import "./LoginForm.css";
 import { Context } from "../../store/appContext";
+import { Link } from "react-router-dom";
 
 export const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -43,9 +44,9 @@ export const LoginForm = () => {
           </button>
           <p className="footer">
             ¿No tienes cuenta?{" "}
-            <a href="#" className="link">
+            <Link to="/signup" className="link">
               Por favor, Registrate
-            </a>
+            </Link>
           </p>
         </div>
         <div></div>
