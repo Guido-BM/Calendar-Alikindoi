@@ -1,4 +1,5 @@
 import React from "react";
+import { LoginForm } from "../component/login/LoginForm";
 import { Link } from "react-router-dom";
 
 export const Login = () => {
@@ -13,10 +14,10 @@ export const Login = () => {
           velit non lorem. Vivamus nec magna eget ex ultricies lacinia. In hac
           habitasse platea dictumst.
         </p>
+        <div className="Home">
+          <LoginForm />
+        </div>
       </div>
-      <Link to="/">
-        <button className="btn btn-primary">Back home</button>
-      </Link>
     </>
   );
 };
