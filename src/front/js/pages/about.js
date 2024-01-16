@@ -1,22 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import CardContainer from "../component/About/CardContainer";
 
 export const About = () => {
   return (
     <>
-      <div className="container">
-        <h1>About</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet
-          libero vel nunc finibus ullamcorper. Nullam euismod, nisl vitae
-          aliquam ultricies, elit elit tincidunt massa, in ullamcorper nunc
-          velit non lorem. Vivamus nec magna eget ex ultricies lacinia. In hac
-          habitasse platea dictumst.
-        </p>
+      <div>
+        <CardContainer />
+      
       </div>
-      <Link to="/">
-        <button className="btn btn-primary">Back home</button>
-      </Link>
     </>
   );
 };
