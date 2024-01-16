@@ -20,7 +20,7 @@ from api.routes.piggybank_route import piggybank_api
 from api.routes.google_calendar_event_route import get_google_calendar_event_api
 
 
-
+from api.routes.auth_todoist_route import auth_todoist_api
 from api.routes.auth_jwt_route import auth_jwt_api
 from flask_cors import CORS
 
@@ -32,7 +32,8 @@ CORS(app)
 app.url_map.strict_slashes = False
 
 # Configuracion de JWT
-app.config["JWT_SECRET_KEY"] = "1234"  # Change this "super secret" to something else!
+# Change this "super secret" to something else!
+app.config["JWT_SECRET_KEY"] = "1234"
 jwt = JWTManager(app)
 
 # Configuración de la base de datos para SQLite
