@@ -6,7 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       selectedDate: moment(),
       selectedEvents: [],
       savedMonthlyEvents: [],
-      token: false,
+      token: "",
       tokenTodoist: "",
       // other state variables...
       demo: [
@@ -88,27 +88,30 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
         const data = await response.json();
         if (data.token) {
-          setStore({ ...store, token: true });
+          setStore({ ...store, token: data.token });
           console.log("User is authenticated");
         } else {
-          setStore({ ...store, token: false });
+          setStore({ ...store, token: "" });
           console.log("User is not authenticated");
         }
       },
       clearToken: () => {
         const store = getStore();
-        setStore({ ...store, token: false });
+        setStore({ ...store, token: "" });
       },
       setTokenTodoist: async (code) => {
         const store = getStore();
         try {
-          const response = await fetch(`${process.env.BACKEND_URL}/api/todoist`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ code: code }),
-          });
+          const response = await fetch(
+            `${process.env.BACKEND_URL}/api/todoist`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ code: code }),
+            }
+          );
           const data = await response.json();
           if (data.token) {
             setStore({ ...store, tokenTodoist: data.token });
