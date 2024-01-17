@@ -20,7 +20,10 @@ def create_token():
 
 
     return jsonify({"token": access_token, "user_id": user.id})
-    
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7f2ea37073fdd95bfdf87a38ae5b375445883da8
 
 
 @auth_jwt_api.route("/protected", methods=["GET"])
