@@ -45,6 +45,7 @@ def todoist_callback():
     if token:
         access_token = token.get('access_token')
         print(f"Access token: {access_token}")
+        return redirect(f"{redirect_uri}?accessToken={access_token}", code=302)
     else:
         return "Error: Empty response from Todoist", 500
-    return 'Successfully authenticated'
+    
