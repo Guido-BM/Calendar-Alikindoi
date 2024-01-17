@@ -22,7 +22,6 @@ def create_token():
     if user is not None:
         return redirect(url_for('auth_todoist_api.todoist_auth'))
     return jsonify({"token": access_token, "user_id": user.id})
-    pass
 
 
 @auth_jwt_api.route("/protected", methods=["GET"])
