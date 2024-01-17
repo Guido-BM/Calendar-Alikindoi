@@ -1,6 +1,6 @@
 import React from "react";
-import { savings } from "../../../data/data";
-import { iconsImgs, personsImgs } from "../../../utils/images";
+import { savings } from "../../data/data";
+import { iconsImgs, personsImgs } from "../../utils/images";
 import "./Savings.css";
 
 const Savings = () => {

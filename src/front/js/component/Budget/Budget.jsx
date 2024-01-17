@@ -1,7 +1,7 @@
 import React from "react";
 import "./Budget.css";
-import { iconsImgs } from "../../../utils/images.js";
-import { budget } from "../../../data/data.js";
+import { iconsImgs } from "../../utils/images.js";
+import { budget } from "../../data/data.js";
 
 const Budget = () => {
   return (
