@@ -49,12 +49,9 @@ const Financial = () => {
         {projects.map(project => (
           <p key={project.id}>{project.name}</p>
         ))}
-        <button onClick={() => setModalOpen(true)}>Add Task</button>
-        {modalOpen && (
-          <div>
-            <TaskModal handleInputChange={handleInputChange} handleAddTask={handleAddTask} />
-          </div>
-        )}
+        <div>
+          <TaskModal handleInputChange={handleInputChange} handleAddTask={handleAddTask} />
+        </div>
       </div>
     </div>
   );

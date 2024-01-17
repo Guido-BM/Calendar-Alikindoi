@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, ConfigProvider, Modal, Space } from 'antd';
+import { Button, Modal, Space } from 'antd';
 import { createStyles, useTheme } from 'antd-style';
 
 const useStyle = createStyles(({ token }) => ({
@@ -62,14 +62,11 @@ const TaskModal = () => {
             <>
                   <Space>
                         <Button type="primary" onClick={() => toggleModal(0, true)}>
-                              Open Modal
-                        </Button>
-                        <Button type="primary" onClick={() => toggleModal(1, true)}>
-                              ConfigProvider
+                              Anadir Tarea
                         </Button>
                   </Space>
                   <Modal
-                        title="Basic Modal"
+                        title="Anadir Tarea"
                         open={isModalOpen[0]}
                         onOk={() => toggleModal(0, false)}
                         onCancel={() => toggleModal(0, false)}
@@ -81,24 +78,6 @@ const TaskModal = () => {
                         <p>Some contents...</p>
                         <p>Some contents...</p>
                   </Modal>
-                  <ConfigProvider
-                        modal={{
-                              classNames,
-                              styles: modalStyles,
-                        }}
-                  >
-                        <Modal
-                              title="Basic Modal"
-                              open={isModalOpen[1]}
-                              onOk={() => toggleModal(1, false)}
-                              onCancel={() => toggleModal(1, false)}
-                              footer="Footer"
-                        >
-                              <p>Some contents...</p>
-                              <p>Some contents...</p>
-                              <p>Some contents...</p>
-                        </Modal>
-                  </ConfigProvider>
             </>
       );
 };
