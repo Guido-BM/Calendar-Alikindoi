@@ -1,41 +1,60 @@
-import React from "react";
-import { iconsImgs } from "../../utils/images.js";
-
-const BACKEND_URL = process.env.BACKEND_URL;
-
-const todoistAuth = () => {
-  fetch(`${process.env.BACKEND_URL}/api/todoist/auth`)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.text();
-    })
-    .then((text) => {
-      try {
-        return JSON.parse(text);
-      } catch (error) {
-        console.error("Error parsing JSON:", error);
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-};
+import React, { useEffect, useState } from 'react';
+import { getTasks, addTask, updateTask, deleteTask, closeTask, getProjects } from '../../store/todoistService';
+import TaskModal from './TaskModal.jsx';
 
 const Financial = () => {
+  const [tasks, setTasks] = useState([]);
+  const [projects, setProjects] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [newTask, setNewTask] = useState('');
+
+
+  useEffect(() => {
+    getTasks().then(task => setTasks(task));
+    getProjects().then(project => setProjects(project));
+  }, []);
+
+  const handleInputChange = (event) => {
+    setNewTask(event.target.value);
+  };
+
+  const handleAddTask = () => {
+    const taskToAdd = { content: newTask };
+    addTask(taskToAdd)
+      .then(addedTask => {
+        if (addedTask && addedTask.id) {
+          setTasks(prevTasks => [...prevTasks, addedTask]);
+        } else {
+          // handle the case where addedTask is undefined or doesn't have an id
+        }
+      })
+      .catch(error => {
+        // handle the error
+      });
+    setNewTask('');
+    setModalOpen(false);
+  };
+
   return (
     <div className="subgrid-two-item grid-common grid-c8">
       <div className="grid-c-title">
         <h3 className="text text-silver-v1">TODOIST</h3>
-        <button onClick={todoistAuth}>
-          <img src={iconsImgs.plus} />
-        </button>
       </div>
-      <div className="grid-c8-content">
-        <p className="text text-silver-v1">
-          Ipsum dolor sit amet consectetur, adipisicing elit. Iste, vitae.....
-        </p>
+      <div className="grid-c8-content" style={{ overflowY: 'auto', maxHeight: '90px' }}>
+        <h4>Tasks:</h4>
+        {tasks.map(task => (
+          <p key={task.id}>{task.content}</p>
+        ))}
+        <h4>Projects:</h4>
+        {projects.map(project => (
+          <p key={project.id}>{project.name}</p>
+        ))}
+        <button onClick={() => setModalOpen(true)}>Add Task</button>
+        {modalOpen && (
+          <div>
+            <TaskModal handleInputChange={handleInputChange} handleAddTask={handleAddTask} />
+          </div>
+        )}
       </div>
     </div>
   );
