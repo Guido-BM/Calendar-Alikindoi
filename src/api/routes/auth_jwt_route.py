@@ -7,7 +7,6 @@ auth_jwt_api = Blueprint('auth_jwt_api', __name__)
 
 
 @auth_jwt_api.route('/login', methods=['POST', 'GET'])
-@cross_origin()
 def create_token():
     email = request.json.get('email', None)
     print(email)
@@ -19,9 +18,12 @@ def create_token():
 
     access_token = create_access_token(identity=email)
 
-    if user is not None:
-        return redirect(url_for('auth_todoist_api.todoist_auth'))
+
     return jsonify({"token": access_token, "user_id": user.id})
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7f2ea37073fdd95bfdf87a38ae5b375445883da8
 
 
 @auth_jwt_api.route("/protected", methods=["GET"])
