@@ -5,9 +5,10 @@ import secrets
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, decode_token
 from api.models.user import User
 from jwt.exceptions import ExpiredSignatureError, InvalidTokenError
+from flask_cors import CORS
 
-auth_todoist_api = Blueprint('auth_todoist_api', __name__)\
-
+auth_todoist_api = Blueprint('auth_todoist_api', __name__)
+CORS(auth_todoist_api)
 client_id = os.getenv('TODOIST_CLIENT_ID')
 client_secret = os.getenv('TODOIST_CLIENT_SECRET')
 redirect_uri = os.getenv('TODOIST_REDIRECT_URI')
@@ -15,7 +16,7 @@ state = secrets.token_hex(16)
 scope = 'task:add,data:read,data:read_write,data:delete,project:delete'
 
 
-@auth_todoist_api.route('/todoist/auth')
+@auth_todoist_api.route('/todoist/auth', methods=['GET', 'POST'])
 def todoist_auth():
     auth_url = f'https://todoist.com/oauth/authorize?client_id={client_id}&scope={scope}&state={state}'
     return redirect(auth_url)
