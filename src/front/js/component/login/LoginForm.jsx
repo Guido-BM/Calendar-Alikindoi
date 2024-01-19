@@ -32,6 +32,7 @@ export const LoginForm = () => {
               placeholder="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              autoComplete="email"
             />
             <i className="fa-solid fa-user"></i>
           </div>
@@ -43,6 +44,7 @@ export const LoginForm = () => {
               placeholder="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              autoComplete="current-password"
             />
             <i className="fa-solid fa-lock"></i>
           </div>
@@ -50,10 +52,6 @@ export const LoginForm = () => {
             Iniciar sesión
           </button>
           <p className="footer">
-            ¿No tienes cuenta?{" "}
-            <a href="#" className="link">
-              Por favor, Registrate
-            </a>
             ¿No tienes cuenta?{" "}
             <Link to="/signup" className="link">
               Por favor, Registrate

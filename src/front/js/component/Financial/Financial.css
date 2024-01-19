@@ -3,4 +3,5 @@
   height: 10px;
   background-color: var(--clr-pumpkin);
   border-radius: 100vh;
+  overflow-y: auto;
 }
