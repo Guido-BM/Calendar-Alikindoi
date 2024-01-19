@@ -87,7 +87,8 @@
     "react-polyfills": "0.0.1",
     "react-router-dom": "^6.3.0",
     "sqlite3": "^5.1.6",
-    "stream-browserify": "^3.0.0"
+    "stream-browserify": "^3.0.0",
+    "styled-components": "^6.1.8"
   },
   "proxy": "http://localhost:3001"
 }
