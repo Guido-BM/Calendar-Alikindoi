@@ -1,18 +1,37 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { Context } from "../store/appContext";
-import { LoginForm } from "../component/login/LoginForm";
-import { useNavigate } from "react-router-dom";
+import Cards from "../component/Cards/Cards";
+import Transactions from "../component/Transactions/Transactions";
+import Report from "../component/Report/Report";
+import Budget from "../component/Budget/Budget";
+import Subscriptions from "../component/Subscriptions/Subscriptions";
+import Financial from "../component/Financial/Financial";
+
+import "./home.scss";
 
 export const Home = () => {
-  const { store, actions } = useContext(Context);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (store.token) {
-      navigate("/demo");
-    }
-  }, [store.token]);
-
-  return <div className="Home">{store.token ? null : <LoginForm />}</div>;
+  return (
+    <>
+      <div className="home" style={{ height: "100vh" }}>
+        <div className="main-content">
+          <div className="main-content-holder">
+            <div className="content-grid-one">
+              <Cards />
+              <Subscriptions />
+              <Report />
+            </div>
+            <div className="content-grid-two">
+              <div className="grid-two-item">
+                <div className="subgrid-two">
+                  <Financial />
+                  <Transactions />
+                </div>
+              </div>
+              <Budget />
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };

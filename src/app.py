@@ -3,6 +3,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 import os
 from flask import Flask, request, jsonify, url_for, send_from_directory
+from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
 from api.utils import APIException, generate_sitemap
@@ -28,7 +29,7 @@ ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 static_file_dir = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), '../public/')
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=["http://localhost:3000", "http://localhost:3001","http://localhost:3001/api/todoist/auth", "http://localhost:3001/api/todoist/callback","http://127.0.0.1:3000/home?"])
 app.url_map.strict_slashes = False
 
 # Configuracion de JWT
@@ -60,7 +61,7 @@ app.register_blueprint(wallet_api, url_prefix='/api')
 app.register_blueprint(piggybank_api, url_prefix='/api')
 app.register_blueprint(get_google_calendar_event_api, url_prefix='/api')
 
-
+app.register_blueprint(auth_todoist_api, url_prefix='/api')
 app.register_blueprint(auth_jwt_api, url_prefix='/api')
 
 # Handle/serialize errors like a JSON object

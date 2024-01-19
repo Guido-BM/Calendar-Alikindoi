@@ -33,6 +33,10 @@ module.exports = {
         },
       }, //for images
       {
+        test: /\.(png|jp(e*)g|svg|gif)$/,
+        type: "asset/resource",
+      },
+      {
         test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
         use: ["file-loader"],
       }, //for fonts
@@ -40,6 +44,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
+    fallback: {
+      "stream": require.resolve("stream-browserify"),
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({

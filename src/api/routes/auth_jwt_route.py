@@ -1,8 +1,11 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, redirect, url_for
+from flask_cors import CORS
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from api.models.user import User
 
 auth_jwt_api = Blueprint('auth_jwt_api', __name__)
+CORS(auth_jwt_api)
+
 
 
 @auth_jwt_api.route('/login', methods=['POST', 'GET'])
@@ -16,8 +19,9 @@ def create_token():
         return jsonify({"msg": "Bad email or password"}), 401
 
     access_token = create_access_token(identity=email)
-    return jsonify({"token": access_token, "user_id": user.id})
 
+
+    return jsonify({"token": access_token, "user_id": user.id})
 
 @auth_jwt_api.route("/protected", methods=["GET"])
 @jwt_required()
