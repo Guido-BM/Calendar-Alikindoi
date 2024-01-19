@@ -1,38 +1,56 @@
-import React from "react";
-import { subscriptions } from "../../data/data";
-import { iconsImgs } from "../../utils/images";
-import "./Subscriptions.css";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import OverViewComponent from "./overViewComponent";
+import TransactionsComponent from "./transactionsComponent";
 
-const Subscriptions = () => {
+const Container = styled.div`
+  background-color: white;
+  color: #0d1d2c;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 22px;
+  font-size: 18px;
+  width: 360px;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const Wallet = (props) => {
+  const [transactions, updateTransaction] = useState([]);
+  const [expense, updateExpense] = useState(0);
+  const [income, updateIncome] = useState(0);
+
+  const calculateBalance = () => {
+    let exp = 0;
+    let inc = 0;
+    transactions.map((payload) =>
+      payload.type === "EXPENSE"
+        ? (exp = exp + payload.amount)
+        : (inc = inc + payload.amount)
+    );
+    updateExpense(exp);
+    updateIncome(inc);
+  };
+  useEffect(() => calculateBalance(), [transactions]);
+
+  const addTransaction = (payload) => {
+    const transactionArray = [...transactions];
+    transactionArray.push(payload);
+    updateTransaction(transactionArray);
+  };
   return (
-    <div className="subgrid-two-item grid-common grid-c5">
-      <div className="grid-c-title">
-        <h3 className="grid-c-title-text">Subscriptions</h3>
-        <button className="grid-c-title-icon">
-          <img src={iconsImgs.plus} />
-        </button>
-      </div>
-      <div className="grid-c5-content">
-        <div className="grid-items">
-          {subscriptions.map((subscription) => (
-            <div className="grid-item" key={subscription.id}>
-              <div className="grid-item-l">
-                <div className="icon">
-                  <img src={iconsImgs.alert} />
-                </div>
-                <p className="text text-silver-v1">
-                  {subscription.title} <span>due {subscription.due_date}</span>
-                </p>
-              </div>
-              <div className="grid-item-r">
-                <span className="text-silver-v1">$ {subscription.amount}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+    <Container>
+      <OverViewComponent
+        expense={expense}
+        income={income}
+        addTransaction={addTransaction}
+      />
+      {transactions?.length ? (
+        <TransactionsComponent transactions={transactions} />
+      ) : (
+        ""
+      )}
+    </Container>
   );
 };
-
-export default Subscriptions;
+export default Wallet;
