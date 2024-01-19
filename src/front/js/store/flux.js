@@ -113,8 +113,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           );
           const data = await response.json();
-          if (data.token) {
-            setStore({ ...store, tokenTodoist: data.token });
+          if (data.access_token) {
+            setStore({ ...store, tokenTodoist: data.access_token });
             console.log("User is authenticated");
           } else {
             setStore({ ...store, tokenTodoist: "" });

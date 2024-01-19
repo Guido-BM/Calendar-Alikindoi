@@ -10,15 +10,14 @@ import { About } from "./pages/about";
 import { Login } from "./pages/login";
 import { Signup } from "./pages/signup";
 
-import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 // import { TodoistView } from "./todoistView";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 
-import LoginForm  from "./component/login/LoginForm";
-
+import LoginForm from "./component/login/LoginForm";
+import LandingPage from "./pages/landing";
 
 //create your first component
 const Layout = () => {
@@ -35,12 +34,13 @@ const Layout = () => {
         <ScrollToTop>
           <Navbar />
           <Routes>
-            <Route element={<Login />} path="/" />
+            <Route element={<LandingPage />} path="/" />
+            <Route element={<Login />} path="/login" />
             <Route element={<Signup />} path="/signup" />
             <Route element={<Home />} path="/home" />
             <Route element={<Demo />} path="/demo" />
             <Route element={<About />} path="/about" />
-            <Route element={<Single />} path="/single/:theid" />
+
             {/* <Route element={<TodoistView />} path="/todoist" /> */}
             <Route element={<h1>Not found!</h1>} />
           </Routes>
