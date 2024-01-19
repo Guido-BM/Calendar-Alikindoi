@@ -4,7 +4,7 @@ import Cards from "../component/Cards/Cards";
 import Transactions from "../component/Transactions/Transactions";
 import Report from "../component/Report/Report";
 import Budget from "../component/Budget/Budget";
-import Subscriptions from "../component/Subscriptions/Subscriptions";
+import Wallet from "../component/Subscriptions/Wallet";
 import Financial from "../component/Financial/Financial";
 
 import "./home.scss";
@@ -17,7 +17,7 @@ export const Home = () => {
           <div className="main-content-holder">
             <div className="content-grid-one">
               <Cards />
-              <Subscriptions />
+              <Wallet />
               <Report />
             </div>
             <div className="content-grid-two">
