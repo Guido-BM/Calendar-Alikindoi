@@ -3,7 +3,7 @@
 * {
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
+  
 }
 
 :root {
@@ -142,7 +142,7 @@ button {
 }
 .content-grid-two {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 28ch auto;
   column-gap: 16px;
 }
 
