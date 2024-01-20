@@ -95,6 +95,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("User is not authenticated");
         }
       },
+      updateToken: (token) => {
+        const store = getStore();
+        setStore({ ...store, token: token });
+      },
       clearToken: () => {
         const store = getStore();
         setStore({ ...store, token: "" });
