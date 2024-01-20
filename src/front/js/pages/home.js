@@ -6,6 +6,7 @@ import Report from "../component/Report/Report";
 import Budget from "../component/Budget/Budget";
 import Wallet from "../component/Subscriptions/Wallet";
 import Financial from "../component/Financial/Financial";
+import Pomodoro from "../component/Pomodoro/Pomodoro";
 
 import "./home.scss";
 
@@ -24,7 +25,7 @@ export const Home = () => {
               <div className="grid-two-item">
                 <div className="subgrid-two">
                   <Financial />
-                  <Transactions />
+                  <Pomodoro />
                 </div>
               </div>
               <Budget />
