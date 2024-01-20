@@ -1,11 +1,13 @@
 import React from "react";
 import { iconsImgs } from "../../utils/images.js";
 import "./Cards.css";
+import { Weather } from "../weather/Weather.jsx";
 
 const Cards = () => {
   return (
     <div className="grid-one-item grid-common grid-c1">
-      <div className="grid-c-title">
+      <Weather />
+      {/* <div className="grid-c-title">
         <h3 className="grid-c-title-text">Cards</h3>
         <button className="grid-c-title-icon">
           <img src={iconsImgs.plus} />
@@ -28,7 +30,7 @@ const Cards = () => {
             <div className="logo-shape2"></div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

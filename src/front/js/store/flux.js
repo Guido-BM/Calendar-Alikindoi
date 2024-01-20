@@ -1,4 +1,6 @@
 import moment from "moment";
+import {get_weather_city, } from "./WeatherApi"
+
 
 const getState = ({ getStore, getActions, setStore }) => {
   return {
@@ -21,6 +23,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white",
         },
       ],
+
     },
     message: null,
     demo: [
@@ -125,6 +128,24 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({ ...store, tokenTodoist: "" });
         }
       },
+      getWeatherCity: async (city) => {
+        const store = getStore();
+        try {
+          const weatherData = await get_weather_city(city);
+          setStore({ ...store, weather: weatherData });
+        } catch (error) {
+          console.error("Error obteniendo el tiempo actual:", error);
+        }
+      },
+      // getForecast: async (city) => {
+      //   const store = getStore();
+      //   try {
+      //     const forecastData = await get_forecast(city);
+      //     setStore({ ...store, forecast: forecastData });
+      //   } catch (error) {
+      //     console.error("Error obteniendo el pronóstico:", error);
+      //   }
+      // },
     },
   };
 };

@@ -1,0 +1,22 @@
+.weather-panel {
+  display: flex;
+  flex-direction: column;
+  color: black;
+}
+
+.weather-today, .forecast-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 1em;
+}
+
+.weather-city, .temperature-info, .day1, .day2, .day3 {
+  flex-grow: 1;
+  justify-content: space-around;
+}
+
+.principal{
+  display: flex;
+  align-items: center;
+}
