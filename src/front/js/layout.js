@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
@@ -26,6 +26,32 @@ const Layout = () => {
   // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
   const basename = process.env.BASENAME || "";
   const { store, actions } = useContext(Context);
+  useEffect(() => {
+    const tokenJwt = localStorage.getItem("tokenJwt");
+    if (tokenJwt) {
+      // Si hay un token, lo guardamos en el store
+      actions.setToken(tokenJwt);
+
+      // Y hacemos un fetch a tu backend para identificar al usuario
+      fetch(process.env.BACKEND_URL + "/identify", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${tokenJwt}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // Aquí puedes manejar la respuesta de tu backend
+          // Por ejemplo, podrías guardar el usuario en el store
+          actions.setUser(data.user);
+        })
+        .catch((error) => {
+          // Aquí puedes manejar los errores
+          console.error("Error:", error);
+        });
+    }
+  }, []);
 
   if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "")
     return <BackendURL />;
