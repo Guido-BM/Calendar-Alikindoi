@@ -9,9 +9,10 @@ export const LoginForm = () => {
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
 
-  const login = () => {
+  const login = async () => {
     console.log("credenciales", { email, password });
-    const loginSuccessful = actions.setToken(email, password);
+    const loginSuccessful = await actions.setToken(email, password);
+    console.log("loginSuccessful", loginSuccessful); // add this line
     if (loginSuccessful) {
       alert("Bienvenido");
       navigate("/home");
