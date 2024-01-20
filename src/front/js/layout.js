@@ -1,7 +1,8 @@
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
+import { Context } from "./store/appContext";
 
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
@@ -24,6 +25,33 @@ const Layout = () => {
   //the basename is used when your project is published in a subdirectory and not in the root of the domain
   // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
   const basename = process.env.BASENAME || "";
+  const { store, actions } = useContext(Context);
+  useEffect(() => {
+    const tokenJwt = localStorage.getItem("tokenJwt");
+    if (tokenJwt) {
+      // Si hay un token, lo guardamos en el store
+      actions.setToken(tokenJwt);
+
+      // Y hacemos un fetch a tu backend para identificar al usuario
+      fetch(process.env.BACKEND_URL + "/identify", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${tokenJwt}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // Aquí puedes manejar la respuesta de tu backend
+          // Por ejemplo, podrías guardar el usuario en el store
+          actions.setUser(data.user);
+        })
+        .catch((error) => {
+          // Aquí puedes manejar los errores
+          console.error("Error:", error);
+        });
+    }
+  }, []);
 
   if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "")
     return <BackendURL />;
@@ -32,19 +60,24 @@ const Layout = () => {
     <div>
       <BrowserRouter basename={basename}>
         <ScrollToTop>
-          <Navbar />
           <Routes>
-            <Route element={<LandingPage />} path="/" />
-            <Route element={<Login />} path="/login" />
-            <Route element={<Signup />} path="/signup" />
-            <Route element={<Home />} path="/home" />
-            <Route element={<Demo />} path="/demo" />
-            <Route element={<About />} path="/about" />
-
-            {/* <Route element={<TodoistView />} path="/todoist" /> */}
-            <Route element={<h1>Not found!</h1>} />
+            {store.token ? (
+              <>
+                <Route path="/home" element={<Home />} />
+                <Route path="/login" element={<Navigate to="/home" />} />
+              </>
+            ) : (
+              <>
+                <Route path="/login" element={<Login />} />
+                <Route path="/home" element={<Navigate to="/login" />} />
+              </>
+            )}
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/demo" element={<Demo />} />
+            <Route path="/about" element={<About />} />
+            <Route path="*" element={<h1>Not found!</h1>} />
           </Routes>
-          <Footer />
         </ScrollToTop>
       </BrowserRouter>
     </div>

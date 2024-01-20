@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   getTasks,
   addTask,
@@ -10,12 +10,14 @@ import {
 import TaskModal from "./TaskModal.jsx";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
+import { Context } from "../../store/appContext.js";
 
 const Financial = () => {
   const [tasks, setTasks] = useState([]);
   const [projects, setProjects] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [newTask, setNewTask] = useState("");
+  const { actions } = useContext(Context);
 
   useEffect(() => {
     getTasks().then((task) => setTasks(task));
@@ -69,7 +71,15 @@ const Financial = () => {
         Log In TODOIST
       </Button> */}
       {/* <Link to="/privacy-policy">Privacy Policy</Link> */}
-      <a href="http://localhost:3001/api/todoist/auth">Log In TODOIST</a>
+      <a
+        href="http://localhost:3001/api/todoist/auth"
+        onClick={() => {
+          const token = actions.getToken(); // Usa el método getToken de las acciones del contexto
+          localStorage.setItem("tokenJwt", token);
+        }}
+      >
+        Log In TODOIST
+      </a>
     </div>
   );
 };
