@@ -1,4 +1,6 @@
 import moment from "moment";
+import { get_weather_coordinates } from "./WeatherApi";
+
 
 const getState = ({ getStore, getActions, setStore }) => {
   return {
@@ -21,6 +23,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white",
         },
       ],
+
     },
     message: null,
     demo: [
@@ -131,6 +134,15 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (error) {
           console.error("Error during authentication", error);
           setStore({ ...store, tokenTodoist: "" });
+        }
+      },
+      getWeatherByCoordinates: async (latitude, longitude) => {
+        const store = getStore();
+        try {
+          const weatherData = await get_weather_coordinates(latitude, longitude);
+          setStore({ ...store, weather: weatherData });
+        } catch (error) {
+          console.error("Error obteniendo el tiempo actual:", error);
         }
       },
     },
