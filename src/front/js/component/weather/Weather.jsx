@@ -28,7 +28,7 @@ export const Weather = () => {
     <div className="weather-panel">
       <div className="weather-today">
         <div className="weather-city">
-          <h2>
+          <h2 className="principal">
             {store.weather?.name}
             <br />
             <small>
@@ -41,15 +41,16 @@ export const Weather = () => {
           </h2>
           <div className="weather-icon">
             {WeatherIcons(store.weather?.weather[0]?.description)}
+            <p>{store.weather?.weather[0]?.description}</p>
           </div>
         </div>
 
         <div className="temperature-info">
-          <span>{store.weather?.main.temp.toFixed(0)}ºC</span>
+          <span className="degrees">{store.weather?.main.temp.toFixed(0)}ºC</span>
           <br />
-          <small>
+          <span className="temp_range">
             {store.weather?.main?.temp_min}ºC/{store.weather?.main?.temp_max}ºC
-          </small>
+          </span>
         </div>
       </div>
 

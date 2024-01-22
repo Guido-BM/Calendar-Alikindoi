@@ -10,26 +10,16 @@ export const WeatherBack = () => {
   const handleSearch = async () => {
     if (city.trim() !== "") {
       try {
+        console.log("Searching for city:", city);
         await actions.getWeatherByCity(city);
       } catch (error) {
         console.error("Error obteniendo el tiempo:", error);
-        // Maneja el caso en que no se encuentra la ciudad
       }
     }
   };
 
   return (
     <div className="weather-panel">
-      <div className="weather-search">
-        <input
-          type="text"
-          placeholder="Ingrese el nombre de la ciudad"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-        />
-        <button onClick={handleSearch}>Buscar</button>
-      </div>
-
       {store.weather && (
         <div className="weather-today">
           <div className="weather-city">
@@ -50,6 +40,15 @@ export const WeatherBack = () => {
           </div>
 
           <div className="temperature-info">
+            <div className="weather-search">
+              <input
+                type="text"
+                placeholder="Ingrese el nombre de la ciudad"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
+              <button onClick={handleSearch}>Buscar</button>
+            </div>
             <span>{store.weather.main.temp.toFixed(0)}ºC</span>
             <br />
             <small>

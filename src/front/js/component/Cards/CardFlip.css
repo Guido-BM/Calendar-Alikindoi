@@ -4,7 +4,7 @@
   transform-style: preserve-3d;
   transition: 0.5s;
   width: 90%;
-  height: 90%;
+  height: 150px;
 }
 
 .flip.flipped {
@@ -12,7 +12,7 @@
 }
 
 .flip .face {
-  
+  width: 90%;
   backface-visibility: hidden;
   font-family: Georgia;
 }
@@ -20,16 +20,16 @@
 .flip .front {
   z-index: 1;
   cursor: pointer;
-  position: relative;
-  top: 25%;
+  position: absolute;
+  top: 0;
 }
 
 .flip .back {
   transform: rotateY(-180deg);
   cursor: pointer;
   z-index: 2;
-  position: relative;
-  top: -25%;
+  position: absolute;
+  top: 0;
 }
 .flip-icon {
   color: black;

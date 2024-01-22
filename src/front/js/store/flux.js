@@ -145,6 +145,15 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error("Error obteniendo el tiempo actual:", error);
         }
       },
+      getWeatherByCity: async (city) => {
+        const store = getStore();
+        try {
+          const weatherData = await get_weather_city(city);
+          setStore({ ...store, weather: weatherData });
+        } catch (error) {
+          console.error("Error obteniendo el tiempo por ciudad:", error);
+        }
+      },
     },
   };
 };

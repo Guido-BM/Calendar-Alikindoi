@@ -26,16 +26,17 @@ module.exports = {
         ],
       }, //css and scss files
       {
+        test: /\.(png|jp(e*)g|svg|gif)$/,
+        type: "asset/resource",
+        type: "javascript/auto"
+      },
+      {
         test: /\.(png|jpg|gif|jpeg|webp|svg)$/,
         use: {
           loader: "file-loader",
           options: { name: "[name].[ext]" },
         },
       }, //for images
-      {
-        test: /\.(png|jp(e*)g|svg|gif)$/,
-        type: "asset/resource",
-      },
       {
         test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
         use: ["file-loader"],

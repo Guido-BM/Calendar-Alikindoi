@@ -27,3 +27,7 @@
   display: flex;
   align-items: center;
 }
+
+.weather-icon img {
+  height: 100px;
+}
