@@ -8,21 +8,22 @@ export const LoginForm = () => {
   const [password, setPassword] = useState("");
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const login = async () => {
     console.log("credenciales", { email, password });
     const loginSuccessful = await actions.setToken(email, password);
     console.log("loginSuccessful", loginSuccessful); // add this line
     if (loginSuccessful) {
-      alert("Bienvenido");
       navigate("/home");
     } else {
-      alert("Usuario o contraseña incorrectos");
+      setErrorMessage("Credenciales incorrectas");
     }
   };
   return (
     <>
-      <div className="wrapper">
+      {errorMessage && <p>{errorMessage}</p>}
+      {<div className="wrapper">
         <div>
           <h1 className="title">Inicio</h1>
           <div className="inp">
@@ -65,7 +66,7 @@ export const LoginForm = () => {
           <br />
           <p className="para"></p>
         </div>
-      </div>
+      </div>}
     </>
   );
 };

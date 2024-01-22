@@ -2,14 +2,14 @@
 .grid-c3 {
   display: flex;
   flex-direction: column;
-  position: relative; /* Permite posicionar los elementos hijos con 'absolute' */
+  position: relative;
 }
 
 .grid-c3 .card-buttons {
-  position: absolute; /* Posiciona los botones en relación a la tarjeta */
-  right: 0; /* Alinea los botones a la derecha */
-  bottom: 0; /* Alinea los botones abajo */
-  display: flex; /* Alinea los botones horizontalmente */
-  gap: 10px; /* Añade espacio entre los botones */
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  gap: 10px;
   padding-bottom: 10px;
 }
