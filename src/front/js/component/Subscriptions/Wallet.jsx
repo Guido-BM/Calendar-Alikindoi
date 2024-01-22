@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import OverViewComponent from "./overViewComponent";
-import TransactionsComponent from "./TransactionsComponent";
+import TransactionsComponent from "./transactionsComponent.jsx";
 
 const Container = styled.div`
   background-color: white;
