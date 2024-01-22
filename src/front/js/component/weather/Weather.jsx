@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../../store/appContext";
+import WeatherIcons from "./WeatherIcons";
 import "./Weather.css";
 
 export const Weather = () => {
@@ -7,7 +8,7 @@ export const Weather = () => {
 
   useEffect(() => {
     actions.getWeatherCity("Palencia");
-    // actions.getForecast("Palencia");
+    
   }, []);
 
   return (
@@ -25,12 +26,9 @@ export const Weather = () => {
               })}
             </small>
           </h2>
-          <p className="weather-description">
-            {/* <img className='weather-icon' src={WeatherIcons(icon)} alt="icon-weather" /> */}
-            <i className="weather-icon">
-              {store.weather?.weather[0]?.description}
-            </i>
-          </p>
+          <div className="weather-icon">
+            {WeatherIcons(store.weather?.weather[0]?.description)}
+          </div>
         </div>
 
         <div className="temperature-info">
@@ -42,7 +40,7 @@ export const Weather = () => {
         </div>
       </div>
 
-      <div className="forecast-info">
+      {/* <div className="forecast-info">
         <div className="1">
           <p>{store.weather?.main?.humidity}</p>
           <p>Imagen/descrip</p>
@@ -53,7 +51,7 @@ export const Weather = () => {
           <p>Imagen/descrip</p>
           <p>temperatura</p>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

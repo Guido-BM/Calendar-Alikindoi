@@ -1,14 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Cards from "../component/Cards/Cards";
-import Transactions from "../component/Transactions/Transactions";
 import Report from "../component/Report/Report";
 import Budget from "../component/Budget/Budget";
 import Wallet from "../component/Subscriptions/Wallet";
 import Financial from "../component/Financial/Financial";
 import Pomodoro from "../component/Pomodoro/Pomodoro";
 
+
 import "./home.scss";
+import CardFlip from "../component/Cards/CardFlip";
+import { Weather } from "../component/weather/Weather";
 
 export const Home = () => {
   return (
@@ -17,7 +18,7 @@ export const Home = () => {
         <div className="main-content">
           <div className="main-content-holder">
             <div className="content-grid-one">
-              <Cards />
+              <CardFlip className="grid-c1" front={<Weather/>} back={<Weather/>} />
               <Wallet />
               <Report />
             </div>
