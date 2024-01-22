@@ -14,9 +14,6 @@ import { Signup } from "./pages/signup";
 import injectContext from "./store/appContext";
 // import { TodoistView } from "./todoistView";
 
-import { Navbar } from "./component/navbar";
-import { Footer } from "./component/footer";
-
 import LoginForm from "./component/login/LoginForm";
 import LandingPage from "./pages/landing";
 
