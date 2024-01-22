@@ -26,7 +26,7 @@ module.exports = {
         ],
       }, //css and scss files
       {
-        test: /\.(png|svg|jpg|gif|jpeg|webp)$/,
+        test: /\.(png|jpg|gif|jpeg|webp|svg)$/,
         use: {
           loader: "file-loader",
           options: { name: "[name].[ext]" },

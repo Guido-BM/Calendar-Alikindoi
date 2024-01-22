@@ -1,0 +1,33 @@
+
+.flip {
+  perspective: 800px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: 0.5s;
+
+}
+
+.flip.flipped {
+  transform: rotateY(-180deg);
+}
+
+.flip .face {
+  position: relative;
+  backface-visibility: hidden;
+  
+  font-family: Georgia;
+}
+
+.flip .front {
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.flip .back {
+  transform: rotateY(-180deg);
+  cursor: pointer;
+  z-index: 2;
+}
+
+

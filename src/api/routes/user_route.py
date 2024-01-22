@@ -26,6 +26,8 @@ def create_user():
 
     if email and password:
         new_user = UserService.create_user(email, password, is_active, username, location)
+        user_data = new_user.serialize()
+        user_data['location'] = location
         return jsonify(new_user.serialize()), 201
     else:
         return jsonify({"error": "Email and password are required"}), 400
