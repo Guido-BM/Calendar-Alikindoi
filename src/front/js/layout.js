@@ -48,7 +48,7 @@ const Layout = () => {
           console.error("Error:", error);
         });
     }
-  }, []);
+  }, [store.token]);
 
   if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "")
     return <BackendURL />;
@@ -58,7 +58,7 @@ const Layout = () => {
       <BrowserRouter basename={basename}>
         <ScrollToTop>
           <Routes>
-            {store.token ? (
+            {store.token || localStorage.getItem("tokenJwt") ? (
               <>
                 <Route path="/home" element={<Home />} />
                 <Route path="/login" element={<Navigate to="/home" />} />
