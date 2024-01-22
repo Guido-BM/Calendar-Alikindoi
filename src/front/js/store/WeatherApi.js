@@ -11,3 +11,8 @@ export const get_weather_coordinates = async (latitude, longitude) => {
   const data = await request.json();
   return data;
 };
+export const get_weather_city = async (city) => {
+  const request = await fetch(`${weather_api_url}q=${city}&lang=es&units=metric&appid=${API_TOKEN}`);
+  const data = await request.json();
+  return data;
+}

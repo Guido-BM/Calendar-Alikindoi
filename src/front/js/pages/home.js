@@ -5,11 +5,10 @@ import Budget from "../component/Budget/Budget";
 import Wallet from "../component/Subscriptions/Wallet";
 import Financial from "../component/Financial/Financial";
 import Pomodoro from "../component/Pomodoro/Pomodoro";
-
-
 import "./home.scss";
 import CardFlip from "../component/Cards/CardFlip";
 import { Weather } from "../component/weather/Weather";
+import { WeatherBack } from "../component/weather/WeatherBack";
 
 export const Home = () => {
   return (
@@ -18,7 +17,8 @@ export const Home = () => {
         <div className="main-content">
           <div className="main-content-holder">
             <div className="content-grid-one">
-              <CardFlip className="grid-c1" front={<Weather/>} back={<Weather/>} />
+              <CardFlip front={<Weather />} back={<WeatherBack />} />
+              {/* <Cards /> */}
               <Wallet />
               <Report />
             </div>

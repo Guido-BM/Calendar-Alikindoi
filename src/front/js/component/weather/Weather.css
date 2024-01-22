@@ -3,21 +3,27 @@
   flex-direction: column;
   color: black;
   height: 100%;
+  width: 100%;
 }
 
-.weather-today, .forecast-info {
+.weather-today,
+.forecast-info {
   display: flex;
   align-items: center;
   justify-content: space-around;
   padding: 1em;
 }
 
-.weather-city, .temperature-info, .day1, .day2, .day3 {
+.weather-city,
+.temperature-info,
+.day1,
+.day2,
+.day3 {
   flex-grow: 1;
   justify-content: space-around;
 }
 
-.principal{
+.principal {
   display: flex;
   align-items: center;
 }

@@ -1,10 +1,10 @@
-
 .flip {
-  perspective: 800px;
   position: relative;
+  perspective: 800px;
   transform-style: preserve-3d;
   transition: 0.5s;
-
+  width: 90%;
+  height: 90%;
 }
 
 .flip.flipped {
@@ -12,22 +12,29 @@
 }
 
 .flip .face {
-  position: relative;
-  backface-visibility: hidden;
   
+  backface-visibility: hidden;
   font-family: Georgia;
 }
 
 .flip .front {
-  position: relative;
   z-index: 1;
   cursor: pointer;
+  position: relative;
+  top: 25%;
 }
 
 .flip .back {
   transform: rotateY(-180deg);
   cursor: pointer;
   z-index: 2;
+  position: relative;
+  top: -25%;
 }
-
-
+.flip-icon {
+  color: black;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  z-index: 3;
+}
