@@ -1,14 +1,27 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../../store/appContext";
 import WeatherIcons from "./WeatherIcons";
+
 import "./Weather.css";
 
 export const Weather = () => {
   const { store, actions } = useContext(Context);
 
   useEffect(() => {
-    actions.getWeatherCity("Palencia");
-    
+    // Obtener la ubicación del usuario usando la API de geolocalización del navegador
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          actions.getWeatherByCoordinates(latitude, longitude);
+        },
+        (error) => {
+          console.error("Error obteniendo la ubicación:", error);
+        }
+      );
+    } else {
+      console.error("La geolocalización no está soportada por este navegador.");
+    }
   }, []);
 
   return (

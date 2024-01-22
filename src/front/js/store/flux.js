@@ -1,5 +1,5 @@
 import moment from "moment";
-import {get_weather_city, } from "./WeatherApi"
+import { get_weather_coordinates } from "./WeatherApi";
 
 
 const getState = ({ getStore, getActions, setStore }) => {
@@ -136,10 +136,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({ ...store, tokenTodoist: "" });
         }
       },
-      getWeatherCity: async (city) => {
+      getWeatherByCoordinates: async (latitude, longitude) => {
         const store = getStore();
         try {
-          const weatherData = await get_weather_city(city);
+          const weatherData = await get_weather_coordinates(latitude, longitude);
           setStore({ ...store, weather: weatherData });
         } catch (error) {
           console.error("Error obteniendo el tiempo actual:", error);
