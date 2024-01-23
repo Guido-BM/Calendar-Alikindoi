@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import "./home.scss";
 import CardFlip from "../component/Cards/CardFlip";
 import { Weather } from "../component/weather/Weather";
+import { WeatherBack } from "../component/weather/WeatherBack";
 
 export const Home = () => {
   const { actions } = useContext(Context);
@@ -34,7 +35,8 @@ export const Home = () => {
         <div className="main-content">
           <div className="main-content-holder">
             <div className="content-grid-one">
-              <CardFlip className="grid-c1" front={<Weather />} back={<Weather />} />
+              <CardFlip front={<Weather />} back={<WeatherBack />} />
+              {/* <Cards /> */}
               <Wallet />
               <Todoist />
             </div>

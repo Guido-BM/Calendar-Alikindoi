@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
 
+* {
+  padding: 0;
+  margin: 0;
+  
+}
+
 :root {
   --clr-primary: #F4D9E9;
   --clr-primar-light: #473b33;
@@ -19,20 +25,54 @@
   --transition-default: all 300ms ease-in-out;
 }
 
+body {
+  font-family: var(--font-family-bai);
+}
+
+ul {
+  list-style-type: none;
+}
+a {
+  color: unset;
+  text-decoration: none;
+  color: var(--clr-white);
+}
 button {
   background-color: transparent;
   border: none;
   cursor: pointer;
 }
 
+.img-fit-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.text-white {
+  color: var(--clr-white);
+}
 .text-silver-v1 {
   color: var(--clr-silver-v1);
 }
+.text-scarlet {
+  color: var(--clr-scarlet);
+}
+.text-green {
+  color: var(--clr-green);
+}
+.bg-jet {
+  background: var(--clr-jet);
+}
 
-// .app {
-//   display: flex;
-//   min-height: 100vh;
-// }
+.text-sm {
+  font-size: 14px;
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
 
 /* commons */
 .lg-value {
@@ -148,7 +188,6 @@ button {
 @media screen and (max-width: 768px) {
   .content-grid-one {
     grid-template-columns: repeat(1, 1fr);
-    grid-auto-rows: minmax(auto, auto);
     column-gap: 0;
   }
   .content-grid-two {
