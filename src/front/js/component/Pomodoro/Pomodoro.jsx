@@ -18,7 +18,7 @@ const Pomodoro = () => {
           <button className="grid-c-title-icon"></button>
         </div>
         <div className="grid-c8-content">
-          <p className="text text-silver-v1">
+          <div className="text text-silver-v1">
             {/* {" "} */}
             <main>
               <SettingsContext.Provider
@@ -34,7 +34,7 @@ const Pomodoro = () => {
                 {showSettings ? <Settings /> : <Timer />}
               </SettingsContext.Provider>
             </main>
-          </p>
+          </div>
         </div>
       </div>
     </>

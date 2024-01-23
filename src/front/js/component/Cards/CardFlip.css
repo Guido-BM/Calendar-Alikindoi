@@ -19,19 +19,19 @@
 
 .flip .front {
   z-index: 1;
-  cursor: pointer;
+  /* cursor: pointer; */
   position: absolute;
   top: 0;
 }
 
 .flip .back {
   transform: rotateY(-180deg);
-  cursor: pointer;
   z-index: 2;
   position: absolute;
   top: 0;
 }
 .flip-icon {
+  cursor: pointer;
   color: black;
   position: absolute;
   top: 1em;

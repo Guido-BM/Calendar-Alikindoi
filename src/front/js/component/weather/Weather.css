@@ -50,6 +50,7 @@
 .weather-input {
   width: 70%;
   border-radius: 12px;
+  text-align: center;
 }
 @import url("https://fonts.googleapis.com/css?family=Chivo:700");
 @keyframes float {
@@ -121,12 +122,12 @@ input::placeholder {
 }
 .face .eyes-l,
 .face .eyes-r {
-  width: 0.8em;
-  height: 0.8em;
+  width: 0.7em;
+  height: 0.7em;
   background: #333;
   border-radius: 100%;
   position: absolute;
-  bottom: 0.1em;
+  bottom: 10px;
 }
 .face .eyes-l {
   right: 4.2em;
@@ -137,11 +138,13 @@ input::placeholder {
 .face .mouth {
   width: 0.5em;
   height: 0.3em;
+  position: absolute;
   border-radius: 50px;
   border: 0.2em solid #333;
   border-top: none;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+  left: 4.6em;
 }
 .face .mouth--open {
   border-top: 0.2em solid #333;

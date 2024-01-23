@@ -4,6 +4,9 @@ import Card from "./Card";
 import { bodyStyles, headerStyles } from "./CardStyles";
 
 
+const avatarImageUrlMaria = require("../../assets/images/Maria.jpeg");
+const avatarImageUrlMarta = require("../../assets/images/marta1.jpg");
+
 class CardContainer extends Component {
   render() {
     return (
@@ -14,7 +17,7 @@ class CardContainer extends Component {
         <div className="flex">
           <Card
             imgSrc="http://1.bp.blogspot.com/-tso_pF4jEdU/UPC4zDXEY6I/AAAAAAAAAhE/Vb2Cd8nRZEo/s1600/a.jpg"
-            avatarSrc="https://a1cf74336522e87f135f-2f21ace9a6cf0052456644b80fa06d4f.ssl.cf2.rackcdn.com/images/characters/p-avatar-sam-worthington.jpg"
+            avatarSrc={avatarImageUrlMaria.default}
             cardBackImgSrc="https://i.pinimg.com/564x/1e/7e/4d/1e7e4d11c01e57f32410ece8c1961646.jpg"
             targetId="navi"
           />
@@ -33,7 +36,7 @@ class CardContainer extends Component {
           <Card
             type="hitgirl"
             imgSrc="https://media.giphy.com/media/Y6pDMTysYTQ2I/giphy.gif"
-            avatarSrc="https://66.media.tumblr.com/dcf6558ccad075ce4cca03cc1d972f97/tumblr_phhrt8PrRE1tc5gvpo4_250.png"
+            avatarSrc={avatarImageUrlMarta.default}
             cardBackImgSrc="https://i.pinimg.com/564x/22/f1/3e/22f13ea035bc11beeeb1349550fb3170.jpg"
           />
         </div>

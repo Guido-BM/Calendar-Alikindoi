@@ -65,7 +65,7 @@ export const WeatherBack = () => {
               onChange={(e) => setSearch(e.target.value)}
               onKeyDown={handleSearch}
               type="text"
-              placeholder="Introduce la ciudad "
+              placeholder="Search city "
             />
             <div className="ghost">
               <div className="face">
