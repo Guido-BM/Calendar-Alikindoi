@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import OverViewComponent from "./overViewComponent";
 import TransactionsComponent from "./transactionsComponent.jsx";
+import CardFlip from "../Cards/CardFlip.jsx";
 
 const Container = styled.div`
   background-color: white;
@@ -13,6 +14,8 @@ const Container = styled.div`
   width: 360px;
   align-items: center;
   justify-content: space-between;
+  border-radius: 10px; // Añade un borde redondeado como en weather.jsx
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); // Añade una sombra de caja como en weather.jsx
 `;
 
 const Wallet = (props) => {
@@ -40,16 +43,22 @@ const Wallet = (props) => {
   };
   return (
     <Container>
-      <OverViewComponent
-        expense={expense}
-        income={income}
-        addTransaction={addTransaction}
+      <CardFlip
+        front={
+          <OverViewComponent
+            expense={expense}
+            income={income}
+            addTransaction={addTransaction}
+          />
+        }
+        back={
+          transactions?.length ? (
+            <TransactionsComponent transactions={transactions} />
+          ) : (
+            ""
+          )
+        }
       />
-      {transactions?.length ? (
-        <TransactionsComponent transactions={transactions} />
-      ) : (
-        ""
-      )}
     </Container>
   );
 };

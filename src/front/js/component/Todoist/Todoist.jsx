@@ -25,7 +25,9 @@ const Todoist = () => {
   };
 
   const getTasksForProject = (project_id) => {
-    return getTasks(project_id).catch((error) => console.error(error));
+    return getTasks()
+      .then((tasks) => tasks.filter(task => task.project_id === project_id))
+      .catch((error) => console.error(error));
   };
 
   useEffect(() => {
@@ -51,7 +53,7 @@ const Todoist = () => {
     return (
       <div className="todoist-container subgrid-two-item grid-common grid-c3">
         <div className="grid-c-title">
-          <h3 className="text text-silver-v1">TODOIST</h3>
+          <h3 className="title-todoist">TODOIST</h3>
         </div>
         <div className="grid-c3">
           {projects && projects.map((project) => (

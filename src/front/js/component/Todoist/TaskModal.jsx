@@ -92,6 +92,7 @@ const TaskModal = () => {
                                     placeholder="Due String"
                               />
                               <DatePicker
+                                    className='date-picker'
                                     format="YYYY-MM-DD"
                                     onChange={date => {
                                           setDueDate(date ? date.format('YYYY-MM-DD') : null);
@@ -100,6 +101,7 @@ const TaskModal = () => {
                                     placeholder="Due Date"
                               />
                               <TimePicker
+                                    className='time-picker'
                                     disabled={!dueDate}
                                     format="HH:mm"
                                     onChange={time => {
