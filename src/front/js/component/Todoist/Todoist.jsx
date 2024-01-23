@@ -13,19 +13,36 @@ import { Context } from "../../store/appContext.js";
 import "./Todoist.css";
 import { Button } from "antd";
 
+
+
 const Todoist = () => {
   const [tasks, setTasks] = useState([]);
   const { actions } = useContext(Context);
   const tokenTodoist = localStorage.getItem("tokenTodoist");
+  const [projects, setProjects] = useState([]);
   const addNewTask = (newTask) => {
     setTasks(prevTasks => [...prevTasks, newTask]);
   };
 
+  const getTasksForProject = (project_id) => {
+    return getTasks(project_id).catch((error) => console.error(error));
+  };
+
   useEffect(() => {
-    getTasks()
-      .then((task) => {
-        console.log(task);
-        setTasks(task);
+    getProjects()
+      .then((projects) => {
+        setProjects(projects);
+        // Para cada proyecto, obtener sus tareas
+        projects.forEach((project) => {
+          getTasksForProject(project.id)
+            .then((tasks) => {
+              // Agregar las tareas al proyecto
+              project.tasks = tasks;
+              // Actualizar el estado de los proyectos
+              setProjects(prevProjects => prevProjects.map(p => p.id === project.id ? project : p));
+            })
+            .catch(error => console.error(error));
+        });
       })
       .catch(error => console.error(error));
   }, []);
@@ -37,9 +54,13 @@ const Todoist = () => {
           <h3 className="text text-silver-v1">TODOIST</h3>
         </div>
         <div className="grid-c3">
-          <h4>Tasks:</h4>
-          {tasks && tasks.map((task) => (
-            <p key={task.id}>{task.content}</p>
+          {projects && projects.map((project) => (
+            <div key={project.id}>
+              <h4>{project.name}</h4>
+              {project.tasks && project.tasks.map((task) => (
+                <p key={task.id}>{task.content}</p>
+              ))}
+            </div>
           ))}
         </div>
         <TaskModal addNewTask={addNewTask} />
