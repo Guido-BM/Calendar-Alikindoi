@@ -1,6 +1,7 @@
 from flask import request, jsonify, Blueprint
 from flask_cors import CORS
 from ..services.user_service import UserService
+from ..models.user import User
 
 user_api = Blueprint('user_api', __name__)
 CORS(user_api)

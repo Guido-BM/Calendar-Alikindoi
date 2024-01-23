@@ -1,8 +1,9 @@
-import React, { useState, useContext } from "react";
-import { ConfigProvider, Calendar } from "antd";
+import React, { useState, useContext, useEffect } from "react";
+import { ConfigProvider, Calendar, Button } from "antd";
 import { Context } from "../store/appContext";
 import DateCellRender from "./dateCellRender";
 import PreviewLeft from "./previewLeft";
+import moment from "moment";
 
 const CalendarView = () => {
   const { store, actions } = useContext(Context);
@@ -13,11 +14,20 @@ const CalendarView = () => {
   const setSelectedEvents = actions.setSelectedEvents;
   const setSavedMonthlyEvents = actions.setSavedMonthlyEvents;
 
+  useEffect(() => {
+    // This code will run every time `store.savedMonthlyEvents` changes
+    const events = store.savedMonthlyEvents;
+    console.log("savedMonthlyEvents", events);
+    // Here you can put the code to update the calendar
+  }, [store.savedMonthlyEvents]);
+
   const getListData = (value) => {
-    console.log(selectedEvents);
-    return savedMonthlyEvents.filter(
-      (event) => event.date === value.format("D-MMM")
-    );
+    return savedMonthlyEvents.filter((event) => {
+      const eventDate = moment(event.start_time);
+      return (
+        eventDate.year() === value.year() && eventDate.month() === value.month()
+      );
+    });
   };
 
   const handleDateSelect = (date, info) => {
@@ -33,6 +43,12 @@ const CalendarView = () => {
       return 1394;
     }
   };
+  const listData = savedMonthlyEvents.map((event) => ({
+    date: moment(event.start_time).format("YYYY-MM-DD"),
+    modifier: "success", // You might want to adjust this based on your needs
+    title: event.title,
+    time: [moment(event.start_time), moment(event.end_time)],
+  }));
   const monthCellRender = (value) => {
     const num = getMonthData(value);
     return num ? (
@@ -44,8 +60,15 @@ const CalendarView = () => {
   };
 
   const cellRender = (current, info) => {
-    if (info.type === "date")
-      return <DateCellRender listData={getListData(current)} />;
+    if (info.type === "date") {
+      const listData = getListData(current).map((event) => ({
+        date: moment(event.start_time).format("YYYY-MM-DD"),
+        modifier: "success", // You might want to adjust this based on your needs
+        title: event.title,
+        time: [moment(event.start_time), moment(event.end_time)],
+      }));
+      return <DateCellRender listData={listData} />;
+    }
     if (info.type === "month") return monthCellRender(current);
     return info.originNode;
   };
@@ -87,6 +110,7 @@ const CalendarView = () => {
           }
         }}
       />
+      <Button onClick={() => actions.loadUserEvents()}>SYNC</Button>
       <Calendar onSelect={handleDateSelect} cellRender={cellRender} />
     </ConfigProvider>
   );

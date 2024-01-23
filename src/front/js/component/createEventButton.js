@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form, Input, Modal, Radio, TimePicker } from "antd";
+import { DatePicker } from "antd";
 
 const CollectionCreateForm = ({
   open,
@@ -68,16 +69,12 @@ const CollectionCreateForm = ({
         >
           <TimePicker.RangePicker format="HH:mm" />
         </Form.Item>
-        <Form.Item
-          name="modifier"
-          className="collection-create-form_last-form-item"
-        >
-          <Radio.Group>
-            <Radio value="error">Urgent</Radio>
-            <Radio value="warning">Require attention</Radio>
-            <Radio value="success">No Rush</Radio>
-          </Radio.Group>
-        </Form.Item>
+        {/* <Form.Item
+                            name="modifier"
+                            className="collection-create-form_last-form-item"
+                          >
+                            <Radio.Group> */}
+        {/* </Form.Item> */}
       </Form>
     </Modal>
   );

@@ -1,11 +1,11 @@
 import React from "react";
-import "./Budget.css";
+import "./AliquindoiCalendar.css";
 import { Link } from "react-router-dom";
 import { iconsImgs } from "../../utils/images.js";
 import { budget } from "../../data/data.js";
-import CalendarView from "../../component/calendarView.js";
+import CalendarView from "../calendarView.js";
 
-const Budget = () => {
+const AliquindoiCalendar = () => {
   return (
     <div className="grid-two-item grid-common grid-c4">
       <div className="grid-item">
@@ -20,7 +20,7 @@ const Budget = () => {
   );
 };
 
-export default Budget;
+export default AliquindoiCalendar;
 
 // import React, { useState, useEffect, useContext } from "react";
 // import { Link } from "react-router-dom";
