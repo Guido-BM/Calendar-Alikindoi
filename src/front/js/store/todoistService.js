@@ -1,8 +1,6 @@
 import { TodoistApi } from "@doist/todoist-api-typescript";
 
-const TOKEN = "8ce5618c71961c8f596f7dc06dd0e6466881b51d"; // PAUL
-// const TOKEN = 'd5137b3c62cc6c9733acc52bb3064fdb40c1e117'; // GUIDO
-// const TOKEN = '0b41420452dd60a56a6dacb4d37f4d259fcd8587'; // MARIA
+const TOKEN = localStorage.getItem('tokenTodoist');
 
 const api = new TodoistApi(TOKEN);
 

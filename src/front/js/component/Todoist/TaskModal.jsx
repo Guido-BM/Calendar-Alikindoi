@@ -5,20 +5,51 @@ import { addTask, updateTask } from '../../store/todoistService';
 
 const useStyle = createStyles(({ token }) => ({
       'my-modal-body': {
-            background: token.blue1,
+            background: '#f0f2f5', // Un fondo más suave
             padding: token.paddingSM,
       },
       'my-modal-mask': {
-            boxShadow: `inset 0 0 15px #fff`,
+            boxShadow: `inset 0 0 15px #f0f2f5`, // Sombra más suave
       },
       'my-modal-header': {
-            borderBottom: `1px dotted ${token.colorPrimary}`,
+            borderBottom: `1px solid ${token.colorPrimary}`, // Línea sólida
+            backgroundColor: token.colorPrimary, // Fondo del color primario
+            color: '#fff', // Texto blanco
       },
       'my-modal-footer': {
             color: token.colorPrimary,
+            backgroundColor: '#f0f2f5', // Fondo más suave
       },
       'my-modal-content': {
-            border: '1px solid #333',
+            border: '1px solid #ccc', // Borde más suave
+      },
+      'my-input': {
+            width: 'calc(100% - 30px)', // Restar el padding y el margen del ancho total
+            padding: '10px',
+            margin: '10px 0',
+            borderRadius: '5px',
+            border: '1px solid #ccc',
+      },
+      'my-textarea': {
+            width: 'calc(100% - 30px)', // Restar el padding y el margen del ancho total
+            padding: '10px',
+            margin: '10px 0',
+            borderRadius: '5px',
+            border: '1px solid #ccc',
+            resize: 'none', // Evitar que el usuario pueda cambiar el tamaño
+      },
+      'my-button': {
+            padding: '10px 20px',
+            margin: '10px',
+            borderRadius: '5px',
+            border: 'none',
+            backgroundColor: '#007BFF',
+            color: '#fff',
+            cursor: 'pointer',
+      },
+      'footer': {
+            display: 'flex',
+            justifyContent: 'flex-end',
       },
 }));
 
@@ -58,21 +89,23 @@ const TaskModal = () => {
       const modalStyles = {
             header: {
                   borderLeft: `5px solid ${token.colorPrimary}`,
-                  borderRadius: 0,
+                  borderRadius: '5px', // Bordes redondeados
                   paddingInlineStart: 5,
+                  color: '#fff', // Texto blanco
             },
             body: {
-                  boxShadow: 'inset 0 0 5px #999',
-                  borderRadius: 5,
+                  boxShadow: 'inset 0 0 5px #ccc', // Sombra más suave
+                  borderRadius: '5px', // Bordes redondeados
             },
             mask: {
                   backdropFilter: 'blur(10px)',
             },
             footer: {
-                  borderTop: '1px solid #333',
+                  borderTop: '1px solid #ccc', // Borde más suave
+                  backgroundColor: '#f0f2f5', // Fondo más suave
             },
             content: {
-                  boxShadow: '0 0 30px #999',
+                  boxShadow: '0 0 30px #ccc', // Sombra más suave
             },
       };
       return (
@@ -94,11 +127,23 @@ const TaskModal = () => {
                         <form>
                               <label>
                                     Title:
-                                    <input type="text" name="title" value={task.title} onChange={handleInputChange} />
+                                    <input
+                                          type="text"
+                                          name="title"
+                                          value={task.title}
+                                          onChange={handleInputChange}
+                                          className={styles['my-input']}
+                                    />
                               </label>
                               <label>
                                     Description:
-                                    <input type="text" name="description" value={task.description} onChange={handleInputChange} />
+                                    <textarea
+                                          type="text"
+                                          name="description"
+                                          value={task.description}
+                                          onChange={handleInputChange}
+                                          className={styles['my-textarea']}
+                                    />
                               </label>
                         </form>
                   </Modal>

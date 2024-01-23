@@ -1,42 +1,49 @@
 import React from "react";
 import "./Budget.css";
+import { Link } from "react-router-dom";
 import { iconsImgs } from "../../utils/images.js";
 import { budget } from "../../data/data.js";
+import CalendarView from "../../component/calendarView.js";
 
 const Budget = () => {
   return (
     <div className="grid-two-item grid-common grid-c4">
-        <div className="grid-c-title">
-            <h3 className="grid-c-title-text">Budget</h3>
-            <button className="grid-c-title-icon">
-                <img src={ iconsImgs.plus } />
-            </button>
+      <div className="grid-item">
+        <div className="grid-item-header">
+          <h3>Calendar</h3>
         </div>
-        <div className="grid-c-top text-silver-v1">
-            <h2 className="lg-value">Cash</h2>
-            <span className="lg-value">$ 100,000</span>
+        <div className="grid-item-body">
+          <CalendarView />
         </div>
-        <div className="grid-c4-content bg-jet">
-            <div className="grid-items">
-                {
-                    budget.map((budget) => (
-                        <div className="grid-item" key = { budget.id }>
-                            <div className="grid-item-l">
-                                <div className="icon">
-                                    <img src={ iconsImgs.check } />
-                                </div>
-                                <p className="text text-silver-v1">{ budget.title } <span>{ budget.type }</span></p>
-                            </div>
-                            <div className="grid-item-r">
-                                <span className="text-silver-v1">$ { budget.amount }</span>
-                            </div>
-                        </div>
-                    ))
-                }
-            </div>
-        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default Budget;
+
+// import React, { useState, useEffect, useContext } from "react";
+// import { Link } from "react-router-dom";
+// import CalendarView from "../component/calendarView";
+// import { Context } from "../store/appContext";
+
+// export const Demo = () => {
+//   const { store, actions } = useContext(Context);
+
+//   return (
+//     <div className="container">
+//       <h1>Welcome to the awesome CalendApp Alikindoi!</h1>
+//       <br />
+//       <Link to="/">
+//         <button className="btn btn-primary">Back home</button>
+//       </Link>
+//       <br />
+//       <Link to="/about">
+//         <button className="btn btn-primary">About</button>
+//       </Link>
+//       <br />
+
+//       <CalendarView />
+//     </div>
+//   );
+// };
