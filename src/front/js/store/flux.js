@@ -10,6 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       savedMonthlyEvents: [],
       token: "",
       tokenTodoist: "",
+      user: null,
       // other state variables...
       demo: [
         {
@@ -42,13 +43,16 @@ const getState = ({ getStore, getActions, setStore }) => {
     actions: {
       // Use getActions to call a function within a fuction
       setSelectedDate: (date) => {
-        setStore({ selectedDate: date });
+        const store = getStore();
+        setStore({ ...store, selectedDate: date });
       },
       setSelectedEvents: (events) => {
-        setStore({ selectedEvents: events });
+        const store = getStore();
+        setStore({ ...store, selectedEvents: events });
       },
       setSavedMonthlyEvents: (events) => {
-        setStore({ savedMonthlyEvents: events });
+        const store = getStore();
+        setStore({ ...store, savedMonthlyEvents: events });
       },
       exampleFunction: () => {
         getActions().changeColor(0, "green");
@@ -57,9 +61,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       getMessage: async () => {
         try {
           // fetching data from the backend
+          const store = getStore();
           const resp = await fetch(process.env.BACKEND_URL + "/api/hello");
           const data = await resp.json();
-          setStore({ message: data.message });
+          setStore({ ...store, message: data.message });
           // don't forget to return something, that is how the async resolves
           return data;
         } catch (error) {
@@ -78,25 +83,47 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
 
         //reset the global store
-        setStore({ demo: demo });
+        setStore({ ...store, demo: demo });
       },
       setToken: async (email, password) => {
         const store = getStore();
-        const response = await fetch(`${process.env.BACKEND_URL}/api/login`, {
+        const responseLogin = await fetch(`${process.env.BACKEND_URL}/api/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ email: email, password: password }),
         });
-        const data = await response.json();
+        const data = await responseLogin.json();
         if (data.token) {
           setStore({ ...store, token: data.token });
+          await getActions().setTokenFromLocalStorage(data.token);
+          localStorage.setItem("tokenJwt", data.token);
           console.log("User is authenticated");
+          return data.token;
         } else {
           setStore({ ...store, token: "" });
           console.log("User is not authenticated");
         }
+      },
+      setTokenFromLocalStorage: async (tokenJwt) => {
+        fetch(process.env.BACKEND_URL + "/identify", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${tokenJwt}`,
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // Aquí puedes manejar la respuesta de tu backend
+            // Por ejemplo, podrías guardar el usuario en el store
+            setStore({ ...store, user: data.user });
+          })
+          .catch((error) => {
+            // Aquí puedes manejar los errores
+            console.error("Error:", error);
+          });
       },
       updateToken: (token) => {
         const store = getStore();
@@ -111,30 +138,31 @@ const getState = ({ getStore, getActions, setStore }) => {
         return store.token;
       },
       setTokenTodoist: async (code) => {
-        const store = getStore();
-        try {
-          const response = await fetch(
-            `${process.env.BACKEND_URL}/api/todoist`,
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ code: code }),
-            }
-          );
-          const data = await response.json();
-          if (data.access_token) {
-            setStore({ ...store, tokenTodoist: data.access_token });
-            console.log("User is authenticated");
-          } else {
-            setStore({ ...store, tokenTodoist: "" });
-            console.log("User is not authenticated");
-          }
-        } catch (error) {
-          console.error("Error during authentication", error);
-          setStore({ ...store, tokenTodoist: "" });
-        }
+        setStore({ ...store, tokenTodoist: code });
+        // const store = getStore();
+        // try {
+        //   const response = await fetch(
+        //     `${process.env.BACKEND_URL}/api/todoist`,
+        //     {
+        //       method: "POST",
+        //       headers: {
+        //         "Content-Type": "application/json",
+        //       },
+        //       body: JSON.stringify({ code: code }),
+        //     }
+        //   );
+        //   const data = await response.json();
+        //   if (data.access_token) {
+        //     setStore({ ...store, tokenTodoist: data.access_token });
+        //     console.log("User is authenticated");
+        //   } else {
+        //     setStore({ ...store, tokenTodoist: "" });
+        //     console.log("User is not authenticated");
+        //   }
+        // } catch (error) {
+        //   console.error("Error during authentication", error);
+        //   setStore({ ...store, tokenTodoist: "" });
+        // }
       },
       getWeatherByCoordinates: async (latitude, longitude) => {
         const store = getStore();

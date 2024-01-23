@@ -11,16 +11,22 @@ import TaskModal from "./TaskModal.jsx";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
 import { Context } from "../../store/appContext.js";
-import './Todoist.css';
+import "./Todoist.css";
 
 const Todoist = () => {
   const [tasks, setTasks] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [newTask, setNewTask] = useState("");
   const { actions } = useContext(Context);
+  const tokenTodoist = localStorage.getItem("tokenTodoist");
 
   useEffect(() => {
-    getTasks().then((task) => setTasks(task));
+    getTasks()
+      .then((task) => {
+        console.log(task);
+        setTasks(task);
+      })
+      .catch(error => console.error(error));
   }, []);
 
   const handleInputChange = (event) => {
@@ -44,42 +50,47 @@ const Todoist = () => {
     setModalOpen(false);
   };
 
-  return (
-    <div className="subgrid-two-item grid-common grid-c3">
-      <div className="grid-c-title">
-        <h3 className="text text-silver-v1">TODOIST</h3>
-      </div>
-      <div
-        className="grid-c3"
-        style={{ overflowY: "auto", maxHeight: "90px" }}
-      >
-        <h4>Tasks:</h4>
-        {tasks && tasks.map((task) => (
-          <p key={task.id}>{task.content}</p>
-        ))}
-      </div>
-      <div className="card-buttons">
+  if (tokenTodoist) {
+    return (
+      <div className="subgrid-two-item grid-common grid-c3">
+        <div className="grid-c-title">
+          <h3 className="text text-silver-v1">TODOIST</h3>
+        </div>
+        <div className="grid-c3">
+          <h4>Tasks:</h4>
+          {tasks && tasks.map((task) => (
+            <p key={task.id}>{task.content}</p>
+          ))}
+        </div>
         <TaskModal
+          className="TaskModal"
           handleInputChange={handleInputChange}
           handleAddTask={handleAddTask}
         />
-
-        {/* <Button type="primary" onClick={handleClick}>
-        Log In TODOIST
-      </Button> */}
-        {/* <Link to="/privacy-policy">Privacy Policy</Link> */}
-        <a
-          href="http://localhost:3001/api/todoist/auth"
-          onClick={() => {
-            const token = actions.getToken(); // Usa el método getToken de las acciones del contexto
-            localStorage.setItem("tokenJwt", token);
-          }}
-        >
-          Log In TODOIST
-        </a>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      // <a
+      //   href="http://localhost:3001/api/todoist/auth"
+      //   onClick={() => {
+      //     const token = actions.getToken(); // Usa el método getToken de las acciones del contexto
+      //     localStorage.setItem("tokenJwt", token);
+      //   }}
+      // >
+      //   Log In TODOIST
+      // </a>
+      <div className="subgrid-two-item grid-common grid-c3">
+        <div className="grid-c-title">
+          <h3 className="text text-silver-v1">TODOIST</h3>
+        </div>
+        <Button type="primary"
+          property="loading"
+          onClick={() => window.location.href = "http://localhost:3001/api/todoist/auth"}
+        >LogIn TODOIST</Button>
+      </div>
+    )
+  };
 };
 
 export default Todoist;

@@ -1,15 +1,26 @@
-/* grid c3 */
-.grid-c3 {
-  display: flex;
-  flex-direction: column;
-  position: relative; /* Permite posicionar los elementos hijos con 'absolute' */
+.grid-c-title h3 {
+  color: black;
 }
 
-.grid-c3 .card-buttons {
-  position: absolute; /* Posiciona los botones en relación a la tarjeta */
-  right: 0; /* Alinea los botones a la derecha */
-  bottom: 0; /* Alinea los botones abajo */
-  display: flex; /* Alinea los botones horizontalmente */
-  gap: 10px; /* Añade espacio entre los botones */
-  padding-bottom: 10px;
+.grid-c3 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+
+.grid-c3 .TaskModal {
+  position: absolute;
+  right: 0;
+  bottom: 5px;
+}
+
+.grid-c3 h4 {
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+}
+
+.grid-c3 p {
+  margin: 0px;
+  padding: 1px;
 }
