@@ -4,20 +4,20 @@
 *::after {
   box-sizing: border-box;
 }
-body{
+/* body{
 	font-family: 'Poppins', sans-serif;
 	font-weight: 400;
 	font-size: 15px;
 	line-height: 1.7;
 	color: #1f2029;
   	background-color: #fff;
-  /* overflow: hidden; */
+
   background-image: url('https://assets.codepen.io/1462889/back-page.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 101%;
-}
-p{
+} */
+.TaskModal-p{
 	font-family: 'Poppins', sans-serif;
 	font-weight: 400;
 	font-size: 16px;

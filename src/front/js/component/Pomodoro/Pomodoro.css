@@ -1,4 +1,4 @@
-.grid-c6 .grid-item-fill {
+.pomodoro-container .grid-c6 .grid-item-fill {
   width: 60%;
   height: 10px;
   background-color: var(--clr-pumpkin);
@@ -9,18 +9,18 @@
   --green: #4aec8c;
 }
 
-body {
+.pomodoro-container body {
   background-color: #f5d9ea;
   color: #a697c0;
 }
-main {
+.pomodoro-container main {
   padding-top: 5px;
   max-width: 200px;
   margin: 0 auto;
   text-align: center;
 }
 
-button {
+.pomodoro-container button {
   background-color: transparent;
   color: #a697c0;
   border: 0;
@@ -29,7 +29,7 @@ button {
   cursor: pointer;
 }
 
-button.with-text {
+.pomodoro-container button.with-text {
   width: auto;
   background-color: #f4bbc8;
   border-radius: 10px;
@@ -37,18 +37,18 @@ button.with-text {
   font-size: 1rem;
   line-height: 20px;
 }
-button.with-text svg {
+.pomodoro-container button.with-text svg {
   width: 20px;
   float: left;
   margin-right: 5px;
 }
 
-label {
+.pomodoro-container label {
   display: block;
   margin-bottom: 5px;
   margin-top: 10px;
   text-transform: capitalize;
 }
-.container {
+.pomodoro-container .container {
   max-width: 200px;
 }

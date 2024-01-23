@@ -8,15 +8,15 @@ import {
   getProjects,
 } from "../../store/todoistService.js";
 import TaskModal from "./TaskModal.jsx";
-import { Button } from "antd";
 import { Link } from "react-router-dom";
 import { Context } from "../../store/appContext.js";
 import "./Todoist.css";
+import NewModal from "./NewModal.jsx";
 
 const Todoist = () => {
   const [tasks, setTasks] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [newTask, setNewTask] = useState("");
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [newTask, setNewTask] = useState({ title: '', description: '' });
   const { actions } = useContext(Context);
   const tokenTodoist = localStorage.getItem("tokenTodoist");
 
@@ -29,8 +29,16 @@ const Todoist = () => {
       .catch(error => console.error(error));
   }, []);
 
+  const openModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setIsModalVisible(false);
+  };
+
   const handleInputChange = (event) => {
-    setNewTask(event.target.value);
+    setnewTask(event.target.value);
   };
 
   const handleAddTask = () => {
@@ -63,7 +71,6 @@ const Todoist = () => {
           ))}
         </div>
         <TaskModal
-          className="TaskModal"
           handleInputChange={handleInputChange}
           handleAddTask={handleAddTask}
         />

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Modal, Space } from 'antd';
+import { Modal, Space } from 'antd';
 import { createStyles, useTheme } from 'antd-style';
 import { addTask, updateTask } from '../../store/todoistService';
 
@@ -39,13 +39,25 @@ const useStyle = createStyles(({ token }) => ({
             resize: 'none',
       },
       'my-button': {
-            padding: '10px 20px',
-            margin: '10px',
-            borderRadius: '5px',
-            border: 'none',
-            backgroundColor: '#007BFF',
+            backgroundColor: 'blue',
             color: '#fff',
+            border: 'none',
+            padding: '6px 15px',
+            borderRadius: '2px',
             cursor: 'pointer',
+            fontSize: '14px',
+            lineHeight: '1.5715',
+            transition: 'all .3s',
+            userSelect: 'none',
+            textAlign: 'center',
+            verticalAlign: 'middle',
+            outline: 'none',
+            ':hover': {
+                  backgroundColor: '#40a9ff',
+            },
+            ':active': {
+                  backgroundColor: '#096dd9',
+            },
       },
       'footer': {
             display: 'flex',
@@ -111,9 +123,9 @@ const TaskModal = () => {
       return (
             <>
                   <Space>
-                        <Button type="primary" onClick={() => toggleModal(0, true)}>
-                              Anadir Tarea
-                        </Button>
+                        <button type="primary" onClick={() => toggleModal(0, true)}>
+                              Add Task
+                        </button>
                   </Space>
                   <Modal
                         title={task.id ? "Edit Task" : "Add Task"}
