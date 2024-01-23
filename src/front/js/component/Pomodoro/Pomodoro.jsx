@@ -4,7 +4,6 @@ import Timer from "./Timer.js";
 import Settings from "./Settings.js";
 import SettingsContext from "./SettingsContext.js";
 import "./Pomodoro.css";
-import "../../pages/home.scss";
 
 const Pomodoro = () => {
   const [showSettings, setShowSettings] = useState(false);
@@ -14,8 +13,7 @@ const Pomodoro = () => {
   return (
     <div className="pomodoro-container subgrid-two-item grid-common grid-c8">
       <div className="grid-c-title">
-        <h3 className="grid-c-title-text">Pomodoro Timer</h3>
-        <button className="grid-c-title-icon"></button>
+        <h2 className="grid-c-title-text-pomodoro">Pomodoro Timer</h2>
       </div>
       <div className="grid-c8-content">
         <p className="text text-silver-v1">

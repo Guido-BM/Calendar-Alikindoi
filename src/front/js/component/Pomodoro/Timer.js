@@ -80,25 +80,27 @@ function Timer() {
           })}
         />
       </div>
-      <div style={{ marginTop: "10px" }}>
-        {isPaused ? (
-          <PlayButton
-            onClick={() => {
-              setIsPaused(false);
-              isPausedRef.current = false;
-            }}
-          />
-        ) : (
-          <PauseButton
-            onClick={() => {
-              setIsPaused(true);
-              isPausedRef.current = true;
-            }}
-          />
-        )}
-      </div>
-      <div style={{ marginTop: "10px" }}>
-        <SettingsButton onClick={() => settingsInfo.setShowSettings(true)} />
+      <div className="buttons-timer">
+        <div style={{ marginTop: "10px" }}>
+          {isPaused ? (
+            <PlayButton
+              onClick={() => {
+                setIsPaused(false);
+                isPausedRef.current = false;
+              }}
+            />
+          ) : (
+            <PauseButton
+              onClick={() => {
+                setIsPaused(true);
+                isPausedRef.current = true;
+              }}
+            />
+          )}
+        </div>
+        <div style={{ marginTop: "10px" }}>
+          <SettingsButton onClick={() => settingsInfo.setShowSettings(true)} />
+        </div>
       </div>
     </div>
   );

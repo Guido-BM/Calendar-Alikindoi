@@ -29,7 +29,7 @@
   width: auto;
   background-color: #82acff;
   border-radius: 10px;
-  padding: 5px;
+  padding: 10px;
   font-size: 1.5rem;
   line-height: 30px;
 }
@@ -45,13 +45,26 @@
   margin-top: 10px;
   text-transform: capitalize;
   font-size: 20px;
+  display: grid;
+  grid-auto-flow: column;
 }
 .pomodoro-container .container {
   max-width: 200px;
   display: grid;
   grid-auto-flow: column;
+  justify-content: center;
 }
 .container-timer {
   display: grid;
   grid-auto-flow: column;
+  justify-content: center;
+}
+.buttons-timer {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+.grid-c-title-text-pomodoro {
+  color: #ff5d9e;
 }
