@@ -38,12 +38,12 @@ export const Home = () => {
               <CardFlip front={<Weather />} back={<WeatherBack />} />
               {/* <Cards /> */}
               <Wallet />
-              <Todoist />
+              <Pomodoro />
             </div>
             <div className="content-grid-two">
               <div className="grid-two-item">
                 <div className="subgrid-two">
-                  <Pomodoro />
+                  <Todoist />
                 </div>
               </div>
               <Budget />

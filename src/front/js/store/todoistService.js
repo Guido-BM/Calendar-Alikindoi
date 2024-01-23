@@ -9,8 +9,14 @@ export const getTasks = () => {
   return api.getTasks().catch((error) => console.error(error));
 };
 
-export const addTask = (content) => {
-  return api.addTask(content).catch((error) => console.error(error));
+export const addTask = (task) => {
+  try {
+    const response = api.addTask(task);
+    return response;
+  } catch (error) {
+    console.error('Error adding task:', error);
+    throw new Error('Failed to add task. Please check your input and try again.');
+  }
 };
 
 export const updateTask = (id, content) => {

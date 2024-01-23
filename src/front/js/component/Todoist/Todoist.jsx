@@ -11,14 +11,15 @@ import TaskModal from "./TaskModal.jsx";
 import { Link } from "react-router-dom";
 import { Context } from "../../store/appContext.js";
 import "./Todoist.css";
-import NewModal from "./NewModal.jsx";
+import { Button } from "antd";
 
 const Todoist = () => {
   const [tasks, setTasks] = useState([]);
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [newTask, setNewTask] = useState({ title: '', description: '' });
   const { actions } = useContext(Context);
   const tokenTodoist = localStorage.getItem("tokenTodoist");
+  const addNewTask = (newTask) => {
+    setTasks(prevTasks => [...prevTasks, newTask]);
+  };
 
   useEffect(() => {
     getTasks()
@@ -29,38 +30,9 @@ const Todoist = () => {
       .catch(error => console.error(error));
   }, []);
 
-  const openModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const closeModal = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleInputChange = (event) => {
-    setnewTask(event.target.value);
-  };
-
-  const handleAddTask = () => {
-    const taskToAdd = { content: newTask };
-    addTask(taskToAdd)
-      .then((addedTask) => {
-        if (addedTask && addedTask.id) {
-          setTasks((prevTasks) => [...prevTasks, addedTask]);
-        } else {
-          // handle the case where addedTask is undefined or doesn't have an id
-        }
-      })
-      .catch((error) => {
-        // handle the error
-      });
-    setNewTask("");
-    setModalOpen(false);
-  };
-
   if (tokenTodoist) {
     return (
-      <div className="subgrid-two-item grid-common grid-c3">
+      <div className="todoist-container subgrid-two-item grid-common grid-c3">
         <div className="grid-c-title">
           <h3 className="text text-silver-v1">TODOIST</h3>
         </div>
@@ -70,24 +42,12 @@ const Todoist = () => {
             <p key={task.id}>{task.content}</p>
           ))}
         </div>
-        <TaskModal
-          handleInputChange={handleInputChange}
-          handleAddTask={handleAddTask}
-        />
+        <TaskModal addNewTask={addNewTask} />
       </div>
     );
   } else {
     return (
-      // <a
-      //   href="http://localhost:3001/api/todoist/auth"
-      //   onClick={() => {
-      //     const token = actions.getToken(); // Usa el método getToken de las acciones del contexto
-      //     localStorage.setItem("tokenJwt", token);
-      //   }}
-      // >
-      //   Log In TODOIST
-      // </a>
-      <div className="subgrid-two-item grid-common grid-c3">
+      <div className="todoist-container subgrid-two-item grid-common grid-c3">
         <div className="grid-c-title">
           <h3 className="text text-silver-v1">TODOIST</h3>
         </div>

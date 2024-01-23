@@ -1,26 +1,26 @@
-.grid-c-title h3 {
+.pomodoro-container.grid-c-title h3 {
   color: black;
 }
 
-.grid-c3 {
+.pomodoro-container.grid-c3 {
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 0px;
 }
 
-.grid-c3 .TaskModal {
+.pomodoro-container.grid-c3 .TaskModal {
   position: absolute;
   right: 0;
   bottom: 5px;
 }
 
-.grid-c3 h4 {
+.pomodoro-container.grid-c3 h4 {
   margin-block-start: 0px;
   margin-block-end: 0px;
 }
 
-.grid-c3 p {
+.pomodoro-container.grid-c3 p {
   margin: 0px;
   padding: 1px;
 }
