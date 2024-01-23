@@ -1,64 +1,63 @@
-import React, { useState, useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../../store/appContext";
 import WeatherIcons from "./WeatherIcons";
 import "./Weather.css";
 
+
 export const WeatherBack = () => {
   const { store, actions } = useContext(Context);
-  const [city, setCity] = useState("");
+  const [search, setSearch] = useState('');
+  // const [values, setValues] = useState('');
 
-  const handleSearch = async () => {
-    if (city.trim() !== "") {
-      try {
-        console.log("Searching for city:", city);
-        await actions.getWeatherByCity(city);
-      } catch (error) {
-        console.error("Error obteniendo el tiempo:", error);
-      }
+  const handleSearch = (e) => {
+    if(e.key === 'Enter'){      
+      actions.getWeatherByCity(search)
     }
-  };
+  }
+  useEffect(() => {
+    
+  }, []);
 
   return (
     <div className="weather-panel">
-      {store.weather && (
-        <div className="weather-today">
-          <div className="weather-city">
-            <h2>
-              {store.weather.name}
-              <br />
-              <small>
-                {new Date().toLocaleDateString("es-es", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })}
-              </small>
-            </h2>
-            <div className="weather-icon">
-              {WeatherIcons(store.weather.weather[0].description)}
-            </div>
-          </div>
-
-          <div className="temperature-info">
-            <div className="weather-search">
-              <input
-                type="text"
-                placeholder="Ingrese el nombre de la ciudad"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-              />
-              <button onClick={handleSearch}>Buscar</button>
-            </div>
-            <span>{store.weather.main.temp.toFixed(0)}ºC</span>
-            <br />
+      <div className="weather-today">
+        <div className="weather-city">
+          <h2 className="principal">
+            {store.weatherBack?.name}
+          </h2>
             <small>
-              {store.weather.main.temp_min}ºC/{store.weather.main.temp_max}ºC
+              {new Date().toLocaleDateString("es-es", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })}
             </small>
+          <div className="weather-icon">
+            {WeatherIcons(store.weatherBack?.weather[0]?.description)}
+            <p>{store.weatherBack?.weather[0]?.description}</p>
           </div>
         </div>
-      )}
 
-      {/* Agrega cualquier otra información que desees mostrar */}
+        <div className="temperature-info">
+          <input
+            className="weather-input"
+            value={search}
+            onChange={(e)=>setSearch(e.target.value)}
+            onKeyDown={handleSearch}
+            type="text"
+            placeholder="Introduce la ciudad "
+          />
+          
+          <span className="degrees">{store.weatherBack?.main.temp.toFixed(0)}ºC</span>
+          
+          <span className="temp_range">
+            {store.weatherBack?.main?.temp_min.toFixed(0)}ºC/{store.weatherBack?.main?.temp_max.toFixed(0)}ºC
+          </span>
+          
+        </div>
+      </div>
     </div>
   );
 };
+
+

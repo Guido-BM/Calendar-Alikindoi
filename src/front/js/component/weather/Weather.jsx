@@ -8,7 +8,6 @@ export const Weather = () => {
   const { store, actions } = useContext(Context);
 
   useEffect(() => {
-    // Obtener la ubicación del usuario usando la API de geolocalización del navegador
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -30,7 +29,7 @@ export const Weather = () => {
         <div className="weather-city">
           <h2 className="principal">
             {store.weather?.name}
-            <br />
+          </h2>
             <small>
               {new Date().toLocaleDateString("es-es", {
                 year: "numeric",
@@ -38,7 +37,6 @@ export const Weather = () => {
                 day: "numeric",
               })}
             </small>
-          </h2>
           <div className="weather-icon">
             {WeatherIcons(store.weather?.weather[0]?.description)}
             <p>{store.weather?.weather[0]?.description}</p>
@@ -49,23 +47,10 @@ export const Weather = () => {
           <span className="degrees">{store.weather?.main.temp.toFixed(0)}ºC</span>
           <br />
           <span className="temp_range">
-            {store.weather?.main?.temp_min}ºC/{store.weather?.main?.temp_max}ºC
+            {store.weather?.main?.temp_min.toFixed(0)}ºC/{store.weather?.main?.temp_max.toFixed(0)}ºC
           </span>
         </div>
       </div>
-
-      {/* <div className="forecast-info">
-        <div className="1">
-          <p>{store.weather?.main?.humidity}</p>
-          <p>Imagen/descrip</p>
-          <p>temperatura</p>
-        </div>
-        <div className="2">
-          <p>{store.weather?.wind?.speed}</p>
-          <p>Imagen/descrip</p>
-          <p>temperatura</p>
-        </div>
-      </div> */}
     </div>
   );
 };

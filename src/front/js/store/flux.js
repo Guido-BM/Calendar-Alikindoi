@@ -1,5 +1,5 @@
 import moment from "moment";
-import { get_weather_coordinates } from "./WeatherApi";
+import { get_weather_coordinates, get_weather_city } from "./WeatherApi";
 
 
 const getState = ({ getStore, getActions, setStore }) => {
@@ -140,16 +140,16 @@ const getState = ({ getStore, getActions, setStore }) => {
         const store = getStore();
         try {
           const weatherData = await get_weather_coordinates(latitude, longitude);
-          setStore({ ...store, weather: weatherData });
+          setStore({ ...store, weather: weatherData, weatherBack: weatherData });
         } catch (error) {
           console.error("Error obteniendo el tiempo actual:", error);
         }
       },
-      getWeatherByCity: async (city) => {
+      getWeatherByCity: async (search) => {
         const store = getStore();
         try {
-          const weatherData = await get_weather_city(city);
-          setStore({ ...store, weather: weatherData });
+          const weatherData = await get_weather_city(search);
+          setStore({ ...store, weatherBack: weatherData });
         } catch (error) {
           console.error("Error obteniendo el tiempo por ciudad:", error);
         }

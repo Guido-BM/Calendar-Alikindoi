@@ -14,13 +14,19 @@
   padding: 1em;
 }
 
-.weather-city,
-.temperature-info,
-.day1,
-.day2,
-.day3 {
-  flex-grow: 1;
+.weather-city {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
   justify-content: space-around;
+  align-items:flex-start;
+}
+.temperature-info {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-end;
 }
 
 .principal {
@@ -29,5 +35,10 @@
 }
 
 .weather-icon img {
-  height: 100px;
+  height: 60px;
+}
+
+.weather-input {
+  width: 70%;
+  border-radius: 12px;
 }
