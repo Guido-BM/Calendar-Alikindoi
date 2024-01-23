@@ -5,38 +5,38 @@ import { addTask, updateTask } from '../../store/todoistService';
 
 const useStyle = createStyles(({ token }) => ({
       'my-modal-body': {
-            background: '#f0f2f5', // Un fondo más suave
+            background: '#f0f2f5',
             padding: token.paddingSM,
       },
       'my-modal-mask': {
-            boxShadow: `inset 0 0 15px #f0f2f5`, // Sombra más suave
+            boxShadow: `inset 0 0 15px #f0f2f5`,
       },
       'my-modal-header': {
-            borderBottom: `1px solid ${token.colorPrimary}`, // Línea sólida
-            backgroundColor: token.colorPrimary, // Fondo del color primario
-            color: '#fff', // Texto blanco
+            borderBottom: `1px solid ${token.colorPrimary}`,
+            backgroundColor: token.colorPrimary,
+            color: '#fff',
       },
       'my-modal-footer': {
             color: token.colorPrimary,
-            backgroundColor: '#f0f2f5', // Fondo más suave
+            backgroundColor: '#f0f2f5',
       },
       'my-modal-content': {
-            border: '1px solid #ccc', // Borde más suave
+            border: '1px solid #ccc',
       },
       'my-input': {
-            width: 'calc(100% - 30px)', // Restar el padding y el margen del ancho total
+            width: 'calc(100% - 30px)',
             padding: '10px',
             margin: '10px 0',
             borderRadius: '5px',
             border: '1px solid #ccc',
       },
       'my-textarea': {
-            width: 'calc(100% - 30px)', // Restar el padding y el margen del ancho total
+            width: 'calc(100% - 30px)',
             padding: '10px',
             margin: '10px 0',
             borderRadius: '5px',
             border: '1px solid #ccc',
-            resize: 'none', // Evitar que el usuario pueda cambiar el tamaño
+            resize: 'none',
       },
       'my-button': {
             padding: '10px 20px',
@@ -89,23 +89,23 @@ const TaskModal = () => {
       const modalStyles = {
             header: {
                   borderLeft: `5px solid ${token.colorPrimary}`,
-                  borderRadius: '5px', // Bordes redondeados
+                  borderRadius: '5px',
                   paddingInlineStart: 5,
-                  color: '#fff', // Texto blanco
+                  color: '#fff',
             },
             body: {
-                  boxShadow: 'inset 0 0 5px #ccc', // Sombra más suave
-                  borderRadius: '5px', // Bordes redondeados
+                  boxShadow: 'inset 0 0 5px #ccc',
+                  borderRadius: '5px',
             },
             mask: {
                   backdropFilter: 'blur(10px)',
             },
             footer: {
-                  borderTop: '1px solid #ccc', // Borde más suave
-                  backgroundColor: '#f0f2f5', // Fondo más suave
+                  borderTop: '1px solid #ccc',
+                  backgroundColor: '#f0f2f5',
             },
             content: {
-                  boxShadow: '0 0 30px #ccc', // Sombra más suave
+                  boxShadow: '0 0 30px #ccc',
             },
       };
       return (
@@ -120,7 +120,6 @@ const TaskModal = () => {
                         open={isModalOpen[0]}
                         onOk={handleSubmit}
                         onCancel={() => toggleModal(0, false)}
-                        footer="Footer"
                         classNames={classNames}
                         styles={modalStyles}
                   >
