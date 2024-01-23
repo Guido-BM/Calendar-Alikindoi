@@ -56,16 +56,14 @@ const Todoist = () => {
         <div className="grid-c-title">
           <h3 className="text text-silver-v1">TODOIST</h3>
         </div>
-        <div
-          className="grid-c3"
-          style={{ overflowY: "auto", maxHeight: "90px" }}
-        >
+        <div className="grid-c3">
           <h4>Tasks:</h4>
           {tasks && tasks.map((task) => (
             <p key={task.id}>{task.content}</p>
           ))}
         </div>
         <TaskModal
+          className="TaskModal"
           handleInputChange={handleInputChange}
           handleAddTask={handleAddTask}
         />
