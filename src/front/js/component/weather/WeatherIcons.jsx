@@ -1,7 +1,7 @@
 import React from 'react';
 
 const WeatherIcons = (description) => {
-  console.log("Descripción del clima:", description);
+  
   let iconComponent;
 
   if (description === 'thunderstorm') {

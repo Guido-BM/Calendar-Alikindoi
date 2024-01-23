@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import "./CardFlip.css";
 import "../../pages/home.scss";
 
@@ -10,13 +10,28 @@ const CardFlip = (props) => {
   };
 
   return (
-    <div className={`flip grid-one-item  ${isFlipped ? 'flipped' : ''} ${props.className ? props.className : '' }`} onClick={handleToggle}>
-      
-      
-        <div className="face front grid-common"> {props.front}</div>
-        <div className="face back grid-common">{props.back}</div>
+    <div
+      className={`flip grid-one-item grid-common grid-c1  ${
+        isFlipped ? "flipped" : ""
+      } ${props.className ? props.className : ""}`}
+    >
+      <div className="face front">
+        {" "}
+        {props.front}
+        <i
+          className="fa-solid fa-arrow-rotate-left flip-icon"
+          onClick={handleToggle}
+        ></i>
       </div>
-    
+      <div className="face back">
+        {props.back}
+
+        <i
+          className="fa-solid fa-arrow-rotate-left flip-icon"
+          onClick={handleToggle}
+        ></i>
+      </div>
+    </div>
   );
 };
 
