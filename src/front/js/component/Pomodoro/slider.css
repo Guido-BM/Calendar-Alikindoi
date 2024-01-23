@@ -1,14 +1,15 @@
 .slider {
-  height: 20px;
+  height: 30px;
   border: 2px solid var(--red);
   border-radius: 20px;
+  width: 150px;
 }
 
 .thumb {
   background-color: var(--red);
   cursor: pointer;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   border-radius: 20px;
 }
 
@@ -17,4 +18,8 @@
 }
 .slider.green .thumb {
   background-color: var(--green);
+}
+.settings-container {
+  display: grid;
+  grid-auto-flow: column;
 }

@@ -7,7 +7,6 @@ import Pomodoro from "../component/Pomodoro/Pomodoro";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 
-
 import "./home.scss";
 import CardFlip from "../component/Cards/CardFlip";
 import { Weather } from "../component/weather/Weather";
@@ -22,8 +21,8 @@ export const Home = () => {
     let urlObj = new URL(url);
     let token = urlObj.searchParams.get("accessToken");
     if (token) {
-      localStorage.setItem('tokenTodoist', token);
-      actions.setTokenTodoist(token)
+      localStorage.setItem("tokenTodoist", token);
+      actions.setTokenTodoist(token);
       // navigate("/home");
       console.log(token);
     }
@@ -38,12 +37,12 @@ export const Home = () => {
               <CardFlip front={<Weather />} back={<WeatherBack />} />
               {/* <Cards /> */}
               <Wallet />
-              <Todoist />
+              <Pomodoro />
             </div>
             <div className="content-grid-two">
               <div className="grid-two-item">
                 <div className="subgrid-two">
-                  <Pomodoro />
+                  <Todoist />
                 </div>
               </div>
               <Budget />

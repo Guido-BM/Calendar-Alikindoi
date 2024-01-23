@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "antd";
+import "./landing.css";
 
 function LandingPage() {
   return (
-    <div>
-      <h1>Bienvenido a la página de inicio</h1>
+    <div className="landing-container">
+      <h1 className="landing-welcome">Bienvenido a la página de inicio</h1>
 
       <Link to="/login">
         <Button type="primary">Iniciar sesión</Button>

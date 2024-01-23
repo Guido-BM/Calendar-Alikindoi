@@ -4,6 +4,7 @@ import Timer from "./Timer.js";
 import Settings from "./Settings.js";
 import SettingsContext from "./SettingsContext.js";
 import "./Pomodoro.css";
+import "../../pages/home.scss";
 
 const Pomodoro = () => {
   const [showSettings, setShowSettings] = useState(false);

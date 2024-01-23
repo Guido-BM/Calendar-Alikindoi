@@ -6,8 +6,8 @@ import SettingsButton from "./SettingsButton";
 import React, { useContext, useState, useEffect, useRef } from "react";
 import SettingsContext from "./SettingsContext";
 
-const red = "#f54e4e";
-const green = "#4aec8c";
+const red = "#8f71ff";
+const green = "#82acff;";
 
 function Timer() {
   const settingsInfo = useContext(SettingsContext);
@@ -68,16 +68,18 @@ function Timer() {
   if (seconds < 10) seconds = "0" + seconds;
 
   return (
-    <div>
-      <CircularProgressbar
-        value={percentage}
-        text={minutes + ":" + seconds}
-        styles={buildStyles({
-          textColor: "#a698c0",
-          pathColor: mode === "work" ? red : green,
-          tailColor: "rgba(255,255,255,.2)",
-        })}
-      />
+    <div className="container-timer">
+      <div>
+        <CircularProgressbar
+          value={percentage}
+          text={minutes + ":" + seconds}
+          styles={buildStyles({
+            textColor: "#ff5d9e",
+            pathColor: mode === "work" ? red : green,
+            tailColor: "rgba(255,255,255,.2)",
+          })}
+        />
+      </div>
       <div style={{ marginTop: "10px" }}>
         {isPaused ? (
           <PlayButton

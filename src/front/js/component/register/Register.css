@@ -12,10 +12,10 @@ body{
   justify-content: center;
   align-content: center;
 } */
-::-webkit-input-placeholder{
-  color: #eee;
+::-webkit-input-placeholder {
+  color: #ff5d9e;
 }
-.wrapper{
+.wrapper {
   position: relative;
   width: 800px;
   height: 65vh;
@@ -24,31 +24,30 @@ body{
   border: 3px solid #00ffff;
   box-shadow: 0 0 50px 0 #00a6bc;
 }
-.form{
+.form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.title{
+.title {
   font-size: 35px;
 }
-.inp{
+.inp {
   padding-bottom: 10px;
-  border-bottom: 2px solid #eee;
+  border-bottom: 2px solid, #ff5d9e;
 }
-.input{
+.input {
   border: none;
   outline: none;
   background: none;
   width: 260px;
   margin-top: 40px;
   padding-right: 10px;
-  font-size: 17px;
+  font-size: 20px;
   color: #0ef;
-
 }
-.submit{
+.submit {
   border: none;
   outline: none;
   width: 288px;
@@ -60,23 +59,25 @@ body{
   cursor: pointer;
   background: linear-gradient(45deg, #0ef, #c800ff);
 }
-.footer{
+.footer {
   margin-top: 30px;
   letter-spacing: 0.5px;
-  font-size: 14px;
+  font-size: 17px;
 }
-.link{
-  color: #0ef;
+.link {
+  color: #82acff;
   text-decoration: none;
+  font-size: 17px;
+  font-weight: bold;
 }
-.banner{
+.banner {
   position: absolute;
   top: 0;
   right: 0;
   width: 450px;
   height: 390px;
-  background: linear-gradient(to right,#0ef, #c800ff );
-  clip-path: polygon(0 0,100% 0,100% 100%, 60% 100%);
+  background: linear-gradient(to right, #0ef, #c800ff);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 60% 100%);
   padding-right: 70px;
   text-align: right;
   display: flex;
@@ -84,12 +85,12 @@ body{
   justify-content: center;
   align-items: flex-end;
 }
-.wel_text{
+.wel_text {
   font-size: 40px;
   margin-top: -50px;
   line-height: 50px;
 }
-.para{
+.para {
   margin-top: 10px;
   font-size: 18px;
   line-height: 24px;
