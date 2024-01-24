@@ -151,31 +151,23 @@ const OverViewComponent = (props) => {
           {isAddTxnVisible ? "CANCEL" : "ADD"}
         </AddTransaction>
       </BalanceBox>
-      <FlipContainer>
-        <Flipper isFlipped={isAddTxnVisible}>
-          <Front>
-            <ExpenseContainer>
-              <ExpenseBox>
-                Expense<span>${props.expense}</span>
-              </ExpenseBox>
-              <ExpenseBox isIncome={true}>
-                Income<span>${props.income}</span>
-              </ExpenseBox>
-            </ExpenseContainer>
-          </Front>
-          <Back>
-            {isAddTxnVisible && (
-              <AddTransactionView
-                isAddTxnVisible={isAddTxnVisible}
-                addTransaction={(payload) => {
-                  props.addTransaction(payload);
-                  toggleAddTXn((isVisible) => !isVisible);
-                }}
-              />
-            )}
-          </Back>
-        </Flipper>
-      </FlipContainer>
+      {isAddTxnVisible && (
+        <AddTransactionView
+          isAddTxnVisible={isAddTxnVisible}
+          addTransaction={(payload) => {
+            props.addTransaction(payload);
+            toggleAddTXn((isVisible) => !isVisible);
+          }}
+        />
+      )}
+      <ExpenseContainer>
+        <ExpenseBox>
+          Expense<span>${props.expense}</span>
+        </ExpenseBox>
+        <ExpenseBox isIncome={true}>
+          Income<span>${props.income}</span>
+        </ExpenseBox>
+      </ExpenseContainer>
     </Container>
   );
 };
