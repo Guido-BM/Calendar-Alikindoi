@@ -5,7 +5,6 @@
   height: 100%;
   width: 100%;
 }
-
 .weather-today,
 .forecast-info {
   display: flex;
@@ -13,7 +12,6 @@
   justify-content: space-around;
   padding: 1em;
 }
-
 .weather-city {
   height: 80%;
   display: flex;
@@ -32,21 +30,17 @@
   display: block;
   margin-top: 1em;
 }
-
 .temp_range {
   display: block;
   margin-top: 0.5em;
 }
-
 .principal {
   display: flex;
   align-items: center;
 }
-
 .weather-icon img {
   height: 60px;
 }
-
 .weather-input {
   width: 70%;
   border-radius: 12px;
@@ -61,7 +55,7 @@
     transform: translateY(-0.5em);
   }
 }
-.container {
+.weather-panel .container {
   position: relative;
   animation: float 3s infinite alternate;
 }
@@ -76,30 +70,26 @@
   margin-bottom: 5em;
   font-family: "Chivo";
 }
-
-input {
+.weather-panel input {
   background-color: gray;
   font-size: 0.8em;
   font-family: "Chivo";
-  padding: 1em; 
+  padding: 1em;
   border: none;
   border-radius: 0.2em;
   outline: none;
   transition: background 0.3s;
 }
-input::placeholder {
+.weather-panel input::placeholder {
   color: #000000;
 }
-
 .ghost {
   background: white;
   color: white;
 }
-
 .ghost * {
   transition: all 0.3s;
 }
-
 .ghost>* {
   position: absolute;
   left: 50%;
@@ -110,7 +100,7 @@ input::placeholder {
   width: 4em;
   height: 6em;
   background: inherit;
-  border-radius: 100px; 
+  border-radius: 100px;
   box-shadow: 0 0 12px #424242;
   transform: translate(-50%, 50px);
   transition: all 0.3s background 0.4s 0.1s;
@@ -158,7 +148,6 @@ input::placeholder {
   border-radius: 100px;
   box-shadow: 0 4px 4px #3333334d;
 }
-
 .hands-r {
   transform: translate(1.5em, 1em);
 }
@@ -174,13 +163,12 @@ input::placeholder {
   border-bottom-left-radius: 0.4em;
   border-bottom-right-radius: 0.4em;
 }
-input:focus {
+.weather-panel input:focus {
   background: white;
 }
-input:focus+.ghost {
+.weather-panel input:focus+.ghost {
   background: #ffffff33;
   color: transparent;
-
   & .torso {
     transform: translate(-50%, 42px) scaleY(0.9);
   }
