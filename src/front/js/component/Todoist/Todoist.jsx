@@ -24,10 +24,8 @@ const Todoist = () => {
     setTasks(prevTasks => [...prevTasks, newTask]);
   };
 
-  const getTasksForProject = (project_id) => {
-    return getTasks()
-      .then((tasks) => tasks.filter(task => task.project_id === project_id))
-      .catch((error) => console.error(error));
+  const getTasksForProject = () => {
+    return getTasks().then((tasks) => { return tasks });
   };
 
   useEffect(() => {

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import OverViewComponent from "./overViewComponent";
+import OverViewComponent from "./overViewComponent.jsx";
 import TransactionsComponent from "./transactionsComponent.jsx";
-import CardFlip from "../Cards/CardFlip.jsx";
+import WalletCardFlip from "../Cards/WalletCardFlip.jsx";
 
 const Container = styled.div`
   background-color: white;
@@ -22,6 +22,17 @@ const Wallet = (props) => {
   const [transactions, updateTransaction] = useState([]);
   const [expense, updateExpense] = useState(0);
   const [income, updateIncome] = useState(0);
+  const [isFlipped, setFlipped] = useState(false);
+
+  const handleAddClick = () => {
+    // Aquí va tu lógica para el botón "Add"
+    setFlipped(true);
+  };
+
+  const handleCancelClick = () => {
+    // Aquí va tu lógica para el botón "Cancel"
+    setFlipped(false);
+  };
 
   const calculateBalance = () => {
     let exp = 0;
@@ -42,24 +53,24 @@ const Wallet = (props) => {
     updateTransaction(transactionArray);
   };
   return (
-    <Container>
-      <CardFlip
-        front={
-          <OverViewComponent
-            expense={expense}
-            income={income}
-            addTransaction={addTransaction}
-          />
-        }
-        back={
-          transactions?.length ? (
-            <TransactionsComponent transactions={transactions} />
-          ) : (
-            ""
-          )
-        }
-      />
-    </Container>
+
+    <WalletCardFlip
+      front={
+        <OverViewComponent
+          expense={expense}
+          income={income}
+          addTransaction={addTransaction}
+        />
+      }
+      back={
+        transactions?.length ? (
+          <TransactionsComponent transactions={transactions} />
+        ) : (
+          ""
+        )
+      }
+    />
+
   );
 };
 export default Wallet;
