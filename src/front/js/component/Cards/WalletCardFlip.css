@@ -1,33 +1,33 @@
 .flip-wallet {
-      position: relative;
-      perspective: 800px;
-      transform-style: preserve-3d;
-      transition: 0.5s;
-    }
+  position: relative;
+  perspective: 800px;
+  transform-style: preserve-3d;
+  transition: 0.5s;
+}
 
-    .flip-wallet.flipped {
-      transform: rotateY(-180deg);
-    }
+.flip-wallet.flipped {
+  transform: rotateY(-180deg);
+}
 
-    .flip-wallet .face {
-      width: 90%;
-      backface-visibility: hidden;
-      font-family: Georgia;
-    }
+.flip-wallet .face {
+  width: 90%;
+  backface-visibility: hidden;
+  font-family: Georgia;
+}
 
-    .flip-wallet .front {
-      z-index: 1;
-      cursor: pointer;
-      position: absolute;
-      top: 0;
-      max-height: 100%;
-      max-width: 100%;
-    }
+.flip-wallet .front {
+  z-index: 1;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  max-height: 100%;
+  max-width: 100%;
+}
 
-    .flip-wallet .back {
-      transform: rotateY(-180deg);
-      cursor: pointer;
-      z-index: 2;
-      position: absolute;
-      top: 0;
-    }
+.flip-wallet .back {
+  transform: rotateY(-180deg);
+  cursor: pointer;
+  z-index: 2;
+  position: absolute;
+  top: 0;
+}
