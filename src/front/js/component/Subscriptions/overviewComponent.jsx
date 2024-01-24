@@ -1,32 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styled, { css } from "styled-components";
-
-const FlipContainer = styled.div`
-  perspective: 1000px;
-`;
-
-const Flipper = styled.div`
-  transition: 0.6s;
-  transform-style: preserve-3d;
-  position: relative;
-
-  ${props => props.isFlipped && css`
-    transform: rotateY(180deg);
-  `}
-`;
-
-const Front = styled.div`
-  position: absolute;
-  width: 100%;
-  backface-visibility: hidden;
-`;
-
-const Back = styled.div`
-  position: absolute;
-  width: 100%;
-  backface-visibility: hidden;
-  transform: rotateY(180deg);
-`;
+import styled from "styled-components";
 
 const Container = styled.div`
   display: flex;
