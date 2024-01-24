@@ -28,6 +28,15 @@
   justify-content: space-around;
   align-items: flex-end;
 }
+.degrees {
+  display: block;
+  margin-top: 1em;
+}
+
+.temp_range {
+  display: block;
+  margin-top: 0.5em;
+}
 
 .principal {
   display: flex;
@@ -41,4 +50,160 @@
 .weather-input {
   width: 70%;
   border-radius: 12px;
+  text-align: center;
+}
+@import url("https://fonts.googleapis.com/css?family=Chivo:700");
+@keyframes float {
+  from {
+    transform: translateY(0.5em);
+  }
+  to {
+    transform: translateY(-0.5em);
+  }
+}
+.container {
+  position: relative;
+  animation: float 3s infinite alternate;
+}
+.chat-buble {
+  position: absolute;
+  width: 100%;
+  color: white;
+  left: 50%;
+  bottom: 100%;
+  text-align: center;
+  transform: translateY(-50%);
+  margin-bottom: 5em;
+  font-family: "Chivo";
+}
+
+input {
+  background-color: gray;
+  font-size: 0.8em;
+  font-family: "Chivo";
+  padding: 1em; 
+  border: none;
+  border-radius: 0.2em;
+  outline: none;
+  transition: background 0.3s;
+}
+input::placeholder {
+  color: #000000;
+}
+
+.ghost {
+  background: white;
+  color: white;
+}
+
+.ghost * {
+  transition: all 0.3s;
+}
+
+.ghost>* {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  transform: translateX(-50%);
+}
+.torso {
+  width: 4em;
+  height: 6em;
+  background: inherit;
+  border-radius: 100px; 
+  box-shadow: 0 0 12px #424242;
+  transform: translate(-50%, 50px);
+  transition: all 0.3s background 0.4s 0.1s;
+  z-index: -1;
+}
+.face {
+  margin-bottom: 1em;
+  background: none;
+}
+.face .eyes-l,
+.face .eyes-r {
+  width: 0.7em;
+  height: 0.7em;
+  background: #333;
+  border-radius: 100%;
+  position: absolute;
+  bottom: 10px;
+}
+.face .eyes-l {
+  right: 4.2em;
+}
+.face .eyes-r {
+  left: 4.2em;
+}
+.face .mouth {
+  width: 0.5em;
+  height: 0.3em;
+  position: absolute;
+  border-radius: 50px;
+  border: 0.2em solid #333;
+  border-top: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  left: 4.6em;
+}
+.face .mouth--open {
+  border-top: 0.2em solid #333;
+  height: 0.2em;
+}
+.hands-r,
+.hands-l {
+  width: 0.8em;
+  height: 1.5em;
+  background: white;
+  border-radius: 100px;
+  box-shadow: 0 4px 4px #3333334d;
+}
+
+.hands-r {
+  transform: translate(1.5em, 1em);
+}
+.hands-l {
+  transform: translate(-1.5em, 2.5em);
+}
+.legs {
+  width: 4em;
+  height: 1em;
+  background: inherit;
+  top: 100%;
+  box-shadow: 0 0 12px #424242;
+  border-bottom-left-radius: 0.4em;
+  border-bottom-right-radius: 0.4em;
+}
+input:focus {
+  background: white;
+}
+input:focus+.ghost {
+  background: #ffffff33;
+  color: transparent;
+
+  & .torso {
+    transform: translate(-50%, 42px) scaleY(0.9);
+  }
+  & .eyes * {
+    background: #ffffff99;
+  }
+  & .face {
+    transform: translate(-50%, 0.4em);
+  }
+  & .mouth {
+    transform: scaleY(0.6);
+    border-color: #ffffff99;
+  }
+  & .hands {
+    transform: translate(-50%, 0.2em);
+  }
+  & .hands * {
+    background: transparent;
+  }
+  & .legs {
+    border-bottom-left-radius: 2em;
+    border-bottom-right-radius: 0.6em;
+    transform: translateX(-50%) scaleY(0.85);
+    transform-origin: top;
+  }
 }

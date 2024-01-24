@@ -4,11 +4,6 @@
   font-family: Raleway, sans-serif;
 }
 
-.cardContainer {
-}
-.cardBack {
-}
-
 .flipperContainer {
   border-radius:35px;
 }
@@ -58,11 +53,25 @@
 	transform: rotateY(180deg);
 }
 
-
-
 .flex {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   margin: 10px;
 }
+
+@media (max-width: 1200px) {
+  .flex {
+    flex-wrap: wrap; /* Permitir que las tarjetas se envuelvan en pantallas más pequeñas */
+    justify-content: center; /* Centrar las tarjetas en el contenedor */
+  }
+
+  .cardFront, .cardBack {
+    width: 100%; /* O cualquier otro ancho que desees en pantallas pequeñas */
+  }
+
+  .cardContainer {
+    margin-bottom: 20px 10px; /* Ajusta el espacio entre las tarjetas en pantallas pequeñas */
+  }
+}
+
