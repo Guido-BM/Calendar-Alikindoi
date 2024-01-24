@@ -7,13 +7,13 @@ const CardSocialIcons = () => {
   return (
     <div style={iconsContainerStyles} className="iconContainer">
       <span style={iconStyles} className="icons">
-        <i className="fab fa-facebook-square"></i>
+        <i class="fa-brands fa-github"></i>
       </span>
       <span style={iconStyles} className="icons">
-        <i className="fab fa-youtube-square"></i>
+        <i class="fa-brands fa-linkedin"></i>
       </span>
       <span style={iconStyles} className="icons">
-        <i className="fab fa-twitter-square"></i>
+        <i class="fa-solid fa-envelope"></i>
       </span>
     </div>
   );
