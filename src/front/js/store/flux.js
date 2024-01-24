@@ -1,6 +1,6 @@
 import moment from "moment";
 import { get_weather_coordinates, get_weather_city } from "./WeatherApi";
-
+import { set } from "immutable";
 
 const getState = ({ getStore, getActions, setStore }) => {
   return {
@@ -24,7 +24,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white",
         },
       ],
-
     },
     message: null,
     demo: [
@@ -53,6 +52,100 @@ const getState = ({ getStore, getActions, setStore }) => {
       setSavedMonthlyEvents: (events) => {
         const store = getStore();
         setStore({ ...store, savedMonthlyEvents: events });
+      },
+      saveEvent: async (event) => {
+        const store = getStore();
+        try {
+          const response = await fetch(
+            `${process.env.BACKEND_URL}/api/users/${store.user}/events`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${store.token}`,
+              },
+              body: JSON.stringify(event),
+            }
+          );
+          const data = await response.json();
+          if (data.id) {
+            // El evento se guardó correctamente
+            // Puedes agregar el evento a tu store si lo necesitas
+            setStore({
+              ...store,
+              savedMonthlyEvents: [...store.savedMonthlyEvents, data],
+            });
+          } else {
+            // Hubo un error al guardar el evento
+            console.error("Error saving event:", data);
+          }
+        } catch (error) {
+          console.error("Error saving event:", error);
+        }
+      },
+      loadUserEvents: async () => {
+        const store = getStore();
+        if (store.user) {
+          try {
+            const response = await fetch(
+              `${process.env.BACKEND_URL}/api/users/${store.user}/events`,
+              {
+                method: "GET",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${store.token}`,
+                },
+              }
+            );
+            const data = await response.json();
+            if (Array.isArray(data)) {
+              // Los eventos se cargaron correctamente
+              // Puedes agregar los eventos a tu store
+              setStore({
+                ...store,
+                savedMonthlyEvents: data,
+              });
+            } else {
+              // Hubo un error al cargar los eventos
+              console.error("Error loading events:", data);
+            }
+          } catch (error) {
+            console.error("Error loading events:", error);
+          }
+        }
+      },
+      saveUserEvents: async (events) => {
+        const store = getStore();
+        // iterate over the events array and save each event
+        for (const event of events) {
+          try {
+            const response = await fetch(
+              `${process.env.BACKEND_URL}/api/users/${store.user}/events`,
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${store.token}`,
+                },
+                body: JSON.stringify(event),
+              }
+            );
+            const data = await response.json();
+            if (data.id) {
+              // The event was saved correctly
+              // You can add the event to your store if you need to
+              setStore({
+                ...store,
+                savedMonthlyEvents: [...store.savedMonthlyEvents, data],
+              });
+            } else {
+              // There was an error saving the event
+              console.error("Error saving event:", data);
+            }
+          } catch (error) {
+            console.error("Error saving event:", error);
+          }
+        }
       },
       exampleFunction: () => {
         getActions().changeColor(0, "green");
@@ -87,16 +180,20 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       setToken: async (email, password) => {
         const store = getStore();
-        const responseLogin = await fetch(`${process.env.BACKEND_URL}/api/login`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email: email, password: password }),
-        });
+        const responseLogin = await fetch(
+          `${process.env.BACKEND_URL}/api/login`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email: email, password: password }),
+          }
+        );
         const data = await responseLogin.json();
         if (data.token) {
           setStore({ ...store, token: data.token });
+          setStore({ ...store, user: data.user_id });
           await getActions().setTokenFromLocalStorage(data.token);
           localStorage.setItem("tokenJwt", data.token);
           console.log("User is authenticated");
@@ -167,8 +264,15 @@ const getState = ({ getStore, getActions, setStore }) => {
       getWeatherByCoordinates: async (latitude, longitude) => {
         const store = getStore();
         try {
-          const weatherData = await get_weather_coordinates(latitude, longitude);
-          setStore({ ...store, weather: weatherData, weatherBack: weatherData });
+          const weatherData = await get_weather_coordinates(
+            latitude,
+            longitude
+          );
+          setStore({
+            ...store,
+            weather: weatherData,
+            weatherBack: weatherData,
+          });
         } catch (error) {
           console.error("Error obteniendo el tiempo actual:", error);
         }
