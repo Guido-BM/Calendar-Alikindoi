@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button, Form, Input, Modal, Radio, TimePicker } from "antd";
 import { DatePicker } from "antd";
+import { Context } from "../store/appContext";
 
 const CollectionCreateForm = ({
   open,
@@ -9,6 +10,7 @@ const CollectionCreateForm = ({
   onFormDataChange,
 }) => {
   const [form] = Form.useForm();
+
   return (
     <Modal
       open={open}
@@ -82,17 +84,19 @@ const CollectionCreateForm = ({
 
 const CreateEventButton = ({ addEvents, selectedDate }) => {
   const [open, setOpen] = useState(false);
-
+  const { store, actions } = useContext(Context);
   const onCreate = (values) => {
-    const newEvent = {
+    const [start, end] = values.time;
+    const event = {
       title: values.title,
       description: values.description,
-      modifier: values.modifier,
-      date: selectedDate,
-      time: values.time,
+      start_time: start.toISOString(),
+      end_time: end.toISOString(),
+      user_id: store.user, // Asegúrate de obtener el id del usuario correctamente
     };
-    addEvents(newEvent);
-    setOpen(false);
+
+    // Guarda el evento usando la acción saveEvent
+    actions.saveEvent(event);
   };
 
   return (
