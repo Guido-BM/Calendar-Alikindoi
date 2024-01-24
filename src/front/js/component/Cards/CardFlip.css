@@ -4,7 +4,6 @@
   transform-style: preserve-3d;
   transition: 0.5s;
   width: 90%;
-  height: 150px;
 }
 
 .flip.flipped {
