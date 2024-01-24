@@ -8,15 +8,16 @@ import {
   getProjects,
 } from "../../store/todoistService.js";
 import TaskModal from "./TaskModal.jsx";
-import { Button } from "antd";
 import { Link } from "react-router-dom";
 import { Context } from "../../store/appContext.js";
 import "./Todoist.css";
+import NewModal from "./NewModal.jsx";
+import { Button } from "antd";
 
 const Todoist = () => {
   const [tasks, setTasks] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [newTask, setNewTask] = useState("");
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [newTask, setNewTask] = useState({ title: "", description: "" });
   const { actions } = useContext(Context);
   const tokenTodoist = localStorage.getItem("tokenTodoist");
 
@@ -26,11 +27,19 @@ const Todoist = () => {
         console.log(task);
         setTasks(task);
       })
-      .catch(error => console.error(error));
+      .catch((error) => console.error(error));
   }, []);
 
+  const openModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setIsModalVisible(false);
+  };
+
   const handleInputChange = (event) => {
-    setNewTask(event.target.value);
+    setnewTask(event.target.value);
   };
 
   const handleAddTask = () => {
@@ -58,12 +67,9 @@ const Todoist = () => {
         </div>
         <div className="grid-c3">
           <h4>Tasks:</h4>
-          {tasks && tasks.map((task) => (
-            <p key={task.id}>{task.content}</p>
-          ))}
+          {tasks && tasks.map((task) => <p key={task.id}>{task.content}</p>)}
         </div>
         <TaskModal
-          className="TaskModal"
           handleInputChange={handleInputChange}
           handleAddTask={handleAddTask}
         />
@@ -84,13 +90,18 @@ const Todoist = () => {
         <div className="grid-c-title">
           <h3 className="text text-silver-v1">TODOIST</h3>
         </div>
-        <Button type="primary"
+        <Button
+          type="primary"
           property="loading"
-          onClick={() => window.location.href = "http://localhost:3001/api/todoist/auth"}
-        >LogIn TODOIST</Button>
+          onClick={() =>
+            (window.location.href = "http://localhost:3001/api/todoist/auth")
+          }
+        >
+          LogIn TODOIST
+        </Button>
       </div>
-    )
-  };
+    );
+  }
 };
 
 export default Todoist;

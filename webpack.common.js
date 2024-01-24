@@ -13,12 +13,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /.(js|jsx)$/,
         exclude: /node_modules/,
         use: ["babel-loader"],
       },
       {
-        test: /\.(css|scss)$/,
+        test: /.(css|scss)$/,
         use: [
           "style-loader", // creates style nodes from JS strings
           "css-loader", // translates CSS into CommonJS
@@ -26,21 +26,21 @@ module.exports = {
         ],
       }, //css and scss files
       {
-        test: /\.(png|jp(e*)g|svg|gif)$/,
+        test: /.(png|jp(e*)g|svg|gif)$/,
         type: "asset/resource",
         type: "javascript/auto"
       },
       {
-        test: /\.(png|jpg|gif|jpeg|webp|svg)$/,
+        test: /.(png|jpg|gif|jpeg|webp|svg)$/,
         use: {
           loader: "file-loader",
           options: { name: "[name].[ext]" },
         },
       }, //for images
       {
-        test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
+        test: /\.(woff|woff2|ttf|eot|svg)$/,
         use: ["file-loader"],
-      }, //for fonts
+      } //for fonts
     ],
   },
   resolve: {

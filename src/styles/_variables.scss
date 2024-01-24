@@ -1,15 +1,32 @@
-
 // Paleta de colores
-$rosa-suave: #F4D9E9;
-$lila-claro: #CBA3CC;
-$lavanda: #A899C3;
-$rosa-pastel: #F9CEE2;
-$morado-palido: #D4C4E3;
+// $rosa-suave: #F4D9E9;
+// $lila-claro: #CBA3CC;
+// $lavanda: #A899C3;
+// $rosa-pastel: #F9CEE2;
+// $morado-palido: #D4C4E3;
 
-// Temas de colores
-$primary-color: $rosa-suave;
-$secondary-color: $lila-claro;
-$highlight-color: $lavanda;
-
+// // Temas de colores
+// $primary-color: $rosa-suave;
+// $secondary-color: $lila-claro;
+// $highlight-color: $lavanda;
+$primary-color: #8f71ff;
+$secondary-color: #ff5d9e;
+$highlight-color: #8bffff;
 
 $font-size: 16px;
+
+.first-color {
+  background: #ff5d9e;
+}
+
+.second-color {
+  background: #8f71ff;
+}
+
+.third-color {
+  background: #82acff;
+}
+
+.fourth-color {
+  background: #8bffff;
+}

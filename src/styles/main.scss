@@ -5,6 +5,7 @@
 @import "./_footer.scss";
 #app {
   font-size: $font-size;
-  background-color: $primary-color;
+  background-color: #8f71ff;
+  height: 100vh;
   background-image: url("../front/img/bg-2.png");
 }

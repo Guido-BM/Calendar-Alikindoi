@@ -1,54 +1,70 @@
-.grid-c6 .grid-item-fill {
+.pomodoro-container .grid-c6 .grid-item-fill {
   width: 60%;
   height: 10px;
   background-color: var(--clr-pumpkin);
   border-radius: 100vh;
 }
-:root {
-  --red: #f54e4e;
-  --green: #4aec8c;
-}
 
-body {
+.pomodoro-container body {
   background-color: #f5d9ea;
   color: #a697c0;
 }
-main {
+.pomodoro-container main {
   padding-top: 5px;
-  max-width: 200px;
+  max-width: 400px;
   margin: 0 auto;
   text-align: center;
 }
 
-button {
+.pomodoro-container button {
   background-color: transparent;
-  color: #a697c0;
+  color: #ff5d9e;
   border: 0;
   display: inline-block;
-  width: 50px;
+  width: 70px;
   cursor: pointer;
 }
 
-button.with-text {
+.pomodoro-container button.with-text {
   width: auto;
-  background-color: #f4bbc8;
+  background-color: #82acff;
   border-radius: 10px;
-  padding: 5px;
-  font-size: 1rem;
-  line-height: 20px;
+  padding: 10px;
+  font-size: 1.5rem;
+  line-height: 30px;
 }
-button.with-text svg {
-  width: 20px;
+.pomodoro-container button.with-text svg {
+  width: 30px;
   float: left;
   margin-right: 5px;
 }
 
-label {
+.pomodoro-container label {
   display: block;
   margin-bottom: 5px;
   margin-top: 10px;
   text-transform: capitalize;
+  font-size: 20px;
+  display: grid;
+  grid-auto-flow: column;
 }
-.container {
+.pomodoro-container .container {
   max-width: 200px;
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: center;
+}
+.container-timer {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: center;
+}
+.buttons-timer {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+.grid-c-title-text-pomodoro {
+  color: #ff5d9e;
 }
