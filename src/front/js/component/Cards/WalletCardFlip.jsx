@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
-import "./WalletCardFlip.css";
+import "../Cards/WalletCardFlip.css";
 import "../../pages/home.scss";
 
 const WalletCardFlip = (props) => {
@@ -12,7 +12,7 @@ const WalletCardFlip = (props) => {
 
       return (
             <div
-                  className={`flip grid-one-item grid-common grid-c1  ${isFlipped ? "flipped" : ""
+                  className={`flip-wallet grid-one-item grid-common grid-c1  ${isFlipped ? "flipped" : ""
                         } ${props.className ? props.className : ""}`}
             >
                   <div className="face front">
