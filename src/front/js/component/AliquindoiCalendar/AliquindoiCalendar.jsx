@@ -3,7 +3,7 @@ import "./AliquindoiCalendar.css";
 import { Link } from "react-router-dom";
 import { iconsImgs } from "../../utils/images.js";
 import { budget } from "../../data/data.js";
-import CalendarView from "../calendarView.js";
+import CalendarView from "../calendarView.jsx";
 
 const AliquindoiCalendar = () => {
   return (

@@ -14,20 +14,17 @@ const CalendarView = () => {
   const setSelectedEvents = actions.setSelectedEvents;
   const setSavedMonthlyEvents = actions.setSavedMonthlyEvents;
 
-  useEffect(() => {
-    // This code will run every time `store.savedMonthlyEvents` changes
-    const events = store.savedMonthlyEvents;
-    console.log("savedMonthlyEvents", events);
-    // Here you can put the code to update the calendar
-  }, [store.savedMonthlyEvents]);
-
   const getListData = (value) => {
-    return savedMonthlyEvents.filter((event) => {
+    const datesToRender = savedMonthlyEvents.filter((event) => {
       const eventDate = moment(event.start_time);
       return (
-        eventDate.year() === value.year() && eventDate.month() === value.month()
+        eventDate.year() === value.year() &&
+        eventDate.month() === value.month() &&
+        eventDate.date() === value.date()
       );
     });
+    if (!datesToRender) return [];
+    return datesToRender;
   };
 
   const handleDateSelect = (date, info) => {
@@ -67,10 +64,11 @@ const CalendarView = () => {
         title: event.title,
         time: [moment(event.start_time), moment(event.end_time)],
       }));
+      console.log(listData);
       return <DateCellRender listData={listData} />;
     }
-    if (info.type === "month") return monthCellRender(current);
-    return info.originNode;
+    // if (info.type === "month") return monthCellRender(current);
+    // return info.originNode;
   };
 
   return (
