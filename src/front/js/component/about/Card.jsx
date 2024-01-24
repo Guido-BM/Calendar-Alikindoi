@@ -16,7 +16,7 @@ class Card extends Component {
     super(props);
     this.state = {
       title: "Maria García",
-      subTitle: "@Na'vi_4_Lyf",
+      subTitle: "@Elora Dana",
       bio: "Sick of doctors telling me what I couldn't do. I was a marine. A warrior... of the uh... Jarhead Clan. My cup is empty.",
       direction: "forwards",
     };
@@ -26,19 +26,19 @@ class Card extends Component {
     if (this.props.type === "wick") {
       this.setState({
         title: "Guido Muelas",
-        subTitle: "@HighOctane",
+        subTitle: "@Guido",
         bio: "People keep asking if I'm back and I haven't really had an answer. But now, yeah, I'm thinkin' I'm back.",
       });
     } else if (this.props.type === "groot") {
       this.setState({
-        title: "Paul",
-        subTitle: "@iAmGroot",
+        title: "Paul Grozescu",
+        subTitle: "@Paul",
         bio: "I am Groot. I am Groot... I am Groot, I am Groot, I am Groot I am Groot. I am Groot. I am Groot. I am Groot.",
       });
     } else if (this.props.type === "hitgirl") {
       this.setState({
         title: "Marta Mohedano",
-        subTitle: "@HitGirl",
+        subTitle: "@Marta",
         bio: "I can't see through walls but I can kick your ass. I think some tasers look gay. Robin wishes he was me.",
       });
     }

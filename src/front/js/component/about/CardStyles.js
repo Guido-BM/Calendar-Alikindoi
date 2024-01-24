@@ -1,6 +1,4 @@
 // CardStyles.js
-
-
 export const cardContainerStyles = {
   width: "300px",
   height: "500px",
@@ -36,9 +34,15 @@ export const bodyStyles = {
 };
 
 export const headerStyles = {
-  textAlign: "center",
-  color:"#fff",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  // textAlign: "center",
+  color: "#fff",
+  width: "100%",
+  height: "10%",
 };
+
 
 export const imgContainerStyles = {
   backgroundColor:"#fff",
@@ -55,7 +59,7 @@ export const avatarContainerStyles = {
   height: "150px",
   zIndex: "9",
   position: "relative",
-  top: "-85px",
+  top: "-100px",
   left: "65px",
   right: "0",
   margin: "0 auto",
@@ -76,12 +80,12 @@ export const titleStyles = {
   width: "100%",
   textAlign: "center",
   position: "relative",
-  top: "-75px"
+  top: "-95px",
 };
 
 export const subTitleStyles = {
   position: "relative",
-  top: "-95px",
+  top: "-75px",
   textAlign: "center",
   fontWeight: "100",
   color: "#888"
@@ -89,7 +93,7 @@ export const subTitleStyles = {
 
 export const bioContainerStyles = {
   position: "relative",
-  top: "-95px"
+  top: "-70px"
 };
 
 export const bioStyles = {
@@ -100,7 +104,7 @@ export const bioStyles = {
 
 export const iconsContainerStyles = {
   position: "relative",
-  top: "-85px",
+  top: "-40px",
   textAlign: "center"
 };
 

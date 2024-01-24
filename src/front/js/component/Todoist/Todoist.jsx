@@ -44,7 +44,7 @@ const Todoist = () => {
             .catch(error => console.error(error));
         });
       })
-      .catch(error => console.error(error));
+      .catch((error) => console.error(error));
   }, []);
 
   if (tokenTodoist) {
@@ -72,13 +72,18 @@ const Todoist = () => {
         <div className="grid-c-title">
           <h3 className="text text-silver-v1">TODOIST</h3>
         </div>
-        <Button type="primary"
+        <Button
+          type="primary"
           property="loading"
-          onClick={() => window.location.href = "http://localhost:3001/api/todoist/auth"}
-        >LogIn TODOIST</Button>
+          onClick={() =>
+            (window.location.href = "http://localhost:3001/api/todoist/auth")
+          }
+        >
+          LogIn TODOIST
+        </Button>
       </div>
-    )
-  };
+    );
+  }
 };
 
 export default Todoist;
