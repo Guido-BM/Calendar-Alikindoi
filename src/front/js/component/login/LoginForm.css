@@ -14,39 +14,39 @@ body {
   justify-content: center;
   align-content: center;
 } */
-::-webkit-input-placeholder {
+/* ::-webkit-input-placeholder {
   color: #ff5d9e;
-}
-.wrapper {
+} */
+.wrapper-login {
   position: relative;
   width: 800px;
-  height: auto;
+  height: 50vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border: 3px solid #772af8;
-  box-shadow: 0 0 50px 0 #772af8;
+  border: 3px solid #2a72f8;
+  box-shadow: 0 0 50px 0 #2d2af8;
   margin: auto;
   place-items: center;
   background-color: #385170;
   align-items: center;
-  /* border-radius: 10px; */
+  border-radius: 20px;
 }
-.form {
+.form-login {
   display: grid;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.title {
+.title-login {
   font-size: 35px;
   color: #9fd3c7;
 }
-.inp {
+.inp-login {
   padding-bottom: 10px;
   border-bottom: 2px solid #ececec;
   color: #142d4c;
 }
-.input {
+.input-login {
   border: none;
   outline: none;
   background: none;
@@ -54,9 +54,9 @@ body {
   margin-top: 40px;
   padding-right: 10px;
   font-size: 17px;
-  color: #142d4c;
+  color: #ececec;
 }
-.submit {
+.submit-login {
   border: none;
   outline: none;
   width: 288px;
@@ -66,27 +66,26 @@ body {
   border-radius: 40px;
   letter-spacing: 1px;
   cursor: pointer;
-  background: linear-gradient(45deg, #d4c4e3, #f9cee2);
-  color: #9fd3c7;
-}
-.footer {
-  margin-top: 30px;
-  letter-spacing: 0.5px;
-  font-size: 20px;
+  background: linear-gradient(45deg, #ececec, #142d4c);
   color: #ececec;
 }
-.link {
-  color: #772af8;
-  text-decoration: none;
-  color: #ff5d9e;
+.footer-login {
+  margin-top: 30px;
+  letter-spacing: 0.5px;
+  font-size: 17px;
+  color: #ececec;
 }
-.banner {
+.link-login {
+  color: #9fd3c7;
+  text-decoration: none;
+}
+.banner-login {
   position: absolute;
   top: 0;
   right: 0;
   width: 450px;
   height: 390px;
-  background: linear-gradient(to right, #d4c4e3, #f9cee2);
+  background: linear-gradient(to right, #ececec, #142d4c);
   clip-path: polygon(0 0, 100% 0, 100% 100%, 60% 100%);
   padding-right: 70px;
   text-align: right;
@@ -95,18 +94,28 @@ body {
   justify-content: center;
   align-items: center;
   color: #ff5d9e;
-  background-color: #9fd3c7;
+  background-color: #142d4c;
+  border-top-right-radius: 20px;
 }
-.wel_text {
+.wel_text-login {
   font-size: 40px;
   margin-top: -50px;
   line-height: 50px;
-  color: #9fd3c7;
+  color: #142d4c;
 }
-.para {
+/* .para-login {
   margin-top: 10px;
   font-size: 20px;
   line-height: 24px;
   letter-spacing: 1px;
   color: #ff5d9e;
+} */
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Esto hace que el contenedor ocupe toda la altura de la pantalla */
+}
+.wrapper-left {
+  padding-left: 25px;
 }

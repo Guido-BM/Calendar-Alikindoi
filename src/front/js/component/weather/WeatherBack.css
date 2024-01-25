@@ -19,8 +19,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-items:flex-start;
-  padding: 1em;
+  align-items: flex-start;
+  color: #142d4c;
 }
 .temperature-info-back {
   height: 80%;
@@ -33,6 +33,8 @@
   display: block;
   margin-top: 4em;
   font-size: 25px;
+  color: #142d4c;
+  font-weight: bold;
 }
 .description-back {
   font-size: 1.5em;
@@ -42,17 +44,21 @@
   display: block;
   margin-top: 0.5em;
   font-size: 25px;
+  color: #142d4c;
 }
 
 .principal-back {
   display: flex;
   align-items: center;
   margin-top: 0.5em;
+  color: #142d4c;
+  font-weight: bold;
+  font-size: 2em;
 }
 
 .weather-icon-back img {
   height: 100px;
-  margin-top:2em;
+  margin-top: 1em;
 }
 
 .weather-input {
@@ -72,7 +78,7 @@
 .ghost-container {
   position: relative;
   animation: float 3s infinite alternate;
-  top: 58px
+  top: 58px;
 }
 .chat-buble {
   position: absolute;
@@ -87,17 +93,17 @@
 }
 
 .weather-panel-back input {
-  background-color: gray;
+  background-color: #142d4c;
   font-size: 0.8em;
   font-family: "Chivo";
-  padding: 1em; 
+  padding: 1em;
   border: none;
   border-radius: 0.2em;
   outline: none;
   transition: background 0.3s;
 }
 .weather-panel-back input::placeholder {
-  color: #000000;
+  color: #9fd3c7;
 }
 
 .ghost {
@@ -109,7 +115,7 @@
   transition: all 0.3s;
 }
 
-.ghost>* {
+.ghost > * {
   position: absolute;
   left: 50%;
   bottom: 100%;
@@ -119,7 +125,7 @@
   width: 4em;
   height: 6em;
   background: inherit;
-  border-radius: 100px; 
+  border-radius: 100px;
   box-shadow: 0 0 12px #424242;
   transform: translate(-50%, 50px);
   transition: all 0.3s background 0.4s 0.1s;
@@ -186,8 +192,8 @@
 .weather-panel-back input:focus {
   background: white;
 }
-.weather-panel-back input:focus+.ghost {
-  background: #ffffff33;
+.weather-panel-back input:focus + .ghost {
+  background: #142d4c;
   color: transparent;
 
   & .torso {
@@ -207,7 +213,7 @@
     transform: translate(-50%, 0.2em);
   }
   & .hands * {
-    background: transparent;
+    background: #142d4c;
   }
   & .legs {
     border-bottom-left-radius: 2em;

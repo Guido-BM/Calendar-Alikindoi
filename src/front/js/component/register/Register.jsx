@@ -91,12 +91,13 @@ export const Register = () => {
               </Link>
             </p>
           </form>
+
         </div>
         <div></div>
-        <div className="banner">
-          <h1 className="wel_text">Bienvenid@</h1>
+        <div className="banner-register">
+          <h1 className="wel_text-register">Bienvenid@</h1>
           <br />
-          <p className="para"></p>
+          <p className="para-register"></p>
         </div>
       </div>
     </>
