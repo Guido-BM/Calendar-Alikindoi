@@ -83,9 +83,10 @@ a {
 .grid-common {
   background-color: var(--clr-primary);
   border-radius: 12px;
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 10px 10px 5px 0px #142d4c;
+  -moz-box-shadow: 10px 10px 5px 0px #142d4c;
+  box-shadow: 10px 10px 5px 0px #142d4c;
+
   padding: 24px;
 }
 .grid-c-title {
