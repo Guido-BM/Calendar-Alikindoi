@@ -1,13 +1,14 @@
 import React from "react";
 import { Badge } from "antd";
+import { v4 as uuidv4 } from "uuid";
 
 const DateCellRender = ({ listData = [] }) => {
   // const listData = getListData(value);
-
+  console.log(listData);
   return (
     <ul className="events">
       {listData.map((item) => (
-        <li key={item.date}>
+        <li key={uuidv4()}>
           <Badge
             status={item.modifier}
             text={`${item.title} ${

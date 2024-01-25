@@ -24,7 +24,7 @@ export const Home = () => {
       localStorage.setItem("tokenTodoist", token);
       actions.setTokenTodoist(token);
       // navigate("/home");
-      console.log(token);
+      // console.log(token);
     }
   }, []);
 

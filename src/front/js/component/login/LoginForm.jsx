@@ -11,9 +11,9 @@ export const LoginForm = () => {
   const [errorMessage, setErrorMessage] = useState(null);
 
   const login = async () => {
-    console.log("credenciales", { email, password });
+    // console.log("credenciales", { email, password });
     const loginSuccessful = await actions.setToken(email, password);
-    console.log("loginSuccessful", loginSuccessful); // add this line
+    // console.log("loginSuccessful", loginSuccessful); // add this line
     if (loginSuccessful) {
       navigate("/home");
     } else {
@@ -23,50 +23,52 @@ export const LoginForm = () => {
   return (
     <>
       {errorMessage && <p>{errorMessage}</p>}
-      {<div className="wrapper">
-        <div>
-          <h1 className="title">Inicio</h1>
-          <div className="inp">
-            <input
-              type="text"
-              id="email"
-              className="input"
-              placeholder="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              autoComplete="email"
-            />
-            <i className="fa-solid fa-user"></i>
+      {
+        <div className="wrapper">
+          <div>
+            <h1 className="title">Inicio</h1>
+            <div className="inp">
+              <input
+                type="text"
+                id="email"
+                className="input"
+                placeholder="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                autoComplete="email"
+              />
+              <i className="fa-solid fa-user"></i>
+            </div>
+            <div className="inp">
+              <input
+                type="password"
+                id="password"
+                className="input"
+                placeholder="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
+              />
+              <i className="fa-solid fa-lock"></i>
+            </div>
+            <button className="submit" onClick={login}>
+              Iniciar sesión
+            </button>
+            <p className="footer">
+              ¿No tienes cuenta?{" "}
+              <Link to="/signup" className="link">
+                Por favor, Registrate
+              </Link>
+            </p>
           </div>
-          <div className="inp">
-            <input
-              type="password"
-              id="password"
-              className="input"
-              placeholder="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              autoComplete="current-password"
-            />
-            <i className="fa-solid fa-lock"></i>
+          <div></div>
+          <div className="banner">
+            <h1 className="wel_text">Bienvenid@</h1>
+            <br />
+            <p className="para"></p>
           </div>
-          <button className="submit" onClick={login}>
-            Iniciar sesión
-          </button>
-          <p className="footer">
-            ¿No tienes cuenta?{" "}
-            <Link to="/signup" className="link">
-              Por favor, Registrate
-            </Link>
-          </p>
         </div>
-        <div></div>
-        <div className="banner">
-          <h1 className="wel_text">Bienvenid@</h1>
-          <br />
-          <p className="para"></p>
-        </div>
-      </div>}
+      }
     </>
   );
 };

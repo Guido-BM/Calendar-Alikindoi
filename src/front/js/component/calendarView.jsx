@@ -64,7 +64,7 @@ const CalendarView = () => {
         title: event.title,
         time: [moment(event.start_time), moment(event.end_time)],
       }));
-      console.log(listData);
+      // console.log(listData);
       return <DateCellRender listData={listData} />;
     }
     // if (info.type === "month") return monthCellRender(current);
