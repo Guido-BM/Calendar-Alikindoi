@@ -151,7 +151,35 @@ const getState = ({ getStore, getActions, setStore }) => {
       exampleFunction: () => {
         getActions().changeColor(0, "green");
       },
-
+      createUser: async (email, location, password, username) => {
+        const store = getStore();
+        try {
+          const response = await fetch(`${process.env.BACKEND_URL}/api/users`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: email,
+              isActive: true,
+              location: location,
+              password: password,
+              username: username,
+            }),
+          });
+          const data = await response.json();
+          if (data.id) {
+            // El usuario se creó correctamente
+            // Puedes agregar el usuario a tu store si lo necesitas
+            setStore({ ...store, user: data.id });
+          } else {
+            // Hubo un error al crear el usuario
+            console.error("Error creating user:", data);
+          }
+        } catch (error) {
+          console.error("Error creating user:", error);
+        }
+      },
       getMessage: async () => {
         try {
           // fetching data from the backend
