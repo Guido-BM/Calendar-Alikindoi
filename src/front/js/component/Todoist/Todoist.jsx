@@ -47,6 +47,11 @@ const Todoist = () => {
       .catch((error) => console.error(error));
   }, []);
 
+  useEffect(() => {
+    // This code will run every time `tasks` changes
+    // Put the code to refresh your Todoist.jsx card here
+  }, [tasks]);
+
   if (tokenTodoist) {
     return (
       <div className="todoist-container subgrid-two-item grid-common grid-c3">

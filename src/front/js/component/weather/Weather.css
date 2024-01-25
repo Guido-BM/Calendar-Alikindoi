@@ -14,6 +14,7 @@
   
 } */
 
+
 .weather-city {
   height: 80%;
   display: flex;
@@ -34,7 +35,6 @@
   margin-top: 4em;
   font-size: 40px;
 }
-
 .temp_range {
   display: block;
   font-size: 25px;
@@ -44,12 +44,11 @@
 .description-front {
   font-size: 1.5em;
 }
-
 .principal {
   display: flex;
   align-items: center;
 }
-
 .weather-icon img {
   height: 100px;
 }
+
