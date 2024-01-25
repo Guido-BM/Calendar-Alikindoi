@@ -18,7 +18,7 @@
 
 .pomodoro-container button {
   background-color: transparent;
-  color: #ff5d9e;
+  color: #142d4c;
   border: 0;
   display: inline-block;
   width: 70px;
@@ -67,5 +67,5 @@
   align-items: center;
 }
 .grid-c-title-text-pomodoro {
-  color: #ff5d9e;
+  color: #142d4c;
 }

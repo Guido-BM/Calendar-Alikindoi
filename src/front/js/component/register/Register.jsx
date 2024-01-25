@@ -13,7 +13,7 @@ export const Register = () => {
               type="text"
               name="username"
               id="username"
-              className="input"
+              className="input-register"
               placeholder="Usuario"
             />
             <i className="fa-solid fa-user"></i>
@@ -23,7 +23,7 @@ export const Register = () => {
               type="text"
               name="location"
               id="location"
-              className="input"
+              className="input-register"
               placeholder="Ubicación"
             />
             <i className="fa-solid fa-map-marker"></i>
@@ -33,7 +33,7 @@ export const Register = () => {
               type="text"
               name="birth_date"
               id="birth_date"
-              className="input"
+              className="input-register"
               placeholder="Fecha de nacimiento"
             />
             <i className="fa-solid fa-calendar"></i>
@@ -43,7 +43,7 @@ export const Register = () => {
               type="email"
               name="email"
               id="email"
-              className="input"
+              className="input-register"
               placeholder="Correo electrónico"
             />
             <i className="fa-solid fa-envelope"></i>
@@ -53,7 +53,7 @@ export const Register = () => {
               type="password"
               name="password"
               id="password"
-              className="input"
+              className="input-register"
               placeholder="Contraseña"
             />
             <i className="fa-solid fa-lock"></i>
