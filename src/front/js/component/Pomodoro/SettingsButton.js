@@ -15,7 +15,6 @@ function SettingsButton(props) {
           clipRule="evenodd"
         />
       </svg>
-      Settings
     </button>
   );
 }

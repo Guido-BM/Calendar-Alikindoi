@@ -23,18 +23,19 @@
   display: inline-block;
   width: 70px;
   cursor: pointer;
+  margin-left: 15px;
 }
 
 .pomodoro-container button.with-text {
   width: auto;
-  background-color: #82acff;
+
   border-radius: 10px;
   padding: 10px;
-  font-size: 1.5rem;
-  line-height: 30px;
+  font-size: 2rem;
+  line-height: 50px;
 }
 .pomodoro-container button.with-text svg {
-  width: 30px;
+  width: 60px;
   float: left;
   margin-right: 5px;
 }
