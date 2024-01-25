@@ -25,31 +25,21 @@ export const Weather = () => {
 
   return (
     <div className="weather-panel">
-      <div className="weather-today">
-        <div className="weather-city">
-          <h2 className="principal">
-            {store.weather?.name}
-          </h2>
-            <small>
-              {new Date().toLocaleDateString("es-es", {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              })}
-            </small>
-          <div className="weather-icon">
-            {WeatherIcons(store.weather?.weather[0]?.description)}
-            <p>{store.weather?.weather[0]?.description}</p>
-          </div>
+      <div className="weather-city ">
+        <h2 className="principal">{store.weather?.name}</h2>
+        <div className="weather-icon">
+          {WeatherIcons(store.weather?.weather[0]?.description)}
+          <p className="description-front">{store.weather?.weather[0]?.description}</p>
         </div>
+      </div>
 
-        <div className="temperature-info">
-          <span className="degrees">{store.weather?.main.temp.toFixed(0)}ºC</span>
-          <br />
-          <span className="temp_range">
-            {store.weather?.main?.temp_min.toFixed(0)}ºC/{store.weather?.main?.temp_max.toFixed(0)}ºC
-          </span>
-        </div>
+      <div className="temperature-info">
+        <span className="degrees">{store.weather?.main.temp.toFixed(0)}ºC</span>
+        <br />
+        <span className="temp_range">
+          {store.weather?.main?.temp_min.toFixed(0)}ºC/
+          {store.weather?.main?.temp_max.toFixed(0)}ºC
+        </span>
       </div>
     </div>
   );

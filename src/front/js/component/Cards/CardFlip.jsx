@@ -19,7 +19,7 @@ const CardFlip = (props) => {
         {" "}
         {props.front}
         <i
-          className="fa-solid fa-arrow-rotate-left flip-icon"
+          className="fa-solid fa-magnifying-glass fa-beat flip-icon"
           onClick={handleToggle}
         ></i>
       </div>

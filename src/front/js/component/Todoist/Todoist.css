@@ -1,6 +1,7 @@
-.grid-c-title h3 {
+/* .grid-c-title h3 {
   color: black;
-}
+  align-self: center;
+} */
 
 .grid-c3 {
   position: relative;
@@ -23,4 +24,11 @@
 .grid-c3 p {
   margin: 0px;
   padding: 1px;
+}
+
+.title-todoist {
+  /* Titulo en el medio de la tarjeta */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

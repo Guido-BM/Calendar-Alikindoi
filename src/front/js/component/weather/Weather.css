@@ -1,18 +1,18 @@
 .weather-panel {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-around;
   color: black;
   height: 100%;
   width: 100%;
 }
 
-.weather-today,
-.forecast-info {
+/* .weather-today {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 1em;
-}
+  
+} */
 
 .weather-city {
   height: 80%;
@@ -20,6 +20,7 @@
   flex-direction: column;
   justify-content: space-around;
   align-items:flex-start;
+  padding: 1em;
 }
 .temperature-info {
   height: 80%;
@@ -28,6 +29,21 @@
   justify-content: space-around;
   align-items: flex-end;
 }
+.degrees {
+  display: block;
+  margin-top: 4em;
+  font-size: 40px;
+}
+
+.temp_range {
+  display: block;
+  font-size: 25px;
+  margin-bottom: 1.5em;
+}
+
+.description-front {
+  font-size: 1.5em;
+}
 
 .principal {
   display: flex;
@@ -35,10 +51,5 @@
 }
 
 .weather-icon img {
-  height: 60px;
-}
-
-.weather-input {
-  width: 70%;
-  border-radius: 12px;
+  height: 100px;
 }

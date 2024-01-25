@@ -1,20 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
 
 * {
-  padding: 0;
+  // padding: 0;
   margin: 0;
-  
 }
 
 :root {
-  --clr-primary: #F4D9E9;
+  --clr-primary: #8bffff;
   --clr-primar-light: #473b33;
-  --clr-secondary: #A899C3;
+  --clr-secondary: #8f71ff;
   --clr-white: #fff;
-  --clr-black: #000;
+  --clr-black: #ff5d9e;
   --clr-pumpkin: #fe6c00;
-  --clr-silver: #a8a5a6;
-  --clr-silver-v1: #bdbabb;
+  --clr-silver: #ff5d9e;
+  --clr-silver-v1: #ff5d9e;
   --clr-scarlet: #fe1e00;
   --clr-scarlet-v1: rgb(254, 30, 0, 0.79);
   --clr-green: #00fe93;
@@ -23,6 +22,8 @@
   --clr-peach: #ffc397;
   --font-family-bai: "Bai Jamjuree", sans-serif;
   --transition-default: all 300ms ease-in-out;
+  --red: #8f71ff;
+  --green: #82acff;
 }
 
 body {
@@ -37,11 +38,11 @@ a {
   text-decoration: none;
   color: var(--clr-white);
 }
-button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
+// button {
+//   background-color: transparent;
+//   border: none;
+//   cursor: pointer;
+// }
 
 .img-fit-cover img {
   width: 100%;
@@ -82,15 +83,17 @@ button {
 .grid-common {
   background-color: var(--clr-primary);
   border-radius: 12px;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 8px 24px;
-  color: var(--clr-white);
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
   padding: 24px;
 }
 .grid-c-title {
-  display: flex;
+  // display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 16px;
+  color: var(--clr-silver);
 }
 .grid-c-title-text {
   font-weight: 400;
@@ -120,7 +123,6 @@ button {
     padding-left: 20px;
     padding-right: 20px;
   }
-  
 }
 
 @media screen and (max-width: 1200px) {
