@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 export const Register = () => {
   return (
     <>
-      <div className="wrapper">
-        <div className="form">
-          <h1 className="title">Registro</h1>
-          <div className="inp">
+      <div className="wrapper-register">
+        <div className="form-register">
+          <h1 className="title-register">Registro</h1>
+          <div className="inp-register">
             <input
               type="text"
               name="username"
@@ -18,7 +18,7 @@ export const Register = () => {
             />
             <i className="fa-solid fa-user"></i>
           </div>
-          <div className="inp">
+          <div className="inp-register">
             <input
               type="text"
               name="location"
@@ -28,17 +28,8 @@ export const Register = () => {
             />
             <i className="fa-solid fa-map-marker"></i>
           </div>
-          <div className="inp">
-            <input
-              type="text"
-              name="birth_date"
-              id="birth_date"
-              className="input-register"
-              placeholder="Fecha de nacimiento"
-            />
-            <i className="fa-solid fa-calendar"></i>
-          </div>
-          <div className="inp">
+
+          <div className="inp-register">
             <input
               type="email"
               name="email"
@@ -48,7 +39,7 @@ export const Register = () => {
             />
             <i className="fa-solid fa-envelope"></i>
           </div>
-          <div className="inp">
+          <div className="inp-register">
             <input
               type="password"
               name="password"
@@ -58,19 +49,19 @@ export const Register = () => {
             />
             <i className="fa-solid fa-lock"></i>
           </div>
-          <button className="submit">Registrarse</button>
-          <p className="footer">
+          <button className="submit-register">Registrarse</button>
+          <p className="footer-register">
             ¿Ya tienes cuenta?{" "}
-            <Link to="/" className="link">
+            <Link to="/" className="link-register">
               Inicia sesión
             </Link>
           </p>
         </div>
         <div></div>
-        <div className="banner">
-          <h1 className="wel_text">Bienvenid@</h1>
+        <div className="banner-register">
+          <h1 className="wel_text-register">Bienvenid@</h1>
           <br />
-          <p className="para"></p>
+          <p className="para-register"></p>
         </div>
       </div>
     </>
