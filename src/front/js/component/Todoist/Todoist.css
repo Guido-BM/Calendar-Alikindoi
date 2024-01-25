@@ -23,6 +23,8 @@
 }
 
 .grid-c3 p {
+  white-space: pre-wrap;
+  word-break: break-all;
   margin: 0px;
   padding: 1px;
 }
