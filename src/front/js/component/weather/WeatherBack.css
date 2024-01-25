@@ -27,25 +27,32 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-items: flex-end;
+  align-items: center;
 }
 .degrees-back {
   display: block;
-  margin-top: 8em;
+  margin-top: 4em;
+  font-size: 25px;
+}
+.description-back {
+  font-size: 1.5em;
 }
 
 .temp_range-back {
   display: block;
   margin-top: 0.5em;
+  font-size: 25px;
 }
 
 .principal-back {
   display: flex;
   align-items: center;
+  margin-top: 0.5em;
 }
 
 .weather-icon-back img {
-  height: 60px;
+  height: 100px;
+  margin-top:2em;
 }
 
 .weather-input {

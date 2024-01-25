@@ -25,18 +25,11 @@ export const Weather = () => {
 
   return (
     <div className="weather-panel">
-      <div className="weather-city weather-today">
+      <div className="weather-city ">
         <h2 className="principal">{store.weather?.name}</h2>
-        {/* <small>
-              {new Date().toLocaleDateString("es-es", {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              })}
-            </small> */}
         <div className="weather-icon">
           {WeatherIcons(store.weather?.weather[0]?.description)}
-          <p>{store.weather?.weather[0]?.description}</p>
+          <p className="description-front">{store.weather?.weather[0]?.description}</p>
         </div>
       </div>
 

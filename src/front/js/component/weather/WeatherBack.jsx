@@ -39,18 +39,11 @@ export const WeatherBack = () => {
 
   return (
     <div className="weather-panel-back">
-      <div className="weather-city-back weather-today-back">
+      <div className="weather-city-back ">
         <h2 className="principal-back">{store.weatherBack?.name}</h2>
-        {/* <small>
-            {new Date().toLocaleDateString("es-es", {
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-            })}
-          </small> */}
         <div className="weather-icon-back">
           {WeatherIcons(store.weatherBack?.weather[0]?.description)}
-          <p>{store.weatherBack?.weather[0]?.description}</p>
+          <p className="description-back">{store.weatherBack?.weather[0]?.description}</p>
         </div>
       </div>
 
