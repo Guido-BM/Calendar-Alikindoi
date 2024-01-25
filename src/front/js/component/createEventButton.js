@@ -85,13 +85,30 @@ const CollectionCreateForm = ({
 const CreateEventButton = ({ addEvents, selectedDate }) => {
   const [open, setOpen] = useState(false);
   const { store, actions } = useContext(Context);
-  const onCreate = (values) => {
+  const onCreate = async (values) => {
     const [start, end] = values.time;
+    const selectedDate = store.selectedDate.clone(); // Clona la fecha seleccionada para no modificar el estado original
+
+    // Ajusta las horas, minutos y segundos de la fecha seleccionada
+    selectedDate.set({
+      hour: start.get("hour"),
+      minute: start.get("minute"),
+      second: start.get("second"),
+    });
+    const eventStart = selectedDate.toISOString().split(".")[0];
+
+    selectedDate.set({
+      hour: end.get("hour"),
+      minute: end.get("minute"),
+      second: end.get("second"),
+    });
+    const eventEnd = selectedDate.toISOString().split(".")[0];
+
     const event = {
       title: values.title,
       description: values.description,
-      start_time: start.toISOString(),
-      end_time: end.toISOString(),
+      start_time: eventStart,
+      end_time: eventEnd,
       user_id: store.user, // Asegúrate de obtener el id del usuario correctamente
     };
 
