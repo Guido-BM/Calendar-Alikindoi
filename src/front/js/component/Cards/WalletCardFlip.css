@@ -1,39 +1,33 @@
-.flip {
+.flip-wallet {
   position: relative;
   perspective: 800px;
   transform-style: preserve-3d;
   transition: 0.5s;
-  width: 90%;
 }
 
-.flip.flipped {
+.flip-wallet.flipped {
   transform: rotateY(-180deg);
 }
 
-.flip .face {
+.flip-wallet .face {
   width: 90%;
   backface-visibility: hidden;
   font-family: Georgia;
 }
 
-.flip .front {
+.flip-wallet .front {
   z-index: 1;
   cursor: pointer;
   position: absolute;
   top: 0;
+  max-height: 100%;
+  max-width: 100%;
 }
 
-.flip .back {
+.flip-wallet .back {
   transform: rotateY(-180deg);
   cursor: pointer;
   z-index: 2;
   position: absolute;
   top: 0;
-}
-.flip-icon {
-  color: black;
-  position: absolute;
-  top: 1em;
-  right: 1em;
-  z-index: 3;
 }

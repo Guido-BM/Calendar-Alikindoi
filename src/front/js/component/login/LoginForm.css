@@ -27,7 +27,7 @@ body {
   box-shadow: 0 0 50px 0 #772af8;
   margin: auto;
   place-items: center;
-  background-color: #8bffff;
+  background-color: #385170;
   align-items: center;
   /* border-radius: 10px; */
 }
@@ -39,12 +39,12 @@ body {
 }
 .title {
   font-size: 35px;
-  color: #ff5d9e;
+  color: #9fd3c7;
 }
 .inp {
   padding-bottom: 10px;
-  border-bottom: 2px solid #ff5d9e;
-  color: #ff5d9e;
+  border-bottom: 2px solid #ececec;
+  color: #142d4c;
 }
 .input {
   border: none;
@@ -54,7 +54,7 @@ body {
   margin-top: 40px;
   padding-right: 10px;
   font-size: 17px;
-  color: #ff5d9e;
+  color: #142d4c;
 }
 .submit {
   border: none;
@@ -67,13 +67,13 @@ body {
   letter-spacing: 1px;
   cursor: pointer;
   background: linear-gradient(45deg, #d4c4e3, #f9cee2);
-  color: #ff5d9e;
+  color: #9fd3c7;
 }
 .footer {
   margin-top: 30px;
   letter-spacing: 0.5px;
   font-size: 20px;
-  color: #ff5d9e;
+  color: #ececec;
 }
 .link {
   color: #772af8;
@@ -95,13 +95,13 @@ body {
   justify-content: center;
   align-items: center;
   color: #ff5d9e;
-  background-color: #8bffff;
+  background-color: #9fd3c7;
 }
 .wel_text {
   font-size: 40px;
   margin-top: -50px;
   line-height: 50px;
-  color: #ff5d9e;
+  color: #9fd3c7;
 }
 .para {
   margin-top: 10px;

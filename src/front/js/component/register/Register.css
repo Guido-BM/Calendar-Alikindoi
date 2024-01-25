@@ -13,12 +13,12 @@ body{
   align-content: center;
 } */
 ::-webkit-input-placeholder {
-  color: #ff5d9e;
+  color: #ececec;
 }
 .wrapper {
   position: relative;
   width: 800px;
-  height: 65vh;
+  height: 80vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
   border: 3px solid #00ffff;
@@ -37,9 +37,9 @@ body{
 }
 .inp {
   padding-bottom: 10px;
-  border-bottom: 2px solid, #ff5d9e;
+  border-bottom: 2px solid, #ececec;
 }
-.input {
+.input-register {
   border: none;
   outline: none;
   background: none;
@@ -47,7 +47,7 @@ body{
   margin-top: 40px;
   padding-right: 10px;
   font-size: 20px;
-  color: #82acff;
+  color: #142d4c;
 }
 .submit {
   border: none;
@@ -59,7 +59,7 @@ body{
   border-radius: 40px;
   letter-spacing: 1px;
   cursor: pointer;
-  background: linear-gradient(45deg, #0ef, #c800ff);
+  background: linear-gradient(45deg, #ececec, #142d4c);
 }
 .footer {
   margin-top: 30px;
@@ -78,7 +78,7 @@ body{
   right: 0;
   width: 450px;
   height: 390px;
-  background: linear-gradient(to right, #0ef, #c800ff);
+  background: linear-gradient(to right, #ececec, #142d4c);
   clip-path: polygon(0 0, 100% 0, 100% 100%, 60% 100%);
   padding-right: 70px;
   text-align: right;
