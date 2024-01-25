@@ -15,29 +15,33 @@ body{
 ::-webkit-input-placeholder {
   color: #ececec;
 }
-.wrapper {
+.wrapper-register {
   position: relative;
   width: 800px;
-  height: 80vh;
+  height: 55vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border: 3px solid #00ffff;
-  box-shadow: 0 0 50px 0 #00a6bc;
+  border: 3px solid #2a72f8;
+  box-shadow: 0 0 50px 0 #2d2af8;
   align-items: center;
   justify-content: center;
+  border-radius: 20px;
+  background-color: #385170;
 }
-.form {
+.form-register {
   display: grid;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.title {
+.title-register {
   font-size: 35px;
+  color: #9fd3c7;
 }
-.inp {
+.inp-register {
   padding-bottom: 10px;
-  border-bottom: 2px solid, #ececec;
+  border-bottom: 2px solid #ececec;
+  color: #142d4c;
 }
 .input-register {
   border: none;
@@ -47,9 +51,9 @@ body{
   margin-top: 40px;
   padding-right: 10px;
   font-size: 20px;
-  color: #142d4c;
+  color: #ececec;
 }
-.submit {
+.submit-register {
   border: none;
   outline: none;
   width: 288px;
@@ -60,19 +64,21 @@ body{
   letter-spacing: 1px;
   cursor: pointer;
   background: linear-gradient(45deg, #ececec, #142d4c);
+  color: #ececec;
 }
-.footer {
+.footer-register {
   margin-top: 30px;
   letter-spacing: 0.5px;
   font-size: 17px;
+  color: #ececec;
 }
-.link {
-  color: #82acff;
+.link-register {
+  color: #9fd3c7;
   text-decoration: none;
   font-size: 17px;
   font-weight: bold;
 }
-.banner {
+.banner-register {
   position: absolute;
   top: 0;
   right: 0;
@@ -86,15 +92,27 @@ body{
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
+  border-top-right-radius: 20px;
+  background-color: #142d4c;
 }
-.wel_text {
+.wel_text-register {
   font-size: 40px;
   margin-top: -50px;
   line-height: 50px;
+  color: #142d4c;
 }
-.para {
+.para-register {
   margin-top: 10px;
   font-size: 18px;
   line-height: 24px;
   letter-spacing: 1px;
+}
+/* .signup {
+  
+} */
+.signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Esto hace que el contenedor ocupe toda la altura de la pantalla */
 }
