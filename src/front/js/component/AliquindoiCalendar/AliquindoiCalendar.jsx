@@ -9,9 +9,7 @@ const AliquindoiCalendar = () => {
   return (
     <div className="grid-two-item grid-common grid-c4">
       <div className="grid-item">
-        <div className="grid-item-header">
-          <h3>Calendar</h3>
-        </div>
+        <div className="grid-item-header"></div>
         <div className="grid-item-body">
           <CalendarView />
         </div>

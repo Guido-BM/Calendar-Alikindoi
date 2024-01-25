@@ -4,6 +4,8 @@
   transform-style: preserve-3d;
   transition: 0.5s;
   width: 90%;
+  min-height: 200px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .flip.flipped {
@@ -14,13 +16,16 @@
   width: 90%;
   backface-visibility: hidden;
   font-family: Georgia;
+  min-height: 100%;
 }
 
 .flip .front {
   z-index: 1;
-  /* cursor: pointer; */
   position: absolute;
   top: 0;
+  left: 0; 
+  right: 0; 
+  bottom: 0;
 }
 
 .flip .back {

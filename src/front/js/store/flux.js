@@ -67,6 +67,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               body: JSON.stringify(event),
             }
           );
+          console.log(event);
           const data = await response.json();
           if (data.id) {
             // El evento se guardó correctamente

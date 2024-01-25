@@ -6,8 +6,8 @@ import SettingsButton from "./SettingsButton";
 import React, { useContext, useState, useEffect, useRef } from "react";
 import SettingsContext from "./SettingsContext";
 
-const red = "#8f71ff";
-const green = "#82acff;";
+const red = "#385170";
+const green = "#ececec;";
 
 function Timer() {
   const settingsInfo = useContext(SettingsContext);
@@ -74,7 +74,7 @@ function Timer() {
           value={percentage}
           text={minutes + ":" + seconds}
           styles={buildStyles({
-            textColor: "#ff5d9e",
+            textColor: "#142d4c",
             pathColor: mode === "work" ? red : green,
             tailColor: "rgba(255,255,255,.2)",
           })}

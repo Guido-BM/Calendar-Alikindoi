@@ -6,14 +6,14 @@
 }
 
 :root {
-  --clr-primary: #8bffff;
+  --clr-primary: #9fd3c7;
   --clr-primar-light: #473b33;
-  --clr-secondary: #8f71ff;
+  --clr-secondary: #ececec;
   --clr-white: #fff;
-  --clr-black: #ff5d9e;
+  --clr-black: #142d4c;
   --clr-pumpkin: #fe6c00;
-  --clr-silver: #ff5d9e;
-  --clr-silver-v1: #ff5d9e;
+  --clr-silver: #142d4c;
+  --clr-silver-v1: #142d4c;
   --clr-scarlet: #fe1e00;
   --clr-scarlet-v1: rgb(254, 30, 0, 0.79);
   --clr-green: #00fe93;
@@ -22,8 +22,8 @@
   --clr-peach: #ffc397;
   --font-family-bai: "Bai Jamjuree", sans-serif;
   --transition-default: all 300ms ease-in-out;
-  --red: #8f71ff;
-  --green: #82acff;
+  --red: #ececec;
+  --green: #385170;
 }
 
 body {
@@ -83,7 +83,9 @@ a {
 .grid-common {
   background-color: var(--clr-primary);
   border-radius: 12px;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 8px 24px;
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
   padding: 24px;
 }
 .grid-c-title {
