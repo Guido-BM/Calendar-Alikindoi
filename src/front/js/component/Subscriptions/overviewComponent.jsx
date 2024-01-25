@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import TransactionsComponent from "./transactionsComponent";
+
+const handleAddClick = () => {
+  setIsMainView(false); // Oculta TransactionsComponent cuando se pulsa "ADD"
+};
+
+const handleCancelClick = () => {
+  setIsMainView(true); // Muestra TransactionsComponent cuando se pulsa "CANCEL"
+};
+
 
 const Container = styled.div`
   display: flex;
@@ -143,6 +153,7 @@ const AddTransactionView = (props) => {
 };
 const OverViewComponent = (props) => {
   const [isAddTxnVisible, toggleAddTXn] = useState(false);
+  const [isMainView, setIsMainView] = useState(true);
   return (
     <Container>
       <BalanceBox>
@@ -151,31 +162,25 @@ const OverViewComponent = (props) => {
           {isAddTxnVisible ? "CANCEL" : "ADD"}
         </AddTransaction>
       </BalanceBox>
-      <FlipContainer>
-        <Flipper isFlipped={isAddTxnVisible}>
-          <Front>
-            <ExpenseContainer>
-              <ExpenseBox>
-                Expense<span>${props.expense}</span>
-              </ExpenseBox>
-              <ExpenseBox isIncome={true}>
-                Income<span>${props.income}</span>
-              </ExpenseBox>
-            </ExpenseContainer>
-          </Front>
-          <Back>
-            {isAddTxnVisible && (
-              <AddTransactionView
-                isAddTxnVisible={isAddTxnVisible}
-                addTransaction={(payload) => {
-                  props.addTransaction(payload);
-                  toggleAddTXn((isVisible) => !isVisible);
-                }}
-              />
-            )}
-          </Back>
-        </Flipper>
-      </FlipContainer>
+      {!isAddTxnVisible && (
+        <ExpenseContainer>
+          <ExpenseBox onClick={() => toggleAddTXn(true)}>
+            Expense<span>${props.expense}</span>
+          </ExpenseBox>
+          <ExpenseBox isIncome={true}>
+            Income<span>${props.income}</span>
+          </ExpenseBox>
+        </ExpenseContainer>
+      )}
+      {isAddTxnVisible && (
+        <AddTransactionView
+          isAddTxnVisible={isAddTxnVisible}
+          addTransaction={(payload) => {
+            props.addTransaction(payload);
+            toggleAddTXn((isVisible) => !isVisible);
+          }}
+        />
+      )}
     </Container>
   );
 };
