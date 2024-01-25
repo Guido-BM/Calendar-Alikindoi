@@ -12,9 +12,6 @@ const Pomodoro = () => {
 
   return (
     <div className="pomodoro-container subgrid-two-item grid-common grid-c8">
-      <div className="grid-c-title">
-        <h2 className="grid-c-title-text-pomodoro">Pomodoro Timer</h2>
-      </div>
       <div className="grid-c8-content">
         <p className="text text-silver-v1">
           {/* {" "} */}
@@ -34,7 +31,7 @@ const Pomodoro = () => {
           </main>
         </p>
       </div>
-    </div >
+    </div>
   );
 };
 
