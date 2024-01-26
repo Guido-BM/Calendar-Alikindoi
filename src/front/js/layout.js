@@ -31,11 +31,9 @@ const Layout = () => {
   const { store, actions } = useContext(Context);
   useEffect(() => {
     const tokenJwt = localStorage.getItem("tokenJwt");
-    console.log("tokenJwt", tokenJwt);
-
     if (tokenJwt) {
       // Si hay un token, lo guardamos en el store
-      actions.setToken(tokenJwt);
+      actions.updateToken(tokenJwt);
 
       // Y hacemos un fetch a tu backend para identificar al usuario
       fetch(process.env.BACKEND_URL + "/api/identify", {
@@ -50,7 +48,7 @@ const Layout = () => {
           // Aquí puedes manejar la respuesta de tu backend
           // Por ejemplo, podrías guardar el usuario en el store
           actions.setUser(data.id);
-          // console.log("data", data);
+          console.log("data", data);
         })
         .catch((error) => {
           // Aquí puedes manejar los errores
