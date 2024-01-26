@@ -69,16 +69,16 @@ const Layout = () => {
           <Routes>
             {store.token || localStorage.getItem("tokenJwt") ? (
               <>
-                <Route path="/home" element={<Home />} />
-                <Route path="/login" element={<Navigate to="/home" />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Navigate to="/" />} />
               </>
             ) : (
               <>
                 <Route path="/login" element={<Login />} />
-                <Route path="/home" element={<Navigate to="/login" />} />
+                <Route path="/" element={<Navigate to="/login" />} />
               </>
             )}
-            <Route path="/" element={<LandingPage />} />
+            {/* <Route path="/" element={<LandingPage />} /> */}
             <Route path="/signup" element={<Signup />} />
             <Route path="/demo" element={<Demo />} />
             <Route path="/about" element={<About />} />
