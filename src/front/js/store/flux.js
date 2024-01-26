@@ -171,7 +171,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (data.id) {
             // El usuario se creó correctamente
             // Puedes agregar el usuario a tu store si lo necesitas
-            setStore({ ...store, user: data.id });
+            await getActions().setToken(email, password);
+            return true;
           } else {
             // Hubo un error al crear el usuario
             console.error("Error creating user:", data);

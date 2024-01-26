@@ -10,11 +10,12 @@ export const Register = () => {
   const [email, setEmail] = useState("");
   const [location, setLocation] = useState("");
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    actions.createUser(email, location, password, username);
-  };
-  const registrar = async () => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   actions.createUser(email, location, password, username);
+  // };
+  const registrar = async (event) => {
+    event.preventDefault();
     const response = await actions.createUser(
       email,
       location,
@@ -23,7 +24,7 @@ export const Register = () => {
     );
     if (response) {
       alert("Usuario creado");
-      navigate("/home");
+      navigate("/");
     } else {
       alert("Usuario no creado");
     }
@@ -34,7 +35,7 @@ export const Register = () => {
       <div className="wrapper-register">
         <div className="form-register">
           <h1 className="title-register">Registro</h1>
-          <form onSubmit={handleSubmit}>
+          <form>
             <div className="inp-register">
               <input
                 type="text"
