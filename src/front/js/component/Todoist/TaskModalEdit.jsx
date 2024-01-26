@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Modal, Input, Select, DatePicker, AutoComplete, TimePicker } from 'antd';
-import { addTask, getProjects, updateTask } from "../../store/todoistService.js";
+import { addTask, updateTask } from "../../store/todoistService.js";
 import './TaskModal.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
@@ -15,17 +15,10 @@ const TaskModalEdit = ({ taskToUpdate, onClose }) => {
       const [dueDatetime, setDueDatetime] = useState(taskToUpdate ? taskToUpdate.dueDatetime : '');
       const dueStringOptions = ['next Monday', 'Tomorrow', 'in 3 days', 'next week'];
       const { Option } = Select;
-      const [projects, setProjects] = useState([]);
       const [project, setProject] = useState(taskToUpdate ? taskToUpdate.project_id : '');
 
       // New state variable for tracking whether we're updating or creating
       const [isUpdating, setIsUpdating] = useState(false);
-
-      useEffect(() => {
-            if (isModalOpen) {
-                  getProjects().then(setProjects);
-            }
-      }, [isModalOpen]);
 
       const handleOk = () => {
             const updatedTask = {
@@ -56,16 +49,6 @@ const TaskModalEdit = ({ taskToUpdate, onClose }) => {
             <>
                   <button onClick={() => handleEditClick(task)}><FontAwesomeIcon icon={faPencilAlt} /></button>
                   <Modal title="Task Info" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-                        <div className="input-container">
-                              <label className="input-label">Project</label>
-                              <Select placeholder="Select Project" value={project} onChange={value => setProject(value)}>
-                                    {projects.map(project => (
-                                          <Select.Option key={project.id} value={project.id}>
-                                                {project.name}
-                                          </Select.Option>
-                                    ))}
-                              </Select>
-                        </div>
                         <div className="input-container">
                               <Input placeholder="Enter task content" value={content} onChange={e => setContent(e.target.value)} />
                         </div>

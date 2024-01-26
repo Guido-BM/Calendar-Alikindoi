@@ -14,22 +14,35 @@ import { Context } from "../../store/appContext.js";
 import "./Todoist.css";
 import { Button } from "antd";
 
-
-
 const Todoist = () => {
   const [tasks, setTasks] = useState([]);
   const { actions } = useContext(Context);
   const tokenTodoist = localStorage.getItem("tokenTodoist");
   const [selectedTask, setSelectedTask] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
-  // const markTaskComplete = (taskId) => {
-  //   const task = tasks.find((task) => task.id === taskId);
-  //   task.isCompleted = true;
-  //   setTasks(tasks.map(t => t.id === taskId ? task : t));
-  //   closeTask().then((isSuccess) => {
-  //     console.log(isSuccess);
-  //   });
-  // };
+  const markTaskComplete = async (taskId) => {
+    if (typeof taskId !== 'string') {
+      console.error('Invalid taskId: ', taskId);
+      return;
+    }
+    const task = tasks.find((task) => task.id === taskId);
+    if (!task) {
+      console.error('Task not found: ', taskId);
+      return;
+    }
+    task.isCompleted = true;
+    setTasks(tasks.map(t => t.id === taskId ? task : t));
+    try {
+      const isSuccess = await closeTask(taskId);
+      console.log(isSuccess);
+      if (isSuccess) {
+        const updatedTasks = await getTasks();
+        setTasks(updatedTasks);
+      }
+    } catch (error) {
+      console.error('Failed to close task: ', error);
+    }
+  };
   const startEditing = (task) => {
     setSelectedTask(task);
     setIsEditing(true);
@@ -40,25 +53,17 @@ const Todoist = () => {
     setIsEditing(false);
   };
   const addNewTask = (newTask) => {
-    setTasks(prevTasks => [...prevTasks, newTask]);
+    setTasks((prevTasks) => [...prevTasks, newTask]);
   };
   const handleEditClick = (task) => {
     setSelectedTask(task);
   };
 
-
   useEffect(() => {
     getTasks().then((tasks) => {
       setTasks(tasks);
-    }
-    );
-  }, []);
-
-  useEffect(() => {
-    getTasks().then((updatedTasks) => {
-      setTasks(updatedTasks);
     });
-  }, [tasks]);
+  }, []);
 
   if (tokenTodoist) {
     return (
@@ -68,14 +73,20 @@ const Todoist = () => {
         </div>
         <div className="grid-c3">
           <h4>Inbox</h4>
-          {tasks.map(task => (
+          {tasks.map((task) => (
             <div key={task.id} className="task-container">
-              <input type="radio" checked={task.isCompleted} onChange={() => markTaskComplete(task.id)} />
+              <input
+                type="radio"
+                checked={task.isCompleted}
+                onChange={() => markTaskComplete(task.id)}
+              />
               <div onClick={() => startEditing(task)} title={task.description}>
-                {task.content}<TaskModalEdit taskToUpdate={selectedTask} onClose={() => setSelectedTask(null)} />
+                {task.content}
               </div>
               {selectedTask && selectedTask.id === task.id && (
-                <div className="task-description">{selectedTask.description}</div>
+                <div className="task-description">
+                  {selectedTask.description}
+                </div>
               )}
             </div>
           ))}
