@@ -8,6 +8,7 @@ import {
   getProjects,
 } from "../../store/todoistService.js";
 import TaskModal from "./TaskModal.jsx";
+import TaskModalEdit from "./TaskModalEdit.jsx";
 import { Link } from "react-router-dom";
 import { Context } from "../../store/appContext.js";
 import "./Todoist.css";
@@ -19,37 +20,44 @@ const Todoist = () => {
   const [tasks, setTasks] = useState([]);
   const { actions } = useContext(Context);
   const tokenTodoist = localStorage.getItem("tokenTodoist");
-  const [projects, setProjects] = useState([]);
+  const [selectedTask, setSelectedTask] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  // const markTaskComplete = (taskId) => {
+  //   const task = tasks.find((task) => task.id === taskId);
+  //   task.isCompleted = true;
+  //   setTasks(tasks.map(t => t.id === taskId ? task : t));
+  //   closeTask().then((isSuccess) => {
+  //     console.log(isSuccess);
+  //   });
+  // };
+  const startEditing = (task) => {
+    setSelectedTask(task);
+    setIsEditing(true);
+  };
+
+  const stopEditing = () => {
+    setSelectedTask(null);
+    setIsEditing(false);
+  };
   const addNewTask = (newTask) => {
     setTasks(prevTasks => [...prevTasks, newTask]);
   };
-
-  const getTasksForProject = () => {
-    return getTasks().then((tasks) => { return tasks });
+  const handleEditClick = (task) => {
+    setSelectedTask(task);
   };
 
+
   useEffect(() => {
-    getProjects()
-      .then((projects) => {
-        setProjects(projects);
-        // Para cada proyecto, obtener sus tareas
-        projects.forEach((project) => {
-          getTasksForProject(project.id)
-            .then((tasks) => {
-              // Agregar las tareas al proyecto
-              project.tasks = tasks;
-              // Actualizar el estado de los proyectos
-              setProjects(prevProjects => prevProjects.map(p => p.id === project.id ? project : p));
-            })
-            .catch(error => console.error(error));
-        });
-      })
-      .catch((error) => console.error(error));
+    getTasks().then((tasks) => {
+      setTasks(tasks);
+    }
+    );
   }, []);
 
   useEffect(() => {
-    // This code will run every time `tasks` changes
-    // Put the code to refresh your Todoist.jsx card here
+    getTasks().then((updatedTasks) => {
+      setTasks(updatedTasks);
+    });
   }, [tasks]);
 
   if (tokenTodoist) {
@@ -59,14 +67,24 @@ const Todoist = () => {
           <h3 className="title-todoist">TODOIST</h3>
         </div>
         <div className="grid-c3">
-          {projects && projects.map((project) => (
-            <div key={project.id}>
-              <h4>{project.name}</h4>
-              {project.tasks && project.tasks.map((task) => (
-                <p key={task.id}>{task.content}</p>
-              ))}
+          <h4>Inbox</h4>
+          {tasks.map(task => (
+            <div key={task.id} className="task-container">
+              <input type="radio" checked={task.isCompleted} onChange={() => markTaskComplete(task.id)} />
+              <div onClick={() => startEditing(task)} title={task.description}>
+                {task.content}<TaskModalEdit taskToUpdate={selectedTask} onClose={() => setSelectedTask(null)} />
+              </div>
+              {selectedTask && selectedTask.id === task.id && (
+                <div className="task-description">{selectedTask.description}</div>
+              )}
             </div>
           ))}
+          {isEditing && (
+            <TaskModalEdit
+              taskToUpdate={selectedTask}
+              onClose={() => stopEditing()}
+            />
+          )}
         </div>
         <TaskModal addNewTask={addNewTask} />
       </div>
