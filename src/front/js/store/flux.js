@@ -232,6 +232,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("User is not authenticated");
         }
       },
+      setUser: (user) => {
+        const store = getStore();
+        setStore({ ...store, user: user });
+      },
       logOut: () => {
         const store = getStore();
         setStore({ ...store, token: "" });
@@ -241,7 +245,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ ...store, tokenTodoist: "" });
       },
       setTokenFromLocalStorage: async (tokenJwt) => {
-        fetch(process.env.BACKEND_URL + "/identify", {
+        fetch(process.env.BACKEND_URL + "/api/identify", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
