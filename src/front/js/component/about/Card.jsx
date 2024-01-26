@@ -13,9 +13,9 @@ class Card extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "Maria García",
-      subTitle: "@Elora Dana",
-      bio: "Sick of doctors telling me what I couldn't do. I was a marine. A warrior... of the uh... Jarhead Clan. My cup is empty.",
+      title: "María García",
+      subTitle: "eloradana1983@gmail.com",
+      bio: "Desde que comencé a explorar el mundo de la programación, me fascinó la forma en que se puede crear y dar vida a ideas a través del código.",
       direction: "forwards",
     };
   }
@@ -24,20 +24,20 @@ class Card extends Component {
     if (this.props.type === "wick") {
       this.setState({
         title: "Guido Muelas",
-        subTitle: "@Guido",
+        subTitle: "guidoboninomuelas@gmail.com",
         bio: "People keep asking if I'm back and I haven't really had an answer. But now, yeah, I'm thinkin' I'm back.",
       });
     } else if (this.props.type === "groot") {
       this.setState({
         title: "Paul Grozescu",
-        subTitle: "@Paul",
+        subTitle: "paulgrozescu@gmail.com",
         bio: "I am Groot. I am Groot... I am Groot, I am Groot, I am Groot I am Groot. I am Groot. I am Groot. I am Groot.",
       });
     } else if (this.props.type === "hitgirl") {
       this.setState({
         title: "Marta Mohedano",
-        subTitle: "@Marta",
-        bio: "I can't see through walls but I can kick your ass. I think some tasers look gay. Robin wishes he was me.",
+        subTitle: "marta.mohedano@gmail.com",
+        bio: "Desarrolladora apasionada y comprometida con crear soluciones que impacten positivamente en la sociedad.",
       });
     }
   }
