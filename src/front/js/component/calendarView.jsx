@@ -109,6 +109,7 @@ const CalendarView = () => {
         }}
       />
       <Button onClick={() => actions.loadUserEvents()}>SYNC</Button>
+      <Button onClick={() => actions.logOut()}>LOGOUT</Button>
       <Calendar onSelect={handleDateSelect} cellRender={cellRender} />
     </ConfigProvider>
   );
