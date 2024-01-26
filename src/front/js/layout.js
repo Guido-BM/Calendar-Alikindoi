@@ -29,19 +29,31 @@ const Layout = () => {
   // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
   const basename = process.env.BASENAME || "";
   const { store, actions } = useContext(Context);
-  // const navigate = useNavigate();
   useEffect(() => {
-    const init = async () => {
-      const tokenJwt = localStorage.getItem("tokenJwt");
-      if (tokenJwt) {
-        // Si hay un token, lo guardamos en el store
-        await actions.setToken(tokenJwt);
-        // navigate("/home");
-      } else {
-        // navigate("/login");
-      }
-    };
-    init();
+    const tokenJwt = localStorage.getItem("tokenJwt");
+    if (tokenJwt) {
+      // Si hay un token, lo guardamos en el store
+      actions.setToken(tokenJwt);
+
+      // Y hacemos un fetch a tu backend para identificar al usuario
+      fetch(process.env.BACKEND_URL + "/identify", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${tokenJwt}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // Aquí puedes manejar la respuesta de tu backend
+          // Por ejemplo, podrías guardar el usuario en el store
+          actions.setUser(data.user);
+        })
+        .catch((error) => {
+          // Aquí puedes manejar los errores
+          console.error("Error:", error);
+        });
+    }
   }, []);
 
   if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "")
@@ -54,7 +66,7 @@ const Layout = () => {
       <BrowserRouter basename={basename}>
         <ScrollToTop>
           <Routes>
-            {store.token ? (
+            {store.token || localStorage.getItem("tokenJwt") ? (
               <>
                 <Route path="/home" element={<Home />} />
                 <Route path="/login" element={<Navigate to="/home" />} />

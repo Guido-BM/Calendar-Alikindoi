@@ -35,3 +35,14 @@ def protected():
         return jsonify({"msg": "User not found"}), 404
 
     return jsonify({"id": user.id, "username": user.email}), 200
+
+@auth_jwt_api.route("/identify", methods=["GET"])
+@jwt_required()
+def identify():
+    current_user_id = get_jwt_identity()
+    user = User.query.filter_by(id=current_user_id).first()
+
+    if user is None:
+        return jsonify({"msg": "User not found"}), 404
+
+    return jsonify({"id": user.id, "username": user.email}), 200
