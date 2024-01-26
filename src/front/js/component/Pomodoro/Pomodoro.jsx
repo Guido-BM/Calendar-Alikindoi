@@ -13,7 +13,7 @@ const Pomodoro = () => {
   return (
     <div className="pomodoro-container subgrid-two-item grid-common grid-c8">
       <div className="grid-c8-content">
-        <p className="text text-silver-v1">
+        <div className="text text-silver-v1">
           {/* {" "} */}
           <main>
             <SettingsContext.Provider
@@ -29,7 +29,7 @@ const Pomodoro = () => {
               {showSettings ? <Settings /> : <Timer />}
             </SettingsContext.Provider>
           </main>
-        </p>
+        </div>
       </div>
     </div>
   );
