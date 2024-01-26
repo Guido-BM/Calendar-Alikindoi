@@ -7,8 +7,6 @@ import CardBio from "./CardBio";
 import CardSocialIcons from "./CardSocialIcons";
 import CardBack from "./CardBack";
 import "./Card.css";
-
-
 import { cardContainerStyles } from "./CardStyles";
 
 class Card extends Component {
@@ -53,7 +51,11 @@ class Card extends Component {
             <CardAvatar avatarSrc={this.props.avatarSrc} />
             <CardTitle targetId={this.props.targetId} title={this.state.title} subTitle={this.state.subTitle} />
             <CardBio bio={this.state.bio} />
-            <CardSocialIcons />
+            <CardSocialIcons
+              githubUrl={this.props.githubUrl}
+              linkedinUrl={this.props.linkedinUrl}
+              email={this.props.email}
+            />
           </div>
           <CardBack />
         </div>
