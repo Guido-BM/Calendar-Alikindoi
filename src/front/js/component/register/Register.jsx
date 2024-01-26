@@ -31,11 +31,11 @@ export const Register = () => {
 
   return (
     <>
-      <div className="wrapper">
-        <div className="form">
-          <h1 className="title">Registro</h1>
+      <div className="wrapper-register">
+        <div className="form-register">
+          <h1 className="title-register">Registro</h1>
           <form onSubmit={handleSubmit}>
-            <div className="inp">
+            <div className="inp-register">
               <input
                 type="text"
                 name="username"
@@ -47,7 +47,7 @@ export const Register = () => {
               />
               <i className="fa-solid fa-user"></i>
             </div>
-            <div className="inp">
+            <div className="inp-register">
               <input
                 type="text"
                 name="location"
@@ -59,7 +59,7 @@ export const Register = () => {
               <i className="fa-solid fa-map-marker"></i>
             </div>
 
-            <div className="inp">
+            <div className="inp-register">
               <input
                 type="email"
                 name="email"
@@ -70,7 +70,7 @@ export const Register = () => {
               />
               <i className="fa-solid fa-envelope"></i>
             </div>
-            <div className="inp">
+            <div className="inp-register">
               <input
                 type="password"
                 name="password"
@@ -81,17 +81,16 @@ export const Register = () => {
               />
               <i className="fa-solid fa-lock"></i>
             </div>
-            <button className="submit" onClick={registrar}>
+            <button className="submit-register" onClick={registrar}>
               Registrarse
             </button>
-            <p className="footer">
+            <p className="footer-register">
               ¿Ya tienes cuenta?{" "}
-              <Link to="/" className="link">
+              <Link to="/" className="link-register">
                 Inicia sesión
               </Link>
             </p>
           </form>
-
         </div>
         <div></div>
         <div className="banner-register">

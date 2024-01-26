@@ -1,5 +1,11 @@
 import React, { useContext, useEffect } from "react";
-import { BrowserRouter, Route, Routes, Navigate, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  Navigate,
+  useNavigate,
+} from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 import { Context } from "./store/appContext";
@@ -34,25 +40,31 @@ const Layout = () => {
       } else {
         // navigate("/login");
       }
-    }
+    };
     init();
   }, []);
 
-  if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
+  if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "")
+    return <BackendURL />;
 
-  const isUserAuthenticated = !!localStorage.getItem('token');
+  const isUserAuthenticated = !!localStorage.getItem("token");
 
   return (
     <div>
       <BrowserRouter basename={basename}>
         <ScrollToTop>
           <Routes>
-            {/* {store.token ?
-              <Route path="/home" element={<Home />} /> :
-              <Route path="/login" element={<Login />} />
-            } */}
-            <Route path="/home" element={<Home />} />
-            <Route path="/login" element={<Login />} />
+            {store.token ? (
+              <>
+                <Route path="/home" element={<Home />} />
+                <Route path="/login" element={<Navigate to="/home" />} />
+              </>
+            ) : (
+              <>
+                <Route path="/login" element={<Login />} />
+                <Route path="/home" element={<Navigate to="/login" />} />
+              </>
+            )}
             <Route path="/" element={<LandingPage />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/demo" element={<Demo />} />

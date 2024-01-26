@@ -4,7 +4,6 @@ import OverViewComponent from "./overViewComponent";
 import TransactionsComponent from "./transactionsComponent";
 
 const Container = styled.div`
-  background-color: white;
   color: #0d1d2c;
   display: flex;
   flex-direction: column;
@@ -36,18 +35,24 @@ const Wallet = (props) => {
     updateTransaction(transactionArray);
   };
   return (
-    <Container>
-      <OverViewComponent
-        expense={expense}
-        income={income}
-        addTransaction={addTransaction}
-      />
-      {transactions?.length ? (
-        <TransactionsComponent transactions={transactions} />
-      ) : (
-        ""
-      )}
-    </Container>
+    <>
+      <div className="wallet-container subgrid-two-item grid-common grid-c8">
+        <div className="grid-c8-content">
+          <Container>
+            <OverViewComponent
+              expense={expense}
+              income={income}
+              addTransaction={addTransaction}
+            />
+            {transactions?.length ? (
+              <TransactionsComponent transactions={transactions} />
+            ) : (
+              ""
+            )}
+          </Container>
+        </div>
+      </div>
+    </>
   );
 };
 export default Wallet;

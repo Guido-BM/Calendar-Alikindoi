@@ -2,7 +2,6 @@ import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 
 const Container = styled.div`
-  background-color: white;
   color: #0d1d2c;
   display: flex;
   flex-direction: column;
@@ -21,7 +20,6 @@ const Container = styled.div`
   }
 `;
 const Cell = styled.div`
-  background-color: white;
   color: #0d1d2c;
   display: flex;
   flex-direction: row;
