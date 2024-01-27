@@ -5,6 +5,7 @@ import PauseButton from "./PauseButton";
 import SettingsButton from "./SettingsButton";
 import React, { useContext, useState, useEffect, useRef } from "react";
 import SettingsContext from "./SettingsContext";
+import { Link } from "react-router-dom";
 
 const red = "#385170";
 const green = "#ececec;";
@@ -98,8 +99,23 @@ function Timer() {
             />
           )}
         </div>
-        <div style={{ marginTop: "10px" }}>
-          <SettingsButton onClick={() => settingsInfo.setShowSettings(true)} />
+        <div className="settings-and-about">
+          <div style={{ marginTop: "10px" }}>
+            <SettingsButton
+              onClick={() => settingsInfo.setShowSettings(true)}
+            />
+          </div>
+          <div>
+            <Link to="/about">
+              <button className="button-about">
+                <img
+                  className="img-about"
+                  src={require("../../assets/icons/abouthands-.png").default}
+                  style={{ width: "20px", height: "20px" }}
+                />
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
