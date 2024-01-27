@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Badge } from "antd";
 import { v4 as uuidv4 } from "uuid";
+import { Context } from "../store/appContext";
 
-const DateCellRender = ({ listData = [] }) => {
-  // const listData = getListData(value);
+const DateCellRender = ({
+  listData = [],
+  handleEdit,
+  handleDelete,
+  showButtons,
+}) => {
+  const { store, actions } = useContext(Context);
   console.log(listData);
   return (
     <ul className="events">
@@ -19,6 +25,14 @@ const DateCellRender = ({ listData = [] }) => {
                 : ""
             }`}
           />
+          {showButtons && (
+            <>
+              {/* <button onClick={() => handleEdit(item.eventId)}>Editar</button> */}
+              <button onClick={() => actions.deleteEvent(item.id)}>
+                Eliminar
+              </button>
+            </>
+          )}
         </li>
       ))}
     </ul>
