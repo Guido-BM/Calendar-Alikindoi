@@ -1,7 +1,10 @@
 import React, { useContext } from "react";
-import { Badge } from "antd";
+import { Badge, Button } from "antd";
 import { v4 as uuidv4 } from "uuid";
 import { Context } from "../store/appContext";
+import EventButton from "./eventButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 const DateCellRender = ({
   listData = [],
@@ -13,7 +16,7 @@ const DateCellRender = ({
   return (
     <ul className="events">
       {listData.map((item) => (
-        <li key={uuidv4()}>
+        <li className="listaEventosPreviewLeft" key={uuidv4()}>
           <Badge
             status={item.modifier}
             text={`${item.title} ${
@@ -25,15 +28,18 @@ const DateCellRender = ({
             }`}
           />
           {showButtons && (
-            <>
-              {/* <button onClick={() => handleEdit(item.eventId)}>Editar</button> */}
-              <button onClick={() => actions.deleteEvent(item.id)}>
-                Eliminar
-              </button>
-              <button onClick={() => actions.updateEvent(item.id)}>
-                Editar
-              </button>
-            </>
+            <div style={{ display: "flex" }}>
+              <EventButton
+                onCreate={handleEdit}
+                eventId={item.id}
+                modalTitle={"Update Event"}
+              >
+                <FontAwesomeIcon icon={faPencilAlt} />
+              </EventButton>
+              <Button type="text" onClick={() => actions.deleteEvent(item.id)}>
+                <FontAwesomeIcon icon={faTrash} />
+              </Button>
+            </div>
           )}
         </li>
       ))}

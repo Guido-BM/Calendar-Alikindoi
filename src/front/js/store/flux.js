@@ -123,7 +123,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         const store = getStore();
         try {
           const response = await fetch(
-            `${process.env.BACKEND_URL}/api/users/${store.user}/events/${event.id}`,
+            `${process.env.BACKEND_URL}/api/events/${event.id}`,
             {
               method: "PUT",
               headers: {

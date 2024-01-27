@@ -44,21 +44,21 @@ const CalendarView = () => {
       return 1394;
     }
   };
-  const listData = savedMonthlyEvents.map((event) => ({
-    date: moment(event.start_time).format("YYYY-MM-DD"),
-    modifier: "success", // You might want to adjust this based on your needs
-    title: event.title,
-    time: [moment(event.start_time), moment(event.end_time)],
-  }));
-  const monthCellRender = (value) => {
-    const num = getMonthData(value);
-    return num ? (
-      <div className="notes-month">
-        <section>{num}</section>
-        <span>Backlog number</span>
-      </div>
-    ) : null;
-  };
+  // const listData = savedMonthlyEvents.map((event) => ({
+  //   date: moment(event.start_time).format("YYYY-MM-DD"),
+  //   modifier: "success", // You might want to adjust this based on your needs
+  //   title: event.title,
+  //   time: [moment(event.start_time), moment(event.end_time)],
+  // }));
+  // const monthCellRender = (value) => {
+  //   const num = getMonthData(value);
+  //   return num ? (
+  //     <div className="notes-month">
+  //       <section>{num}</section>
+  //       <span>Backlog number</span>
+  //     </div>
+  //   ) : null;
+  // };
 
   const cellRender = (current, info) => {
     if (info.type === "date") {
@@ -99,18 +99,6 @@ const CalendarView = () => {
       <PreviewLeft
         selectedDate={selectedDate}
         selectedEvents={getListData(selectedDate)}
-        addEvents={(newEvent) => {
-          const eventExists = savedMonthlyEvents.some(
-            (event) =>
-              event.title === newEvent.title &&
-              event.date === newEvent.date &&
-              event.time === newEvent.time
-          );
-
-          if (!eventExists) {
-            setSavedMonthlyEvents([...savedMonthlyEvents, newEvent]);
-          }
-        }}
       />
       {/* <Button onClick={() => actions.loadUserEvents()}>SYNC</Button> */}
       {/* <Button onClick={() => actions.logOut()}>LOGOUT</Button> */}
