@@ -15,7 +15,7 @@ export const LoginForm = () => {
     const loginSuccessful = await actions.setToken(email, password);
     // console.log("loginSuccessful", loginSuccessful); // add this line
     if (loginSuccessful) {
-      navigate("/home");
+      navigate("/");
     } else {
       setErrorMessage("Credenciales incorrectas");
     }
@@ -24,7 +24,6 @@ export const LoginForm = () => {
     <>
       {errorMessage && <p>{errorMessage}</p>}
       {
-
         <div className="wrapper-login">
           <div className="wrapper-left">
             <h1 className="title-login">Inicio</h1>

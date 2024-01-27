@@ -84,6 +84,74 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error("Error saving event:", error);
         }
       },
+      deleteEvent: async (event) => {
+        const store = getStore();
+        if (!eventId) {
+          console.error("Error deleting event: eventId is undefined");
+          return;
+        }
+        try {
+          const response = await fetch(
+            `${process.env.BACKEND_URL}/api/events/${event.id}`,
+            {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${store.token}`,
+              },
+            }
+          );
+          const data = await response.json();
+          if (data.id) {
+            // El evento se eliminó correctamente
+            // Puedes eliminar el evento de tu store si lo necesitas
+            setStore({
+              ...store,
+              savedMonthlyEvents: store.savedMonthlyEvents.filter(
+                (e) => e.id !== event.id
+              ),
+            });
+          } else {
+            // Hubo un error al eliminar el evento
+            console.error("Error deleting event:", data);
+          }
+        } catch (error) {
+          console.error("Error deleting event:", error);
+        }
+      },
+      updateEvent: async (event) => {
+        const store = getStore();
+        try {
+          const response = await fetch(
+            `${process.env.BACKEND_URL}/api/users/${store.user}/events/${event.id}`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${store.token}`,
+              },
+              body: JSON.stringify(event),
+            }
+          );
+          const data = await response.json();
+          if (data.id) {
+            // El evento se actualizó correctamente
+            // Puedes actualizar el evento en tu store si lo necesitas
+            setStore({
+              ...store,
+              savedMonthlyEvents: store.savedMonthlyEvents.map((e) =>
+                e.id === event.id ? data : e
+              ),
+            });
+          } else {
+            // Hubo un error al actualizar el evento
+            console.error("Error updating event:", data);
+          }
+        } catch (error) {
+          console.error("Error updating event:", error);
+        }
+      },
+
       loadUserEvents: async () => {
         const store = getStore();
         if (store.user) {
@@ -171,7 +239,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (data.id) {
             // El usuario se creó correctamente
             // Puedes agregar el usuario a tu store si lo necesitas
-            setStore({ ...store, user: data.id });
+            await getActions().setToken(email, password);
+            return true;
           } else {
             // Hubo un error al crear el usuario
             console.error("Error creating user:", data);
@@ -232,6 +301,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("User is not authenticated");
         }
       },
+      setUser: (user) => {
+        const store = getStore();
+        setStore({ ...store, user: user });
+      },
       logOut: () => {
         const store = getStore();
         setStore({ ...store, token: "" });
@@ -241,7 +314,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ ...store, tokenTodoist: "" });
       },
       setTokenFromLocalStorage: async (tokenJwt) => {
-        fetch(process.env.BACKEND_URL + "/identify", {
+        fetch(process.env.BACKEND_URL + "/api/identify", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

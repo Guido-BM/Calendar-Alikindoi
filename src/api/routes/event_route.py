@@ -83,6 +83,7 @@ def delete_event_by_id(event_id):
     event = EventService.get_event_by_id(event_id)
     if event:
         EventService.delete_event(event)
-        return jsonify({"message": f"Event with ID {event_id} deleted successfully"}), 200
+        return jsonify({"message": f"Event with ID {event_id} deleted successfully",
+                        "id": f"{event_id}"}), 200
     else:
         return jsonify({"error": "Event not found"}), 404

@@ -5,6 +5,8 @@ import Wallet from "../component/Subscriptions/Wallet";
 import Pomodoro from "../component/Pomodoro/Pomodoro";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
+import { FloatButton } from "antd";
+import { LogoutOutlined } from "@ant-design/icons";
 
 import "./home.scss";
 import CardFlip from "../component/Cards/CardFlip";
@@ -31,6 +33,13 @@ export const Home = () => {
   return (
     <>
       <div className="home" style={{ height: "100vh" }}>
+        <FloatButton
+          onClick={actions.logOut}
+          style={{ position: "fixed", top: "10px", right: "10px" }}
+          icon={<LogoutOutlined />}
+        >
+          Log Out
+        </FloatButton>
         <div className="main-content">
           <div className="main-content-holder">
             <div className="content-grid-one">

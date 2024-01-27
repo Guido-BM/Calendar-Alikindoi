@@ -33,10 +33,10 @@ const Layout = () => {
     const tokenJwt = localStorage.getItem("tokenJwt");
     if (tokenJwt) {
       // Si hay un token, lo guardamos en el store
-      actions.setToken(tokenJwt);
+      actions.updateToken(tokenJwt);
 
       // Y hacemos un fetch a tu backend para identificar al usuario
-      fetch(process.env.BACKEND_URL + "/identify", {
+      fetch(process.env.BACKEND_URL + "/api/identify", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,7 +47,8 @@ const Layout = () => {
         .then((data) => {
           // Aquí puedes manejar la respuesta de tu backend
           // Por ejemplo, podrías guardar el usuario en el store
-          actions.setUser(data.user);
+          actions.setUser(data.id);
+          console.log("data", data);
         })
         .catch((error) => {
           // Aquí puedes manejar los errores
@@ -68,16 +69,16 @@ const Layout = () => {
           <Routes>
             {store.token || localStorage.getItem("tokenJwt") ? (
               <>
-                <Route path="/home" element={<Home />} />
-                <Route path="/login" element={<Navigate to="/home" />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Navigate to="/" />} />
               </>
             ) : (
               <>
                 <Route path="/login" element={<Login />} />
-                <Route path="/home" element={<Navigate to="/login" />} />
+                <Route path="/" element={<Navigate to="/login" />} />
               </>
             )}
-            <Route path="/" element={<LandingPage />} />
+            {/* <Route path="/" element={<LandingPage />} /> */}
             <Route path="/signup" element={<Signup />} />
             <Route path="/demo" element={<Demo />} />
             <Route path="/about" element={<About />} />
