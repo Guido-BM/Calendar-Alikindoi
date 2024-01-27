@@ -1,6 +1,16 @@
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* .grid-c-title h3 {
   color: black;
-  align-self: center;
+  align-items: center;
+  justify-content: center;
 } */
 
 .grid-c3 {
@@ -8,7 +18,6 @@
   display: flex;
   flex-direction: column;
   gap: 0px;
-  align-items: center;
 }
 
 .grid-c3 .TaskModal {
@@ -17,21 +26,103 @@
   bottom: 5px;
 }
 
-.grid-c3 h4 {
+.grid-c3 h3 {
   margin-block-start: 0px;
   margin-block-end: 0px;
+  align-items: center;
+  align-self: center;
 }
 
-.grid-c3 p {
+.task-description {
+  font-size: 0.9em;
+  color: #332929;
+  padding-left: 25px;
+}
+
+.grid-c3 .priority{
   white-space: pre-wrap;
   word-break: break-all;
-  margin: 0px;
+  margin-bottom: 10px;
   padding: 1px;
+  text-decoration: solid;
 }
 
-.title-todoist {
-  /* Titulo en el medio de la tarjeta */
+.refresh-icon:hover {
+  color: #007bff;
+  animation: rotate 1s linear infinite;
+}
+
+.refresh-icon:active {
+  transform: scale(1.2);
+}
+
+/* .title-todoist {
   display: flex;
   justify-content: center;
   align-items: center;
+} */
+
+.task-container {
+  margin-bottom: 7px;
+}
+
+.inbox-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* .task-radio {
+  margin-right: 10px;
+} */
+
+/* Hide the default radio button */
+input[type='radio'] {
+  display: none;
+}
+
+/* Create a custom radio button */
+input[type='radio'] + label {
+  position: relative;
+  padding-left: 20px;
+  vertical-align: middle;
+}
+
+input[type='radio'] + label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+input.priority-1 + label:before {
+  background-color: navajowhite; /* Normal */
+}
+
+input.priority-2 + label:before {
+  background-color: yellow; /* Medium */
+}
+
+input.priority-3 + label:before {
+  background-color: orange; /* High */
+}
+
+input.priority-4 + label:before {
+  background-color: red; /* Urgent */
+}
+
+input[type='radio'] + label:hover:before {
+  opacity: 1;
+}
+
+.new-task-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
 }

@@ -1,69 +1,61 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Modal, Input, Select, DatePicker, AutoComplete, TimePicker } from 'antd';
-import { addTask, getProjects, addProject } from "../../store/todoistService.js";
+import { updateTask } from "../../store/todoistService.js";
 import './TaskModal.css'
-const TaskModal = () => {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+
+const TaskModalEdit = ({ onClose }) => {
       const [isModalOpen, setIsModalOpen] = useState(false);
-      const [content, setContent] = useState('');
-      const [description, setDescription] = useState('');
-      const [priority, setPriority] = useState(1);
-      const [dueString, setDueString] = useState('');
-      const [dueDate, setDueDate] = useState('');
-      const [dueDatetime, setDueDatetime] = useState('');
+      const [content, setContent] = useState(taskToUpdate ? taskToUpdate.content : '');
+      const [description, setDescription] = useState(taskToUpdate ? taskToUpdate.description : '');
+      const [priority, setPriority] = useState(taskToUpdate ? taskToUpdate.priority : 1);
+      const [dueString, setDueString] = useState(taskToUpdate ? taskToUpdate.dueString : '');
+      const [dueDate, setDueDate] = useState(taskToUpdate ? taskToUpdate.dueDate : '');
+      const [dueDatetime, setDueDatetime] = useState(taskToUpdate ? taskToUpdate.dueDatetime : '');
       const dueStringOptions = ['next Monday', 'Tomorrow', 'in 3 days', 'next week'];
       const { Option } = Select;
-      const [projects, setProjects] = useState([]);
-      const [project, setProject] = useState(null);
+      const [project, setProject] = useState(taskToUpdate ? taskToUpdate.project_id : '');
+      const [taskToUpdate, setTaskToUpdate] = useState(null);
 
-      useEffect(() => {
-            if (isModalOpen) {
-                  // Reemplaza esto con tu función para obtener proyectos de la API de Todoist
-                  getProjects().then(setProjects);
-            }
-      }, [isModalOpen]);
-
-
-      const showModal = () => {
-            setIsModalOpen(true);
-      };
+      // New state variable for tracking whether we're updating or creating
+      const [isUpdating, setIsUpdating] = useState(false);
 
       const handleOk = async () => {
             try {
                   if (!content) {
-                        alert('Please select a Project and enter a task name');
+                        alert('Please select a task name');
                         return;
                   }
-                  const task = { content, description, priority, dueString, dueDate, dueDatetime, project_id: project };
-                  const response = await addTask(task);
+                  if (!taskToUpdate) {
+                        alert('Please select a task to edit');
+                        return;
+                  }
+                  const updatedTask = { content, description, priority, dueString, dueDate };
+                  const response = await updateTask(taskToUpdate.id, updatedTask);
                   console.log(response);
                   setContent('');
                   setProject(null);
                   setIsModalOpen(false);
             } catch (error) {
-                  console.error('Error adding task:', error);
+                  console.error('Error updating task:', error);
             }
       };
 
       const handleCancel = () => {
             setIsModalOpen(false);
+            onClose();
+      };
+
+      const handleEditClick = (task) => {
+            setTaskToUpdate(task);
+            setIsModalOpen(true);
       };
 
       return (
             <>
-                  <Button className='custom-modal-task-button' type="primary" onClick={showModal}>
-                        Add New Task
-                  </Button>
-                  <Modal title="Task Info" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-                        <div className="input-container">
-                              <label className="input-label">Project</label>
-                              <Select placeholder="Select Project" value={project} onChange={value => setProject(value)}>
-                                    {projects.map(project => (
-                                          <Select.Option key={project.id} value={project.id}>
-                                                {project.name}
-                                          </Select.Option>
-                                    ))}
-                              </Select>
-                        </div>
+                  <button className='task-modal-edit-btn' onClick={() => handleEditClick(taskToUpdate)}><FontAwesomeIcon icon={faPencilAlt} /></button>
+                  <Modal title="Task Edit" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                         <div className="input-container">
                               <Input placeholder="Enter task content" value={content} onChange={e => setContent(e.target.value)} />
                         </div>
@@ -114,4 +106,5 @@ const TaskModal = () => {
             </>
       );
 };
-export default TaskModal;
+
+export default TaskModalEdit;
