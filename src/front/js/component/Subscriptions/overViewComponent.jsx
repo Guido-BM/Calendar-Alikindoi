@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import TransactionsComponent from "./transactionsComponent";
-
 const handleAddClick = () => {
   setIsMainView(false); // Oculta TransactionsComponent cuando se pulsa "ADD"
 };
-
 const handleCancelClick = () => {
   setIsMainView(true); // Muestra TransactionsComponent cuando se pulsa "CANCEL"
 };
-
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -27,7 +23,7 @@ const ExpenseContainer = styled.div`
 `;
 const ExpenseBox = styled.div`
   border-radius: 4px;
-  border: 1px solid #e6e8e9;
+  border: 1px solid #E6E8E9;
   padding: 15px 20px;
   font-size: 14px;
   display: flex;
@@ -49,7 +45,7 @@ const BalanceBox = styled.div`
   width: 100%;
   font-weight: bold;
   & span {
-    color: #0d1d2c;
+    color: #0D1D2C;
     opacity: 80%;
     font-weight: bold;
     font-size: 20px;
@@ -57,7 +53,7 @@ const BalanceBox = styled.div`
 `;
 const AddTransaction = styled.div`
   font-size: 15px;
-  background: #0d1d2c;
+  background: #0D1D2C;
   display: flex;
   color: white;
   padding: 5px 10px;
@@ -69,10 +65,10 @@ const AddTransaction = styled.div`
 const AddTransactionContainer = styled.div`
   font-size: 15px;
   display: ${(props) => (props.isAddTxnVisible ? "flex" : "none")};
-  color: #0d1d2c;
+  color: #0D1D2C;
   flex-direction: column;
   border-radius: 4px;
-  border: 1px solid #e6e8e9;
+  border: 1px solid #E6E8E9;
   width: 100%;
   align-items: center;
   padding: 15px 20px;
@@ -83,7 +79,7 @@ const AddTransactionContainer = styled.div`
     outline: none;
     padding: 10px 12px;
     border-radius: 4px;
-    border: 1px solid #e6e8e9;
+    border: 1px solid #E6E8E9;
   }
 `;
 const RadioBox = styled.div`
@@ -101,7 +97,6 @@ const AddTransactionView = (props) => {
   const [amount, setAmount] = useState();
   const [desc, setDesc] = useState();
   const [type, setType] = useState("EXPENSE");
-
   return (
     <AddTransactionContainer isAddTxnVisible={props.isAddTxnVisible}>
       <input
@@ -135,7 +130,6 @@ const AddTransactionView = (props) => {
         />
         <label htmlFor="Expense">Income</label>
       </RadioBox>
-
       <AddTransaction
         onClick={() =>
           props.addTransaction({
@@ -154,6 +148,9 @@ const AddTransactionView = (props) => {
 const OverViewComponent = (props) => {
   const [isAddTxnVisible, toggleAddTXn] = useState(false);
   const [isMainView, setIsMainView] = useState(true);
+  const handleAddClick = () => {
+    setIsMainView(false);
+  };
   return (
     <Container>
       <BalanceBox>
