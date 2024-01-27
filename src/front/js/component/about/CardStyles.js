@@ -4,7 +4,7 @@ export const cardContainerStyles = {
   height: "500px",
   background: "#fff",
   borderRadius: 35,
-  boxShadow: "1px 1px 35px #444"
+  boxShadow: "1px 1px 35px #142d4c"
 };
 
 export const cardBackStyles = {
@@ -24,10 +24,10 @@ export const cardBackStyles = {
 };
 
 export const bodyStyles = {
-  background: "-webkit-gradient(linear, left top, right top, color-stop(0%, transparent), color-stop(50%,red), color-stop(100%,transparent))",
-  background: "-webkit-linear-gradient(left, transparent 0%,red 50%,transparent 100%)",
-  background: "-moz-linear-gradient(left, transparent 0%,red 50%,transparent 100%)",
-  background: "linear-gradient(to bottom right,#ff5555 40%,#5555ff 100%)",
+  background: "-webkit-gradient(linear, left top, right top, color-stop(0%, #9fd3c7), color-stop(100%, #ececec))",
+  background: "-webkit-linear-gradient(left, #9fd3c7 0%, #ececec 100%)",
+  background: "-moz-linear-gradient(left, #9fd3c7 0%, #ececec 100%)",
+  background: "linear-gradient(to right, #9fd3c7 0%, #ececec 100%)",
   width: "100%",
   height: "100vh",
   overflowX: "hidden"
@@ -38,7 +38,7 @@ export const headerStyles = {
   alignItems: "center",
   justifyContent: "center",
   // textAlign: "center",
-  color: "#fff",
+  color: "rgb(85, 85, 85)",
   width: "100%",
   height: "10%",
 };
@@ -111,7 +111,7 @@ export const iconsContainerStyles = {
 export const iconStyles = {
   margin: "0 10px",
   color: "#5C6BC0",
-  fontSize: "24px"
+  fontSize: "24px",
 };
 
 export const imgStyles = {
