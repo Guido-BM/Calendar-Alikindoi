@@ -4,12 +4,15 @@ import DateCellRender from "./dateCellRender";
 import { Typography } from "antd";
 import moment from "moment";
 import { Context } from "../store/appContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 
 const { Title } = Typography;
 
 const PreviewLeft = ({ selectedDate, selectedEvents, addEvents }) => {
   const { store, actions } = useContext(Context);
   const mappedEvents = selectedEvents.map((event) => ({
+    id: event.id,
     date: moment(event.start_time).format("YYYY-MM-DD"),
     modifier: "success", // You might want to adjust this based on your needs
     title: event.title,

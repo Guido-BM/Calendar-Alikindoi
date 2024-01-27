@@ -10,7 +10,6 @@ const DateCellRender = ({
   showButtons,
 }) => {
   const { store, actions } = useContext(Context);
-  console.log(listData);
   return (
     <ul className="events">
       {listData.map((item) => (
@@ -30,6 +29,9 @@ const DateCellRender = ({
               {/* <button onClick={() => handleEdit(item.eventId)}>Editar</button> */}
               <button onClick={() => actions.deleteEvent(item.id)}>
                 Eliminar
+              </button>
+              <button onClick={() => actions.updateEvent(item.id)}>
+                Editar
               </button>
             </>
           )}

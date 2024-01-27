@@ -84,7 +84,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error("Error saving event:", error);
         }
       },
-      deleteEvent: async (event) => {
+      deleteEvent: async (eventId) => {
         const store = getStore();
         if (!eventId) {
           console.error("Error deleting event: eventId is undefined");
@@ -92,7 +92,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
         try {
           const response = await fetch(
-            `${process.env.BACKEND_URL}/api/events/${event.id}`,
+            `${process.env.BACKEND_URL}/api/events/${eventId}`,
             {
               method: "DELETE",
               headers: {
@@ -108,7 +108,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({
               ...store,
               savedMonthlyEvents: store.savedMonthlyEvents.filter(
-                (e) => e.id !== event.id
+                (e) => e.id !== eventId
               ),
             });
           } else {

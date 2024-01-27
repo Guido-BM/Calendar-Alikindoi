@@ -62,8 +62,8 @@ def update_event(event_id):
         data = request.get_json()
         title = data.get('title')
         description = data.get('description')
-        start_time = data.get('start_time')
-        end_time = data.get('end_time')
+        start_time = datetime.fromisoformat(data.get('start_time')) if data.get('start_time') else None
+        end_time = datetime.fromisoformat(data.get('end_time')) if data.get('end_time') else None
         user_id = data.get('user_id')
 
         updated_event = EventService.update_event(event, title, description, start_time, end_time, user_id)
