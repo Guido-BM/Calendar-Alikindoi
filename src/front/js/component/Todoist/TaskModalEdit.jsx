@@ -1,54 +1,61 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Modal, Input, Select, DatePicker, AutoComplete, TimePicker } from 'antd';
-import { addTask, updateTask } from "../../store/todoistService.js";
+import { updateTask } from "../../store/todoistService.js";
 import './TaskModal.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
-const TaskModalEdit = ({ taskToUpdate, onClose }) => {
-      const [isModalOpen, setIsModalOpen] = useState(true);
+const TaskModalEdit = ({ onClose }) => {
+      const [isModalOpen, setIsModalOpen] = useState(false);
       const [content, setContent] = useState(taskToUpdate ? taskToUpdate.content : '');
       const [description, setDescription] = useState(taskToUpdate ? taskToUpdate.description : '');
-      const [priority, setPriority] = useState(taskToUpdate ? taskToUpdate.priority : '');
+      const [priority, setPriority] = useState(taskToUpdate ? taskToUpdate.priority : 1);
       const [dueString, setDueString] = useState(taskToUpdate ? taskToUpdate.dueString : '');
       const [dueDate, setDueDate] = useState(taskToUpdate ? taskToUpdate.dueDate : '');
       const [dueDatetime, setDueDatetime] = useState(taskToUpdate ? taskToUpdate.dueDatetime : '');
       const dueStringOptions = ['next Monday', 'Tomorrow', 'in 3 days', 'next week'];
       const { Option } = Select;
       const [project, setProject] = useState(taskToUpdate ? taskToUpdate.project_id : '');
+      const [taskToUpdate, setTaskToUpdate] = useState(null);
 
       // New state variable for tracking whether we're updating or creating
       const [isUpdating, setIsUpdating] = useState(false);
 
-      const handleOk = () => {
-            const updatedTask = {
-                  ...taskToUpdate,
-                  content,
-                  description,
-                  priority,
-                  dueString,
-                  dueDate,
-                  dueDatetime,
-                  project_id: project,
-            };
-
-            updateTask(taskToUpdate.id, updatedTask)
-                  .then((isSuccess) => {
-                        console.log(isSuccess);
-                        setIsModalOpen(false);
-                        onClose();
-                  })
-                  .catch((error) => console.log(error));
+      const handleOk = async () => {
+            try {
+                  if (!content) {
+                        alert('Please select a task name');
+                        return;
+                  }
+                  if (!taskToUpdate) {
+                        alert('Please select a task to edit');
+                        return;
+                  }
+                  const updatedTask = { content, description, priority, dueString, dueDate };
+                  const response = await updateTask(taskToUpdate.id, updatedTask);
+                  console.log(response);
+                  setContent('');
+                  setProject(null);
+                  setIsModalOpen(false);
+            } catch (error) {
+                  console.error('Error updating task:', error);
+            }
       };
+
       const handleCancel = () => {
             setIsModalOpen(false);
             onClose();
       };
 
+      const handleEditClick = (task) => {
+            setTaskToUpdate(task);
+            setIsModalOpen(true);
+      };
+
       return (
             <>
-                  <button onClick={() => handleEditClick(task)}><FontAwesomeIcon icon={faPencilAlt} /></button>
-                  <Modal title="Task Info" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                  <button className='task-modal-edit-btn' onClick={() => handleEditClick(taskToUpdate)}><FontAwesomeIcon icon={faPencilAlt} /></button>
+                  <Modal title="Task Edit" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                         <div className="input-container">
                               <Input placeholder="Enter task content" value={content} onChange={e => setContent(e.target.value)} />
                         </div>

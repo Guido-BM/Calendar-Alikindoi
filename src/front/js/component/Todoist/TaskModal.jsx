@@ -50,7 +50,7 @@ const TaskModal = () => {
 
       return (
             <>
-                  <Button type="primary" onClick={showModal}>
+                  <Button className='custom-modal-task-button' type="primary" onClick={showModal}>
                         Add New Task
                   </Button>
                   <Modal title="Task Info" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>

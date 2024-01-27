@@ -13,13 +13,20 @@ import { Link } from "react-router-dom";
 import { Context } from "../../store/appContext.js";
 import "./Todoist.css";
 import { Button } from "antd";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSyncAlt } from '@fortawesome/free-solid-svg-icons';
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
-const Todoist = () => {
+
+const Todoist = ({ taskToEdit }) => {
   const [tasks, setTasks] = useState([]);
   const { actions } = useContext(Context);
   const tokenTodoist = localStorage.getItem("tokenTodoist");
   const [selectedTask, setSelectedTask] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
+
+
+
   const markTaskComplete = async (taskId) => {
     if (typeof taskId !== 'string') {
       console.error('Invalid taskId: ', taskId);
@@ -43,49 +50,110 @@ const Todoist = () => {
       console.error('Failed to close task: ', error);
     }
   };
+
   const startEditing = (task) => {
     setSelectedTask(task);
     setIsEditing(true);
+  };
+
+  const taskToUpdate = (task) => {
+    setSelectedTask(task);
+    setIsEditing(true);
+  };
+
+  const handleClose = () => {
+    setSelectedTask(null);
+    setIsEditing(false);
+  };
+
+  const isModalOpen = () => {
+    setIsEditing(true);
+  };
+
+  const setIsModalOpen = () => {
+    setIsEditing(false);
   };
 
   const stopEditing = () => {
     setSelectedTask(null);
     setIsEditing(false);
   };
+
   const addNewTask = (newTask) => {
     setTasks((prevTasks) => [...prevTasks, newTask]);
   };
-  const handleEditClick = (task) => {
+
+  const handleEditClick = (event, task) => {
+    setSelectedTask(task);
+    setIsModalOpen(true);
+  };
+
+  const showDescription = (event, task) => {
+    event.stopPropagation();
     setSelectedTask(task);
   };
 
-  useEffect(() => {
+  const fetchTasks = () => {
     getTasks().then((tasks) => {
       setTasks(tasks);
     });
+  };
+
+  useEffect(() => {
+    fetchTasks();
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = () => {
+      setSelectedTask(null);
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
+  const sortedTasks = tasks.sort((a, b) => b.priority - a.priority);
+
 
   if (tokenTodoist) {
     return (
       <div className="todoist-container subgrid-two-item grid-common grid-c3">
-        <div className="grid-c-title">
+        <div className="title-container">
           <h3 className="title-todoist">TODOIST</h3>
         </div>
         <div className="grid-c3">
-          <h4>Inbox</h4>
-          {tasks.map((task) => (
-            <div key={task.id} className="task-container">
+          <div className="inbox-container">
+            <h4 className="inbox-title">Inbox</h4>
+            <FontAwesomeIcon icon={faSyncAlt} className="refresh-icon" onClick={fetchTasks} />
+          </div>
+          {sortedTasks.map((task) => (
+            <div key={task.id} className={`task-container priority-${task.priority}`} onClick={(event) => showDescription(event, task)}>
               <input
                 type="radio"
+                id={`task-${task.id}`}
+                className={`priority-${task.priority}`}
                 checked={task.isCompleted}
                 onChange={() => markTaskComplete(task.id)}
               />
-              <div onClick={() => startEditing(task)} title={task.description}>
-                {task.content}
-              </div>
+              <label htmlFor={`task-${task.id}`}></label>
+              {task.content}
+              <TaskModalEdit
+                taskToUpdate={taskToUpdate}
+                onClose={handleClose}
+                isModalOpen={isModalOpen}
+                setIsModalOpen={setIsModalOpen}
+              />
               {selectedTask && selectedTask.id === task.id && (
-                <div className="task-description">
-                  {selectedTask.description}
+                <div className="task-details">
+                  <div className="task-description">
+                    {selectedTask.description}
+                  </div>
+                  <div className="task-due-date">
+                    {selectedTask.dueDate}
+                  </div>
                 </div>
               )}
             </div>

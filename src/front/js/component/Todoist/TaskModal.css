@@ -65,3 +65,33 @@
   outline: none;
   font-size: 17px;
 }
+
+.custom-modal-task-button {
+  background-color: #a87131;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px 30px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+.custom-modal-task-button:hover {
+  background-color: #45a049;
+}
+
+.task-modal-edit-btn {
+  background-color: inherit;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px 30px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
