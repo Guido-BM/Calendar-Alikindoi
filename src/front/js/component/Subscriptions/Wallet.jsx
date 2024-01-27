@@ -1,31 +1,24 @@
-// Wallet.jsx
 import React, { useState } from "react";
 import "./Wallet.css"; // Importa los estilos desde Wallet.css
 import { Modal, Button } from "antd";
 import WalletBack from "./WalletBack";
-
-const Wallet = () => {
+const Wallet = ({ transactions, setTransactions }) => {
   const [visible, setVisible] = useState(false);
-  const [transactions, setTransactions] = useState([]);
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [type, setType] = useState("expense");
   const [editMode, setEditMode] = useState(null);
-
   const showModal = () => {
     setVisible(true);
   };
-
   const handleOk = (e) => {
     console.log(e);
     setVisible(false);
   };
-
   const handleCancel = (e) => {
     console.log(e);
     setVisible(false);
   };
-
   const addTransaction = (e) => {
     e.preventDefault();
     if (!amount || !description) return;
@@ -40,14 +33,12 @@ const Wallet = () => {
     setDescription("");
     setType("expense");
   };
-
   const deleteTransaction = (id) => {
     const updatedTransactions = transactions.filter(
       (transaction) => transaction.id !== id
     );
     setTransactions(updatedTransactions);
   };
-
   const editTransaction = (id) => {
     const transactionToEdit = transactions.find(
       (transaction) => transaction.id === id
@@ -57,7 +48,6 @@ const Wallet = () => {
     setDescription(transactionToEdit.description);
     setType(transactionToEdit.type);
   };
-
   const saveEditedTransaction = (e) => {
     e.preventDefault();
     const updatedTransactions = transactions.map((transaction) =>
@@ -76,17 +66,13 @@ const Wallet = () => {
     setDescription("");
     setType("expense");
   };
-
   const totalIncome = transactions
     .filter((transaction) => transaction.type === "income")
     .reduce((acc, transaction) => acc + transaction.amount, 0);
-
   const totalExpense = transactions
     .filter((transaction) => transaction.type === "expense")
     .reduce((acc, transaction) => acc + transaction.amount, 0);
-
   const difference = totalIncome - totalExpense;
-
   return (
     <div className="container">
       <Button type="primary" onClick={showModal}>
@@ -94,14 +80,12 @@ const Wallet = () => {
       </Button>
       <Modal
         title="Transaction"
-        visible={visible}
+        open={visible}
         onOk={handleOk}
         onCancel={handleCancel}
       >
         <form
-          onSubmit={
-            editMode !== null ? saveEditedTransaction : addTransaction
-          }
+          onSubmit={editMode !== null ? saveEditedTransaction : addTransaction}
           className="transactionForm"
         >
           <input
@@ -155,13 +139,7 @@ const Wallet = () => {
           <h3>Difference: ${difference.toFixed(2)}</h3>
         </div>
       </div>
-      <WalletBack
-        transactions={transactions}
-        editTransaction={editTransaction}
-        deleteTransaction={deleteTransaction}
-      />
     </div>
   );
 };
-
 export default Wallet;
