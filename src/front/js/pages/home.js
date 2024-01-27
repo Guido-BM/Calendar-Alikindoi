@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import Cards from "../component/Cards/Cards";
 import Todoist from "../component/Todoist/Todoist";
 import Wallet from "../component/Subscriptions/Wallet";
+import WalletBack from "../component/Subscriptions/WalletBack";
 import Pomodoro from "../component/Pomodoro/Pomodoro";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
@@ -36,7 +37,7 @@ export const Home = () => {
             <div className="content-grid-one">
               <CardFlip front={<Weather />} back={<WeatherBack />} />
               {/* <Cards /> */}
-              <Wallet />
+              <CardFlip front={<Wallet />} back={<WalletBack/>} />
               <Pomodoro />
             </div>
             <div className="content-grid-two">

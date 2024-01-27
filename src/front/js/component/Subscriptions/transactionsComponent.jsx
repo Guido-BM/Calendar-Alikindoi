@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 
 const Container = styled.div`
   background-color: white;
@@ -20,6 +20,7 @@ const Container = styled.div`
     outline: none;
   }
 `;
+
 const Cell = styled.div`
   background-color: white;
   color: #0d1d2c;
@@ -34,14 +35,20 @@ const Cell = styled.div`
   justify-content: space-between;
   border-right: 4px solid ${(props) => (props.isExpense ? "red" : "green")};
 `;
+
 const TransactionCell = (props) => {
   return (
     <Cell isExpense={props.payload?.type === "EXPENSE"}>
       <span>{props.payload?.desc}</span>
       <span>${props.payload?.amount}</span>
+      <div>
+        <button onClick={() => props.onEdit(props.payload.id)}>Edit</button>
+        <button onClick={() => props.onDelete(props.payload.id)}>Delete</button>
+      </div>
     </Cell>
   );
 };
+
 const TransactionsComponent = (props) => {
   const [searchText, updateSearchText] = useState("");
   const [filteredTransaction, updateTxn] = useState(props.transactions);
@@ -51,31 +58,41 @@ const TransactionsComponent = (props) => {
       updateTxn(props.transactions);
       return;
     }
-    let txn = [...props.transactions];
-    txn = txn.filter((payload) =>
-      payload.desc.toLowerCase().includes(searchText.toLowerCase().trim())
+    let filteredTransactions = [...props.transactions];
+    filteredTransactions = filteredTransactions.filter((payload) =>
+      payload.desc && payload.desc.toLowerCase().includes(searchText.toLowerCase().trim())
     );
-    updateTxn(txn);
+    updateTxn(filteredTransactions);
   };
 
   useEffect(() => {
     filterData(searchText);
-  }, [props.transactions]);
+  }, [searchText, props.transactions]);
 
   return (
     <Container>
       Transactions
       <input
         placeholder="Search"
+        value={searchText}
         onChange={(e) => {
           updateSearchText(e.target.value);
           filterData(e.target.value);
         }}
       />
       {filteredTransaction?.map((payload) => (
-        <TransactionCell payload={payload} />
+        <TransactionCell
+          key={payload.id}
+          payload={payload}
+          onEdit={props.onEdit}
+          onDelete={props.onDelete}
+        />
       ))}
     </Container>
   );
 };
+
 export default TransactionsComponent;
+
+
+
