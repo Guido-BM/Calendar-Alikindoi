@@ -1,16 +1,29 @@
-.container {
-  color: #0d1d2c;
-  display: flex;
-  flex-direction: column;
+.css-dev-only-do-not-override-dkbvqv .ant-btn {
+  color: #142d4c !important;
+}
+.container-wallet {
+  color: #142d4c;
+  display: grid;
+  grid-column: auto;
   padding: 20px;
   font-size: 18px;
-  width: 400px;
-  align-items: center;
+  width: 500px;
+  justify-content: center;
 }
 
 .transactionList {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border: none;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: space-between; */
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 10px;
+  max-height: 180px; /* Ajusta este valor a la altura máxima que desees */
+  overflow-y: auto;
 }
 
 .transactionItem {
@@ -18,7 +31,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #142d4c;
 }
 
 .transactionForm {
@@ -38,24 +51,77 @@
   margin-top: 10px;
 }
 
-.button {
-  padding: 8px 16px;
-  margin: 0 5px;
+.add-button {
+  /* padding: 8px 8px;
+  margin: 0 1px; */
   cursor: pointer;
-  background-color: #ccc;
-  color: #000;
+  background-color: #142d4c;
+  color: #f5d9ea;
   border: none;
   border-radius: 4px;
+  font-size: 16px;
 }
 
 .button.primary {
-  background-color: #007bff;
-  color: #fff;
+  background-color: #142d4c;
+  color: #f5d9ea;
 }
 
-.totalsContainer {
+.totals-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+/* .container-wallet {
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  width: 100%;
+  margin-top: 20px;
+} */
+.transaction-description {
+  color: #142d4c;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.transaction-amount {
+  color: #142d4c;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.transaction-type.expense {
+  color: red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 
+.transaction-type.income {
+  color: green;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.difference.positive {
+  color: green;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
+.difference.negative {
+  color: red;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+.difference.zero {
+  color: #142d4c;
+}
