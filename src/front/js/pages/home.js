@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 import { FloatButton } from "antd";
 import { LogoutOutlined } from "@ant-design/icons";
 
-
 import "./home.scss";
 import CardFlip from "../component/Cards/CardFlip";
 import { Weather } from "../component/weather/Weather";
