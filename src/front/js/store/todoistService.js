@@ -20,7 +20,13 @@ export const addTask = (task) => {
 };
 
 export const updateTask = (id, content) => {
-  return api.updateTask(id, content).catch((error) => console.error(error));
+  try {
+    const response = api.updateTask(id, content);
+    return response;
+  } catch (error) {
+    console.error('Error updating task:', error);
+    throw new Error('Failed to update task. Please check your input and try again.');
+  };
 };
 
 export const deleteTask = (id) => {
