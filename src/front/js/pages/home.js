@@ -6,6 +6,10 @@ import WalletBack from "../component/Subscriptions/WalletBack";
 import Pomodoro from "../component/Pomodoro/Pomodoro";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
+import { FloatButton } from "antd";
+import { LogoutOutlined } from "@ant-design/icons";
+
+
 import "./home.scss";
 import CardFlip from "../component/Cards/CardFlip";
 import { Weather } from "../component/weather/Weather";
@@ -23,12 +27,19 @@ export const Home = () => {
       localStorage.setItem("tokenTodoist", token);
       actions.setTokenTodoist(token);
       // navigate("/home");
-      console.log(token);
+      // console.log(token);
     }
   }, []);
   return (
     <>
       <div className="home" style={{ height: "100vh" }}>
+        <FloatButton
+          onClick={actions.logOut}
+          style={{ position: "fixed", top: "10px", right: "10px" }}
+          icon={<LogoutOutlined />}
+        >
+          Log Out
+        </FloatButton>
         <div className="main-content">
           <div className="main-content-holder">
             <div className="content-grid-one">

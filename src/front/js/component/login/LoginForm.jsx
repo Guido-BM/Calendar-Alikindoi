@@ -11,11 +11,11 @@ export const LoginForm = () => {
   const [errorMessage, setErrorMessage] = useState(null);
 
   const login = async () => {
-    console.log("credenciales", { email, password });
+    // console.log("credenciales", { email, password });
     const loginSuccessful = await actions.setToken(email, password);
-    console.log("loginSuccessful", loginSuccessful); // add this line
+    // console.log("loginSuccessful", loginSuccessful); // add this line
     if (loginSuccessful) {
-      navigate("/home");
+      navigate("/");
     } else {
       setErrorMessage("Credenciales incorrectas");
     }
@@ -39,6 +39,7 @@ export const LoginForm = () => {
               />
               <i className="fa-solid fa-user"></i>
             </div>
+
             <div className="inp-login">
               <input
                 type="password"
@@ -51,6 +52,7 @@ export const LoginForm = () => {
               />
               <i className="fa-solid fa-lock"></i>
             </div>
+
             <button className="submit-login" onClick={login}>
               Iniciar sesión
             </button>
@@ -62,6 +64,7 @@ export const LoginForm = () => {
             </p>
           </div>
           <div></div>
+
           <div className="banner-login">
             <h1 className="wel_text-login">Bienvenid@</h1>
             <br />

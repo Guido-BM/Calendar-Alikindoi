@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import "./Wallet.css"; // Importa los estilos desde Wallet.css
 import { Modal, Button } from "antd";
@@ -74,6 +75,7 @@ const Wallet = ({ transactions, setTransactions }) => {
     .reduce((acc, transaction) => acc + transaction.amount, 0);
   const difference = totalIncome - totalExpense;
   return (
+
     <div className="container">
       <Button type="primary" onClick={showModal}>
         Open Modal

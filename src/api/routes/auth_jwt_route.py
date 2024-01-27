@@ -11,15 +11,13 @@ CORS(auth_jwt_api)
 @auth_jwt_api.route('/login', methods=['POST', 'GET'])
 def create_token():
     email = request.json.get('email', None)
-    print(email)
     password = request.json.get('password', None)
 
     user = User.query.filter_by(email=email, password=password).first()
     if user is None:
         return jsonify({"msg": "Bad email or password"}), 401
 
-    access_token = create_access_token(identity=email)
-
+    access_token = create_access_token(identity=user.id)
 
     return jsonify({"token": access_token, "user_id": user.id})
 
@@ -35,3 +33,14 @@ def protected():
         return jsonify({"msg": "User not found"}), 404
 
     return jsonify({"id": user.id, "username": user.email}), 200
+
+@auth_jwt_api.route("/identify", methods=['POST', 'GET'])
+@jwt_required()
+def identify():
+    current_user_id = get_jwt_identity()
+    user = User.query.filter_by(id=current_user_id).first()
+
+    if user is None:
+        return jsonify({"msg": "User not found"}), 404
+
+    return jsonify({"id": user.id}), 200
