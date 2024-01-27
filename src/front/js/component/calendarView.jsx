@@ -14,6 +14,10 @@ const CalendarView = () => {
   const setSelectedEvents = actions.setSelectedEvents;
   const setSavedMonthlyEvents = actions.setSavedMonthlyEvents;
 
+  useEffect(() => {
+    actions.loadUserEvents();
+  }, []);
+
   const getListData = (value) => {
     const datesToRender = savedMonthlyEvents.filter((event) => {
       const eventDate = moment(event.start_time);
@@ -64,7 +68,7 @@ const CalendarView = () => {
         title: event.title,
         time: [moment(event.start_time), moment(event.end_time)],
       }));
-      console.log(listData);
+      // console.log(listData);
       return <DateCellRender listData={listData} />;
     }
     // if (info.type === "month") return monthCellRender(current);
@@ -108,7 +112,8 @@ const CalendarView = () => {
           }
         }}
       />
-      <Button onClick={() => actions.loadUserEvents()}>SYNC</Button>
+      {/* <Button onClick={() => actions.loadUserEvents()}>SYNC</Button> */}
+      {/* <Button onClick={() => actions.logOut()}>LOGOUT</Button> */}
       <Calendar onSelect={handleDateSelect} cellRender={cellRender} />
     </ConfigProvider>
   );
