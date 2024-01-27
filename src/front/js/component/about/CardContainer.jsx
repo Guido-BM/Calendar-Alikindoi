@@ -37,8 +37,8 @@ class CardContainer extends Component {
             imgSrc="https://wallpaperaccess.com/full/279729.jpg"
             avatarSrc="https://i.pinimg.com/originals/74/4d/b3/744db3fd9842133829be6e0182c3d62d.jpg"
             cardBackImgSrc="https://pre00.deviantart.net/0274/th/pre/i/2014/357/0/d/guardians_of_the_galaxy___groot_poster__acrylic__by_cybergal2013-d8aydlf.jpg"
-            githubUrl=""
-            linkedinUrl=""
+            githubUrl="https://github.com/Paulmak21"
+            linkedinUrl="https://www.linkedin.com/in/paul-adrian-grozescu-31218b285"
             email="mailto:groot@example.com"
           />
           <Card
