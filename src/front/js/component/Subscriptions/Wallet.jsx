@@ -74,72 +74,82 @@ const Wallet = ({ transactions, setTransactions }) => {
     .reduce((acc, transaction) => acc + transaction.amount, 0);
   const difference = totalIncome - totalExpense;
   return (
-    <div className="container">
-      <Button type="primary" onClick={showModal}>
-        Open Modal
-      </Button>
-      <Modal
-        title="Transaction"
-        open={visible}
-        onOk={handleOk}
-        onCancel={handleCancel}
-      >
-        <form
-          onSubmit={editMode !== null ? saveEditedTransaction : addTransaction}
-          className="transactionForm"
+    <>
+      <div className="container-wallet">
+        <Button className="add-button" type="primary" onClick={showModal}>
+          ADD TRANSACTION
+        </Button>
+        <Modal
+          title="Transaction"
+          open={visible}
+          onOk={handleOk}
+          onCancel={handleCancel}
         >
-          <input
-            className="transactionInput"
-            type="text"
-            placeholder="Description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          <input
-            className="transactionInput"
-            type="number"
-            placeholder="Amount"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-          />
-          <div>
-            <label>
-              <input
-                type="radio"
-                value="expense"
-                checked={type === "expense"}
-                onChange={() => setType("expense")}
-              />
-              Expense
-            </label>
-            <label>
-              <input
-                type="radio"
-                value="income"
-                checked={type === "income"}
-                onChange={() => setType("income")}
-              />
-              Income
-            </label>
-          </div>
-          <div className="buttonGroup">
-            <button
-              className={editMode !== null ? "primary" : ""}
-              type="submit"
-            >
-              {editMode !== null ? "Save Changes" : "Add Transaction"}
-            </button>
-          </div>
-        </form>
-      </Modal>
-      <div className="totalsContainer">
-        <div>
-          <h3>Total Income: ${totalIncome.toFixed(2)}</h3>
-          <h3>Total Expense: ${totalExpense.toFixed(2)}</h3>
-          <h3>Difference: ${difference.toFixed(2)}</h3>
+          <form
+            onSubmit={
+              editMode !== null ? saveEditedTransaction : addTransaction
+            }
+            className="transactionForm"
+          >
+            <input
+              className="transactionInput"
+              type="text"
+              placeholder="Description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+            <input
+              className="transactionInput"
+              type="number"
+              placeholder="Amount"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+            />
+            <div>
+              <label>
+                <input
+                  type="radio"
+                  value="expense"
+                  checked={type === "expense"}
+                  onChange={() => setType("expense")}
+                />
+                Expense
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  value="income"
+                  checked={type === "income"}
+                  onChange={() => setType("income")}
+                />
+                Income
+              </label>
+            </div>
+            <div className="buttonGroup">
+              <button
+                className={editMode !== null ? "primary" : ""}
+                type="submit"
+              >
+                {editMode !== null ? "Save Changes" : "Add Transaction"}
+              </button>
+            </div>
+          </form>
+        </Modal>
+        <div className="totals-container">
+          <h3>Total Income: €{totalIncome.toFixed(2)}</h3>
+          <br />
+          <h3>Total Expense: €{totalExpense.toFixed(2)}</h3>
+          <br />
+          <h3
+            className={`difference ${
+              difference > 0 ? "positive" : difference < 0 ? "negative" : "zero"
+            }`}
+          >
+            Difference: €{difference.toFixed(2)}
+          </h3>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 export default Wallet;
