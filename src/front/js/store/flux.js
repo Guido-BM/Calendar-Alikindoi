@@ -326,6 +326,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         return store.token;
       },
       setTokenTodoist: async (code) => {
+        const store = getStore();
         setStore({ ...store, tokenTodoist: code });
         // const store = getStore();
         // try {
