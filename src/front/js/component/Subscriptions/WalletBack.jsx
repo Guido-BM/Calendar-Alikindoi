@@ -12,7 +12,7 @@ const WalletBack = ({ transactions, deleteTransaction }) => {
             <div className="transaction-description">
               {transaction.description}
             </div>
-            <div className="transaction-amount">${transaction.amount}</div>
+            <div className="transaction-amount">€{transaction.amount}</div>
             <div
               className={`transaction-type ${transaction.type.toLowerCase()}`}
             >
@@ -22,9 +22,7 @@ const WalletBack = ({ transactions, deleteTransaction }) => {
               {/* <button onClick={() => editTransaction(transaction.id)}>
               Edit
             </button> */}
-              <button onClick={() => deleteTransaction(transaction.id)}>
-                Delete
-              </button>
+              <button onClick={() => deleteTransaction(transaction.id)}>Delete</button>
             </div>
           </div>
         ))}

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import "./Wallet.css"; // Importa los estilos desde Wallet.css
+import "./Wallet.css";
 import { Modal, Button } from "antd";
-import WalletBack from "./WalletBack";
 
 const Wallet = ({ transactions, setTransactions }) => {
   const [visible, setVisible] = useState(false);
@@ -9,17 +8,19 @@ const Wallet = ({ transactions, setTransactions }) => {
   const [description, setDescription] = useState("");
   const [type, setType] = useState("expense");
   const [editMode, setEditMode] = useState(null);
+
   const showModal = () => {
     setVisible(true);
   };
-  const handleOk = (e) => {
-    console.log(e);
+
+  const handleOk = () => {
     setVisible(false);
   };
-  const handleCancel = (e) => {
-    console.log(e);
+
+  const handleCancel = () => {
     setVisible(false);
   };
+
   const addTransaction = (e) => {
     e.preventDefault();
     if (!amount || !description) return;
@@ -34,12 +35,14 @@ const Wallet = ({ transactions, setTransactions }) => {
     setDescription("");
     setType("expense");
   };
+
   const deleteTransaction = (id) => {
     const updatedTransactions = transactions.filter(
       (transaction) => transaction.id !== id
     );
     setTransactions(updatedTransactions);
   };
+
   const editTransaction = (id) => {
     const transactionToEdit = transactions.find(
       (transaction) => transaction.id === id
@@ -49,6 +52,7 @@ const Wallet = ({ transactions, setTransactions }) => {
     setDescription(transactionToEdit.description);
     setType(transactionToEdit.type);
   };
+
   const saveEditedTransaction = (e) => {
     e.preventDefault();
     const updatedTransactions = transactions.map((transaction) =>
@@ -67,13 +71,17 @@ const Wallet = ({ transactions, setTransactions }) => {
     setDescription("");
     setType("expense");
   };
+
   const totalIncome = transactions
     .filter((transaction) => transaction.type === "income")
     .reduce((acc, transaction) => acc + transaction.amount, 0);
+
   const totalExpense = transactions
     .filter((transaction) => transaction.type === "expense")
     .reduce((acc, transaction) => acc + transaction.amount, 0);
+
   const difference = totalIncome - totalExpense;
+
   return (
     <>
       <div className="container-wallet">
@@ -82,14 +90,12 @@ const Wallet = ({ transactions, setTransactions }) => {
         </Button>
         <Modal
           title="Transaction"
-          open={visible}
-          onOk={editMode !== null ? saveEditedTransaction : addTransaction} // Cambia la función onOk del modal
+          visible={visible}
+          onOk={editMode !== null ? saveEditedTransaction : addTransaction}
           onCancel={handleCancel}
         >
           <form
-            onSubmit={
-              editMode !== null ? saveEditedTransaction : addTransaction
-            }
+            onSubmit={editMode !== null ? saveEditedTransaction : addTransaction}
             className="transactionForm"
           >
             <input
@@ -107,28 +113,19 @@ const Wallet = ({ transactions, setTransactions }) => {
               onChange={(e) => setAmount(e.target.value)}
             />
             <div>
-              <label>
-                <input
-                  name="type"
-                  type="radio"
-                  value="expense"
-                  checked={type === "expense"}
-                  onChange={() => setType("expense")}
-                />
-                Expense
-              </label>
-              <label>
-                <input
-                  name="type"
-                  type="radio"
-                  value="income"
-                  checked={type === "income"}
-                  onChange={() => setType("income")}
-                />
+              <Button
+  className={`button expense ${type === "expense" ? "active" : ""}`}
+  onClick={() => setType("expense")}
+>
+  Expense
+</Button>
+<Button
+  className={`button income ${type === "income" ? "active" : ""}`}
+  onClick={() => setType("income")}
+>
                 Income
-              </label>
+              </Button>
             </div>
-            {/* Elimina el botón "Add Transaction" del formulario */}
           </form>
         </Modal>
         <div className="totals-container">
@@ -138,7 +135,11 @@ const Wallet = ({ transactions, setTransactions }) => {
           <br />
           <h3
             className={`difference ${
-              difference > 0 ? "positive" : difference < 0 ? "negative" : "zero"
+              difference > 0
+                ? "positive"
+                : difference < 0
+                ? "negative"
+                : "zero"
             }`}
           >
             Difference: €{difference.toFixed(2)}
@@ -148,4 +149,6 @@ const Wallet = ({ transactions, setTransactions }) => {
     </>
   );
 };
+
 export default Wallet;
+
