@@ -16,13 +16,15 @@ import { Button } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSyncAlt } from "@fortawesome/free-solid-svg-icons";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import useTodoistService from "./useTodoistService.jsx";
 
 const Todoist = ({ taskToEdit }) => {
   const [tasks, setTasks] = useState([]);
-  const { actions } = useContext(Context);
+  const { actions, store } = useContext(Context);
   const tokenTodoist = localStorage.getItem("tokenTodoist");
   const [selectedTask, setSelectedTask] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
+  const { getTasks } = useTodoistService();
 
   const markTaskComplete = async (taskId) => {
     if (typeof taskId !== "string") {
@@ -90,15 +92,12 @@ const Todoist = ({ taskToEdit }) => {
     setSelectedTask(task);
   };
 
-  const fetchTasks = () => {
+  useEffect(() => {
+    console.log("component tokenTodoist", tokenTodoist);
     getTasks().then((tasks) => {
       setTasks(tasks);
     });
-  };
-
-  useEffect(() => {
-    fetchTasks();
-  }, []);
+  }, [store.tokenTodoist]);
 
   useEffect(() => {
     const handleClickOutside = () => {
@@ -129,7 +128,11 @@ const Todoist = ({ taskToEdit }) => {
             <FontAwesomeIcon
               icon={faSyncAlt}
               className="refresh-icon"
-              onClick={fetchTasks}
+              onClick={() =>
+                getTasks().then((tasks) => {
+                  setTasks(tasks);
+                })
+              }
             />
           </div>
           {sortedTasks &&
