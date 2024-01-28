@@ -16,13 +16,10 @@
   margin-top: 30px;
   padding-top: 20px;
   border: none;
-  /* display: flex;
-  flex-direction: column;
-  justify-content: space-between; */
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 10px;
-  max-height: 180px; /* Ajusta este valor a la altura máxima que desees */
+  max-height: 180px;
   overflow-y: auto;
 }
 

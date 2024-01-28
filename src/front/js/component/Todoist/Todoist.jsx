@@ -13,10 +13,9 @@ import { Link } from "react-router-dom";
 import { Context } from "../../store/appContext.js";
 import "./Todoist.css";
 import { Button } from "antd";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSyncAlt } from '@fortawesome/free-solid-svg-icons';
-import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSyncAlt } from "@fortawesome/free-solid-svg-icons";
+import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 const Todoist = ({ taskToEdit }) => {
   const [tasks, setTasks] = useState([]);
@@ -25,20 +24,18 @@ const Todoist = ({ taskToEdit }) => {
   const [selectedTask, setSelectedTask] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
 
-
-
   const markTaskComplete = async (taskId) => {
-    if (typeof taskId !== 'string') {
-      console.error('Invalid taskId: ', taskId);
+    if (typeof taskId !== "string") {
+      console.error("Invalid taskId: ", taskId);
       return;
     }
     const task = tasks.find((task) => task.id === taskId);
     if (!task) {
-      console.error('Task not found: ', taskId);
+      console.error("Task not found: ", taskId);
       return;
     }
     task.isCompleted = true;
-    setTasks(tasks.map(t => t.id === taskId ? task : t));
+    setTasks(tasks.map((t) => (t.id === taskId ? task : t)));
     try {
       const isSuccess = await closeTask(taskId);
       console.log(isSuccess);
@@ -47,7 +44,7 @@ const Todoist = ({ taskToEdit }) => {
         setTasks(updatedTasks);
       }
     } catch (error) {
-      console.error('Failed to close task: ', error);
+      console.error("Failed to close task: ", error);
     }
   };
 
@@ -108,15 +105,17 @@ const Todoist = ({ taskToEdit }) => {
       setSelectedTask(null);
     };
 
-    document.addEventListener('click', handleClickOutside);
+    document.addEventListener("click", handleClickOutside);
 
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener("click", handleClickOutside);
     };
   }, []);
 
-  const sortedTasks = tasks.sort((a, b) => b.priority - a.priority);
-
+  let sortedTasks;
+  if (tasks) {
+    sortedTasks = tasks.sort((a, b) => b.priority - a.priority);
+  }
 
   if (tokenTodoist) {
     return (
@@ -127,37 +126,44 @@ const Todoist = ({ taskToEdit }) => {
         <div className="grid-c3">
           <div className="inbox-container">
             <h4 className="inbox-title">Inbox</h4>
-            <FontAwesomeIcon icon={faSyncAlt} className="refresh-icon" onClick={fetchTasks} />
+            <FontAwesomeIcon
+              icon={faSyncAlt}
+              className="refresh-icon"
+              onClick={fetchTasks}
+            />
           </div>
-          {sortedTasks.map((task) => (
-            <div key={task.id} className={`task-container priority-${task.priority}`} onClick={(event) => showDescription(event, task)}>
-              <input
-                type="radio"
-                id={`task-${task.id}`}
-                className={`priority-${task.priority}`}
-                checked={task.isCompleted}
-                onChange={() => markTaskComplete(task.id)}
-              />
-              <label htmlFor={`task-${task.id}`}></label>
-              {task.content}
-              <TaskModalEdit
-                taskToUpdate={taskToUpdate}
-                onClose={handleClose}
-                isModalOpen={isModalOpen}
-                setIsModalOpen={setIsModalOpen}
-              />
-              {selectedTask && selectedTask.id === task.id && (
-                <div className="task-details">
-                  <div className="task-description">
-                    {selectedTask.description}
+          {sortedTasks &&
+            sortedTasks.map((task) => (
+              <div
+                key={task.id}
+                className={`task-container priority-${task.priority}`}
+                onClick={(event) => showDescription(event, task)}
+              >
+                <input
+                  type="radio"
+                  id={`task-${task.id}`}
+                  className={`priority-${task.priority}`}
+                  checked={task.isCompleted}
+                  onChange={() => markTaskComplete(task.id)}
+                />
+                <label htmlFor={`task-${task.id}`}></label>
+                {task.content}
+                <TaskModalEdit
+                  taskToUpdate={taskToUpdate}
+                  onClose={handleClose}
+                  isModalOpen={isModalOpen}
+                  setIsModalOpen={setIsModalOpen}
+                />
+                {selectedTask && selectedTask.id === task.id && (
+                  <div className="task-details">
+                    <div className="task-description">
+                      {selectedTask.description}
+                    </div>
+                    <div className="task-due-date">{selectedTask.dueDate}</div>
                   </div>
-                  <div className="task-due-date">
-                    {selectedTask.dueDate}
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
+                )}
+              </div>
+            ))}
           {isEditing && (
             <TaskModalEdit
               taskToUpdate={selectedTask}

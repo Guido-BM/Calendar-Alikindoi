@@ -1,11 +1,10 @@
-import moment from "moment";
 import { get_weather_coordinates, get_weather_city } from "./WeatherApi";
-import { set } from "immutable";
+import dayjs from "dayjs";
 
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      selectedDate: moment(),
+      selectedDate: dayjs(),
       selectedEvents: [],
       savedMonthlyEvents: [],
       token: "",
@@ -67,14 +66,18 @@ const getState = ({ getStore, getActions, setStore }) => {
               body: JSON.stringify(event),
             }
           );
-          console.log(event);
           const data = await response.json();
           if (data.id) {
             // El evento se guardó correctamente
             // Puedes agregar el evento a tu store si lo necesitas
+            const newEvent = {
+              ...data,
+              start_time: dayjs(data.start_time),
+              end_time: dayjs(data.end_time),
+            };
             setStore({
               ...store,
-              savedMonthlyEvents: [...store.savedMonthlyEvents, data],
+              savedMonthlyEvents: [...store.savedMonthlyEvents, newEvent],
             });
           } else {
             // Hubo un error al guardar el evento
@@ -123,7 +126,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         const store = getStore();
         try {
           const response = await fetch(
-            `${process.env.BACKEND_URL}/api/users/${store.user}/events/${event.id}`,
+            `${process.env.BACKEND_URL}/api/events/${event.id}`,
             {
               method: "PUT",
               headers: {
@@ -137,10 +140,15 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (data.id) {
             // El evento se actualizó correctamente
             // Puedes actualizar el evento en tu store si lo necesitas
+            const newEvent = {
+              ...data,
+              start_time: dayjs(data.start_time),
+              end_time: dayjs(data.end_time),
+            };
             setStore({
               ...store,
               savedMonthlyEvents: store.savedMonthlyEvents.map((e) =>
-                e.id === event.id ? data : e
+                e.id === event.id ? newEvent : e
               ),
             });
           } else {
@@ -170,9 +178,14 @@ const getState = ({ getStore, getActions, setStore }) => {
             if (Array.isArray(data)) {
               // Los eventos se cargaron correctamente
               // Puedes agregar los eventos a tu store
+              const events = data.map((event) => ({
+                ...event,
+                start_time: dayjs(event.start_time),
+                end_time: dayjs(event.end_time),
+              }));
               setStore({
                 ...store,
-                savedMonthlyEvents: data,
+                savedMonthlyEvents: events,
               });
             } else {
               // Hubo un error al cargar los eventos
@@ -180,39 +193,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           } catch (error) {
             console.error("Error loading events:", error);
-          }
-        }
-      },
-      saveUserEvents: async (events) => {
-        const store = getStore();
-        // iterate over the events array and save each event
-        for (const event of events) {
-          try {
-            const response = await fetch(
-              `${process.env.BACKEND_URL}/api/users/${store.user}/events`,
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${store.token}`,
-                },
-                body: JSON.stringify(event),
-              }
-            );
-            const data = await response.json();
-            if (data.id) {
-              // The event was saved correctly
-              // You can add the event to your store if you need to
-              setStore({
-                ...store,
-                savedMonthlyEvents: [...store.savedMonthlyEvents, data],
-              });
-            } else {
-              // There was an error saving the event
-              console.error("Error saving event:", data);
-            }
-          } catch (error) {
-            console.error("Error saving event:", error);
           }
         }
       },
@@ -314,6 +294,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ ...store, tokenTodoist: "" });
       },
       setTokenFromLocalStorage: async (tokenJwt) => {
+        const store = getStore();
         fetch(process.env.BACKEND_URL + "/api/identify", {
           method: "POST",
           headers: {
@@ -325,7 +306,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((data) => {
             // Aquí puedes manejar la respuesta de tu backend
             // Por ejemplo, podrías guardar el usuario en el store
-            setStore({ ...store, user: data.user });
+            setStore({ ...store, user: data.id });
           })
           .catch((error) => {
             // Aquí puedes manejar los errores

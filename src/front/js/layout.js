@@ -48,7 +48,6 @@ const Layout = () => {
           // Aquí puedes manejar la respuesta de tu backend
           // Por ejemplo, podrías guardar el usuario en el store
           actions.setUser(data.id);
-          console.log("data", data);
         })
         .catch((error) => {
           // Aquí puedes manejar los errores

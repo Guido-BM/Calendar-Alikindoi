@@ -53,10 +53,21 @@
 #previewLeftContainer {
   display: flex;
 }
-#eventsList * {
+#eventsList span {
   font-size: 20px;
   font-weight: 600;
 }
 #eventsList {
   height: max-content;
+  flex-grow: 1;
+}
+#eventList:first-child {
+  margin-right: auto;
+}
+
+.listaEventosPreviewLeft {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  justify-content: space-between;
 }

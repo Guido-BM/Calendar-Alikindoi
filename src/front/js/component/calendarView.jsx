@@ -3,7 +3,6 @@ import { ConfigProvider, Calendar, Button } from "antd";
 import { Context } from "../store/appContext";
 import DateCellRender from "./dateCellRender";
 import PreviewLeft from "./previewLeft";
-import moment from "moment";
 
 const CalendarView = () => {
   const { store, actions } = useContext(Context);
@@ -15,16 +14,15 @@ const CalendarView = () => {
   const setSavedMonthlyEvents = actions.setSavedMonthlyEvents;
 
   useEffect(() => {
-    actions.loadUserEvents();
-  }, []);
+    if (store.user) actions.loadUserEvents();
+  }, [store.user]);
 
   const getListData = (value) => {
     const datesToRender = savedMonthlyEvents.filter((event) => {
-      const eventDate = moment(event.start_time);
       return (
-        eventDate.year() === value.year() &&
-        eventDate.month() === value.month() &&
-        eventDate.date() === value.date()
+        event.start_time.year() === value.year() &&
+        event.start_time.month() === value.month() &&
+        event.start_time.date() === value.date()
       );
     });
     if (!datesToRender) return [];
@@ -44,29 +42,29 @@ const CalendarView = () => {
       return 1394;
     }
   };
-  const listData = savedMonthlyEvents.map((event) => ({
-    date: moment(event.start_time).format("YYYY-MM-DD"),
-    modifier: "success", // You might want to adjust this based on your needs
-    title: event.title,
-    time: [moment(event.start_time), moment(event.end_time)],
-  }));
-  const monthCellRender = (value) => {
-    const num = getMonthData(value);
-    return num ? (
-      <div className="notes-month">
-        <section>{num}</section>
-        <span>Backlog number</span>
-      </div>
-    ) : null;
-  };
+  // const listData = savedMonthlyEvents.map((event) => ({
+  //   date: moment(event.start_time).format("YYYY-MM-DD"),
+  //   modifier: "success", // You might want to adjust this based on your needs
+  //   title: event.title,
+  //   time: [moment(event.start_time), moment(event.end_time)],
+  // }));
+  // const monthCellRender = (value) => {
+  //   const num = getMonthData(value);
+  //   return num ? (
+  //     <div className="notes-month">
+  //       <section>{num}</section>
+  //       <span>Backlog number</span>
+  //     </div>
+  //   ) : null;
+  // };
 
   const cellRender = (current, info) => {
     if (info.type === "date") {
       const listData = getListData(current).map((event) => ({
-        date: moment(event.start_time).format("YYYY-MM-DD"),
+        date: event.start_time.format("YYYY-MM-DD"),
         modifier: "success", // You might want to adjust this based on your needs
         title: event.title,
-        time: [moment(event.start_time), moment(event.end_time)],
+        time: [event.start_time, event.end_time],
       }));
       // console.log(listData);
       return <DateCellRender listData={listData} />;
@@ -99,18 +97,6 @@ const CalendarView = () => {
       <PreviewLeft
         selectedDate={selectedDate}
         selectedEvents={getListData(selectedDate)}
-        addEvents={(newEvent) => {
-          const eventExists = savedMonthlyEvents.some(
-            (event) =>
-              event.title === newEvent.title &&
-              event.date === newEvent.date &&
-              event.time === newEvent.time
-          );
-
-          if (!eventExists) {
-            setSavedMonthlyEvents([...savedMonthlyEvents, newEvent]);
-          }
-        }}
       />
       {/* <Button onClick={() => actions.loadUserEvents()}>SYNC</Button> */}
       {/* <Button onClick={() => actions.logOut()}>LOGOUT</Button> */}

@@ -1,21 +1,14 @@
-import React, { useState, useContext } from "react";
-import { Button, Form, Input, Modal, Radio, TimePicker } from "antd";
-import { DatePicker } from "antd";
-import { Context } from "../store/appContext";
+import React, { useState } from "react";
+import { Form, Input, Modal, TimePicker, Button } from "antd";
 
-const CollectionCreateForm = ({
-  open,
-  onCreate,
-  onCancel,
-  onFormDataChange,
-}) => {
+const CollectionCreateForm = ({ open, onCreate, onCancel, title, eventId }) => {
   const [form] = Form.useForm();
 
   return (
     <Modal
       open={open}
-      title="Create a new event"
-      okText="Create"
+      title={title}
+      okText="Done"
       cancelText="Cancel"
       onCancel={onCancel}
       onOk={() => {
@@ -23,7 +16,8 @@ const CollectionCreateForm = ({
           .validateFields()
           .then((values) => {
             form.resetFields();
-            onCreate(values);
+            onCreate({ ...values, id: eventId });
+            onCancel();
           })
           .catch((info) => {
             // console.log('Validate Failed:', info);
@@ -71,62 +65,27 @@ const CollectionCreateForm = ({
         >
           <TimePicker.RangePicker format="HH:mm" />
         </Form.Item>
-        {/* <Form.Item
-                            name="modifier"
-                            className="collection-create-form_last-form-item"
-                          >
-                            <Radio.Group> */}
-        {/* </Form.Item> */}
       </Form>
     </Modal>
   );
 };
 
-const CreateEventButton = ({ addEvents, selectedDate }) => {
+const EventButton = ({ onCreate, children, modalTitle, eventId = null }) => {
   const [open, setOpen] = useState(false);
-  const { store, actions } = useContext(Context);
-  const onCreate = async (values) => {
-    const [start, end] = values.time;
-    const selectedDate = store.selectedDate.clone(); // Clona la fecha seleccionada para no modificar el estado original
-
-    // Ajusta las horas, minutos y segundos de la fecha seleccionada
-    selectedDate.set({
-      hour: start.get("hour"),
-      minute: start.get("minute"),
-      second: start.get("second"),
-    });
-    const eventStart = selectedDate.toISOString().split(".")[0];
-
-    selectedDate.set({
-      hour: end.get("hour"),
-      minute: end.get("minute"),
-      second: end.get("second"),
-    });
-    const eventEnd = selectedDate.toISOString().split(".")[0];
-
-    const event = {
-      title: values.title,
-      description: values.description,
-      start_time: eventStart,
-      end_time: eventEnd,
-      user_id: store.user, // Asegúrate de obtener el id del usuario correctamente
-    };
-
-    // Guarda el evento usando la acción saveEvent
-    actions.saveEvent(event);
-  };
 
   return (
     <div>
       <Button
-        type="primary"
+        type="text"
         onClick={() => {
           setOpen(true);
         }}
       >
-        Create Event
+        {children}
       </Button>
       <CollectionCreateForm
+        eventId={eventId}
+        title={modalTitle}
         open={open}
         onCreate={onCreate}
         onCancel={() => {
@@ -137,4 +96,4 @@ const CreateEventButton = ({ addEvents, selectedDate }) => {
   );
 };
 
-export default CreateEventButton;
+export default EventButton;
