@@ -17,14 +17,14 @@ body{
 }
 .wrapper-register {
   position: relative;
-  width: 800px;
-  height: 55vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  width: 50vw;
+  height: 70vh;
+  display: flex;
+  flex-direction: row;
   border: 3px solid #2a72f8;
   box-shadow: 0 0 50px 0 #2d2af8;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   border-radius: 20px;
   background-color: #385170;
 }
@@ -35,78 +35,88 @@ body{
   align-items: center;
 }
 .title-register {
-  font-size: 35px;
+  font-size: 2rem;
   color: #9fd3c7;
+  padding-top: 2rem;
+  padding-left: 3rem;
 }
 .inp-register {
-  padding-bottom: 10px;
+  padding-bottom: 0.2rem;
   border-bottom: 2px solid #ececec;
   color: #142d4c;
+
+  margin-left: 1rem;
 }
 .input-register {
   border: none;
   outline: none;
   background: none;
-  width: 260px;
-  margin-top: 40px;
-  padding-right: 10px;
-  font-size: 20px;
+  width: 15vw;
+  margin-top: 2.5rem;
+  padding-right: 1rem;
+  font-size: 0.9rem;
   color: #ececec;
+  padding-left: 3rem;
 }
 .submit-register {
   border: none;
   outline: none;
-  width: 288px;
-  margin-top: 25px;
-  padding: 10px 0;
-  font-size: 20px;
+  width: 15vw;
+  margin-top: 2rem;
+  margin-left: 3rem;
+  padding: 0.5rem 0;
+  font-size: 1rem;
   border-radius: 40px;
-  letter-spacing: 1px;
+  letter-spacing: 0.1rem;
   cursor: pointer;
   background: linear-gradient(45deg, #ececec, #142d4c);
   color: #ececec;
 }
 .footer-register {
-  margin-top: 30px;
+  margin-top: 2rem;
+  margin-left: 2rem;
   letter-spacing: 0.5px;
-  font-size: 17px;
+  font-size: 1rem;
   color: #ececec;
 }
 .link-register {
   color: #9fd3c7;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 1rem;
   font-weight: bold;
 }
 .banner-register {
   position: absolute;
   top: 0;
   right: 0;
-  width: 450px;
-  height: 390px;
+  width: 25vw;
+  height: 70vh;
   background: linear-gradient(to right, #ececec, #142d4c);
   clip-path: polygon(0 0, 100% 0, 100% 100%, 60% 100%);
-  padding-right: 70px;
+  padding-right: 3rem;
   text-align: right;
   display: grid;
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
   border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
   background-color: #142d4c;
 }
 .wel_text-register {
-  font-size: 40px;
-  margin-top: -50px;
+  font-size: 2rem;
+  margin-top: -2rem;
+  margin-left: 2.5rem;
   line-height: 50px;
   color: #142d4c;
 }
-.para-register {
-  margin-top: 10px;
-  font-size: 18px;
+/* .para-register {
+  margin-top: 1rem;
+  margin-left: 5rem;
+  font-size: 3rem;
   line-height: 24px;
   letter-spacing: 1px;
-}
+} */
 /* .signup {
   
 } */
