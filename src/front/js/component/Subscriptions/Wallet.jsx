@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Wallet.css"; // Importa los estilos desde Wallet.css
 import { Modal, Button } from "antd";
 import WalletBack from "./WalletBack";
+
 const Wallet = ({ transactions, setTransactions }) => {
   const [visible, setVisible] = useState(false);
   const [amount, setAmount] = useState("");
@@ -82,7 +83,7 @@ const Wallet = ({ transactions, setTransactions }) => {
         <Modal
           title="Transaction"
           open={visible}
-          onOk={handleOk}
+          onOk={editMode !== null ? saveEditedTransaction : addTransaction} // Cambia la función onOk del modal
           onCancel={handleCancel}
         >
           <form
@@ -108,6 +109,7 @@ const Wallet = ({ transactions, setTransactions }) => {
             <div>
               <label>
                 <input
+                  name="type"
                   type="radio"
                   value="expense"
                   checked={type === "expense"}
@@ -117,6 +119,7 @@ const Wallet = ({ transactions, setTransactions }) => {
               </label>
               <label>
                 <input
+                  name="type"
                   type="radio"
                   value="income"
                   checked={type === "income"}
@@ -125,14 +128,7 @@ const Wallet = ({ transactions, setTransactions }) => {
                 Income
               </label>
             </div>
-            <div className="buttonGroup">
-              <button
-                className={editMode !== null ? "primary" : ""}
-                type="submit"
-              >
-                {editMode !== null ? "Save Changes" : "Add Transaction"}
-              </button>
-            </div>
+            {/* Elimina el botón "Add Transaction" del formulario */}
           </form>
         </Modal>
         <div className="totals-container">
