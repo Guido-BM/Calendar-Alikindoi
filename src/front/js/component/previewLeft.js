@@ -22,13 +22,15 @@ const PreviewLeft = ({ selectedDate, selectedEvents }) => {
       .set("hour", start.hour())
       .set("minute", start.minute())
       .set("second", start.second())
-      .toISOString();
+      .toISOString()
+      .split(".")[0];
 
     const eventEnd = selectedDate
       .set("hour", end.hour())
       .set("minute", end.minute())
       .set("second", end.second())
-      .toISOString();
+      .toISOString()
+      .split(".")[0];
 
     const event = {
       id: values.id,
