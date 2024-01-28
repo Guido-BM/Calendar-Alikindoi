@@ -14,8 +14,8 @@ const CalendarView = () => {
   const setSavedMonthlyEvents = actions.setSavedMonthlyEvents;
 
   useEffect(() => {
-    actions.loadUserEvents();
-  }, []);
+    if (store.user) actions.loadUserEvents();
+  }, [store.user]);
 
   const getListData = (value) => {
     const datesToRender = savedMonthlyEvents.filter((event) => {

@@ -4,6 +4,7 @@ import DateCellRender from "./dateCellRender";
 import { Context } from "../store/appContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt, faPlus } from "@fortawesome/free-solid-svg-icons";
+import moment from "moment";
 
 const PreviewLeft = ({ selectedDate, selectedEvents }) => {
   const { store, actions } = useContext(Context);
@@ -18,17 +19,29 @@ const PreviewLeft = ({ selectedDate, selectedEvents }) => {
     const [start, end] = values.time;
 
     // Ajusta las horas, minutos y segundos de la fecha seleccionada
-    const eventStart = selectedDate
-      .set("hour", start.hour())
-      .set("minute", start.minute())
-      .set("second", start.second())
+    const eventStart = new Date(
+      Date.UTC(
+        selectedDate.year(),
+        selectedDate.month(),
+        selectedDate.date(),
+        start.hour(),
+        start.minute(),
+        start.second()
+      )
+    )
       .toISOString()
       .split(".")[0];
 
-    const eventEnd = selectedDate
-      .set("hour", end.hour())
-      .set("minute", end.minute())
-      .set("second", end.second())
+    const eventEnd = new Date(
+      Date.UTC(
+        selectedDate.year(),
+        selectedDate.month(),
+        selectedDate.date(),
+        end.hour(),
+        end.minute(),
+        end.second()
+      )
+    )
       .toISOString()
       .split(".")[0];
 
@@ -47,17 +60,29 @@ const PreviewLeft = ({ selectedDate, selectedEvents }) => {
   const updateEvent = async (values) => {
     const [start, end] = values.time;
     // Ajusta las horas, minutos y segundos de la fecha seleccionada
-    const eventStart = selectedDate
-      .set("hour", start.hour())
-      .set("minute", start.minute())
-      .set("second", start.second())
+    const eventStart = new Date(
+      Date.UTC(
+        selectedDate.year(),
+        selectedDate.month(),
+        selectedDate.date(),
+        start.hour(),
+        start.minute(),
+        start.second()
+      )
+    )
       .toISOString()
       .split(".")[0];
 
-    const eventEnd = selectedDate
-      .set("hour", end.hour())
-      .set("minute", end.minute())
-      .set("second", end.second())
+    const eventEnd = new Date(
+      Date.UTC(
+        selectedDate.year(),
+        selectedDate.month(),
+        selectedDate.date(),
+        end.hour(),
+        end.minute(),
+        end.second()
+      )
+    )
       .toISOString()
       .split(".")[0];
 
