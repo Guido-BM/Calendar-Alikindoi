@@ -2,6 +2,10 @@
 import React, { Component } from "react";
 import Card from "./Card";
 import { bodyStyles, headerStyles } from "./CardStyles";
+import { HomeOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
+import { FloatButton } from "antd";
+
 
 const avatarImageUrlMaria = require("../../assets/images/Maria.jpeg");
 const avatarImageUrlMarta = require("../../assets/images/marta1.jpg");
@@ -13,6 +17,14 @@ class CardContainer extends Component {
         <h1 style={headerStyles} className="header">
           Aliquindoi
         </h1>
+        <Link to="/">
+          <FloatButton
+            style={{ position: "fixed", top: "10px", left: "10px" }}
+            icon={<HomeOutlined />}
+          >
+            Home
+          </FloatButton>
+        </Link>
         <div className="flex">
           <Card
             imgSrc="http://1.bp.blogspot.com/-tso_pF4jEdU/UPC4zDXEY6I/AAAAAAAAAhE/Vb2Cd8nRZEo/s1600/a.jpg"
@@ -57,6 +69,3 @@ class CardContainer extends Component {
 }
 
 export default CardContainer;
-
-
-

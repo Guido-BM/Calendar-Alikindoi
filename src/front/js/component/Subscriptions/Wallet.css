@@ -122,3 +122,26 @@
 .difference.zero {
   color: #142d4c;
 }
+.button.expense {
+  background-color: #ff6347; /* Color de fondo rojo */
+  color: white; /* Color del texto blanco */
+  border: none; /* Sin borde */
+  padding: 8px 16px; /* Espaciado interno */
+  margin-right: 8px; /* Margen derecho */
+  cursor: pointer; /* Cursor de apuntar */
+  border-radius: 4px; /* Borde redondeado */
+}
+
+.button.income {
+  background-color: #32cd32; /* Color de fondo verde */
+  color: white; /* Color del texto blanco */
+  border: none; /* Sin borde */
+  padding: 8px 16px; /* Espaciado interno */
+  cursor: pointer; /* Cursor de apuntar */
+  border-radius: 4px; /* Borde redondeado */
+}
+
+/* Estilo para el botón activo */
+.button.active {
+  background-color: #6495ed; /* Cambia el color de fondo cuando está activo */
+}
