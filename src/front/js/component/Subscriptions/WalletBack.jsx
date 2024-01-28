@@ -3,7 +3,7 @@ import React from "react";
 import "./Wallet.css";
 import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
-const WalletBack = ({ transactions, deleteTransaction }) => {
+const WalletBack = ({ transactions, deleteTransaction, editTransaction }) => {
   return (
     <div className="transactionList">
       {transactions &&
@@ -19,9 +19,6 @@ const WalletBack = ({ transactions, deleteTransaction }) => {
               {transaction.type === "expense" ? "Expense" : "Income"}
             </div>
             <div>
-              {/* <button onClick={() => editTransaction(transaction.id)}>
-              Edit
-            </button> */}
               <button onClick={() => deleteTransaction(transaction.id)}>Delete</button>
             </div>
           </div>
