@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import EventButton from "./eventButton";
 import DateCellRender from "./dateCellRender";
-import moment from "moment";
 import { Context } from "../store/appContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt, faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -10,35 +9,26 @@ const PreviewLeft = ({ selectedDate, selectedEvents }) => {
   const { store, actions } = useContext(Context);
   const mappedEvents = selectedEvents.map((event) => ({
     id: event.id,
-    date: moment(event.start_time).format("YYYY-MM-DD"),
+    date: event.start_time.format("YYYY-MM-DD"),
     modifier: "success", // You might want to adjust this based on your needs
     title: event.title,
-    time: [moment(event.start_time), moment(event.end_time)],
+    time: [event.start_time, event.end_time],
   }));
   const addEvents = async (values) => {
     const [start, end] = values.time;
-    console.log("values", values);
-    console.log("selectedDate", selectedDate);
 
     // Ajusta las horas, minutos y segundos de la fecha seleccionada
     const eventStart = selectedDate
-      .clone()
-      .set({
-        hour: start.get("hour"),
-        minute: start.get("minute"),
-        second: start.get("second"),
-      })
-      .toISOString()
-      .split(".")[0];
+      .set("hour", start.hour())
+      .set("minute", start.minute())
+      .set("second", start.second())
+      .toISOString();
 
     const eventEnd = selectedDate
-      .set({
-        hour: end.get("hour"),
-        minute: end.get("minute"),
-        second: end.get("second"),
-      })
-      .toISOString()
-      .split(".")[0];
+      .set("hour", end.hour())
+      .set("minute", end.minute())
+      .set("second", end.second())
+      .toISOString();
 
     const event = {
       id: values.id,
@@ -56,21 +46,16 @@ const PreviewLeft = ({ selectedDate, selectedEvents }) => {
     const [start, end] = values.time;
     // Ajusta las horas, minutos y segundos de la fecha seleccionada
     const eventStart = selectedDate
-      .clone()
-      .set({
-        hour: start.get("hour"),
-        minute: start.get("minute"),
-        second: start.get("second"),
-      })
+      .set("hour", start.hour())
+      .set("minute", start.minute())
+      .set("second", start.second())
       .toISOString()
       .split(".")[0];
 
     const eventEnd = selectedDate
-      .set({
-        hour: end.get("hour"),
-        minute: end.get("minute"),
-        second: end.get("second"),
-      })
+      .set("hour", end.hour())
+      .set("minute", end.minute())
+      .set("second", end.second())
       .toISOString()
       .split(".")[0];
 
@@ -82,6 +67,9 @@ const PreviewLeft = ({ selectedDate, selectedEvents }) => {
       end_time: eventEnd,
       user_id: store.user, // Asegúrate de obtener el id del usuario correctamente
     };
+
+    console.log(values.time);
+    console.log(event);
 
     // Guarda el evento usando la acción saveEvent
     actions.updateEvent(event);
