@@ -1,6 +1,6 @@
 import { TodoistApi } from "@doist/todoist-api-typescript";
 
-const TOKEN = localStorage.getItem('tokenTodoist');
+const TOKEN = localStorage.getItem("tokenTodoist");
 
 const api = new TodoistApi(TOKEN);
 
@@ -14,8 +14,10 @@ export const addTask = (task) => {
     const response = api.addTask(task);
     return response;
   } catch (error) {
-    console.error('Error adding task:', error);
-    throw new Error('Failed to add task. Please check your input and try again.');
+    console.error("Error adding task:", error);
+    throw new Error(
+      "Failed to add task. Please check your input and try again."
+    );
   }
 };
 
@@ -24,9 +26,11 @@ export const updateTask = (id, content) => {
     const response = api.updateTask(id, content);
     return response;
   } catch (error) {
-    console.error('Error updating task:', error);
-    throw new Error('Failed to update task. Please check your input and try again.');
-  };
+    console.error("Error updating task:", error);
+    throw new Error(
+      "Failed to update task. Please check your input and try again."
+    );
+  }
 };
 
 export const deleteTask = (id) => {

@@ -327,6 +327,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       setTokenTodoist: async (code) => {
         const store = getStore();
+        localStorage.setItem("tokenTodoist", code);
         setStore({ ...store, tokenTodoist: code });
         // const store = getStore();
         // try {
