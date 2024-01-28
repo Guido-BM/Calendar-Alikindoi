@@ -187,7 +187,8 @@ const Todoist = ({ taskToEdit }) => {
           type="primary"
           property="loading"
           onClick={() =>
-            (window.location.href = "http://localhost:3001/api/todoist/auth")
+            (window.location.href =
+              "https://sample-service-name-gn1r.onrender.com/api/todoist/auth")
           }
         >
           LogIn TODOIST
