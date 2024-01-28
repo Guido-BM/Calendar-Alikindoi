@@ -14,65 +14,66 @@ body {
   justify-content: center;
   align-content: center;
 } */
-/* ::-webkit-input-placeholder {
+::-webkit-input-placeholder {
   color: #ff5d9e;
-} */
+}
 .wrapper-login {
   position: relative;
-  width: 800px;
+  max-width: 40vw;
   height: 50vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
   border: 3px solid #2a72f8;
   box-shadow: 0 0 50px 0 #2d2af8;
   margin: auto;
-  place-items: center;
   background-color: #385170;
   align-items: center;
   border-radius: 20px;
 }
 .form-login {
-  display: grid;
-  flex-direction: column;
+  display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 .title-login {
-  font-size: 35px;
+  font-size: 2rem;
   color: #9fd3c7;
 }
 .inp-login {
-  padding-bottom: 10px;
+  padding-bottom: 0.2rem;
   border-bottom: 2px solid #ececec;
   color: #142d4c;
+  display: flex;
 }
 .input-login {
   border: none;
   outline: none;
   background: none;
-  width: 260px;
-  margin-top: 40px;
-  padding-right: 10px;
-  font-size: 17px;
+  width: 12vw;
+  margin-top: 1rem;
+  padding-right: 0.1rem;
+  font-size: 1rem;
   color: #ececec;
 }
 .submit-login {
   border: none;
   outline: none;
-  width: 288px;
-  margin-top: 25px;
-  padding: 10px 0;
-  font-size: 20px;
+  width: 15vw;
+  margin-top: 2rem;
+  padding: 0.5rem 0;
+  font-size: 1rem;
   border-radius: 40px;
-  letter-spacing: 1px;
+  letter-spacing: 0.1rem;
   cursor: pointer;
   background: linear-gradient(45deg, #ececec, #142d4c);
   color: #ececec;
 }
 .footer-login {
-  margin-top: 30px;
+  margin-top: 3rem;
   letter-spacing: 0.5px;
-  font-size: 17px;
+  font-size: 0.7rem;
   color: #ececec;
 }
 .link-login {
@@ -83,39 +84,29 @@ body {
   position: absolute;
   top: 0;
   right: 0;
-  width: 450px;
-  height: 390px;
+  width: 18vw;
+  height: 50vh;
   background: linear-gradient(to right, #ececec, #142d4c);
   clip-path: polygon(0 0, 100% 0, 100% 100%, 60% 100%);
-  padding-right: 70px;
+  padding-right: 3rem;
   text-align: right;
   display: grid;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #ff5d9e;
+
   background-color: #142d4c;
   border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 .wel_text-login {
-  font-size: 40px;
-  margin-top: -50px;
-  line-height: 50px;
+  font-size: 2rem;
+  margin-top: -1.5rem;
+  margin-left: 2rem;
   color: #142d4c;
 }
-/* .para-login {
-  margin-top: 10px;
-  font-size: 20px;
-  line-height: 24px;
-  letter-spacing: 1px;
-  color: #ff5d9e;
-} */
-.login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* Esto hace que el contenedor ocupe toda la altura de la pantalla */
-}
+
 .wrapper-left {
-  padding-left: 25px;
+  padding-left: 2rem;
+  width: 17vw;
 }
