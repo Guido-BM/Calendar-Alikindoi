@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./Wallet.css";
 import { Modal, Button, message } from "antd";
 import WalletBack from "./WalletBack";
+import { Context } from "../../store/appContext";
 
 const Wallet = ({ transactions, setTransactions }) => {
   const [visible, setVisible] = useState(false);
@@ -9,7 +10,7 @@ const Wallet = ({ transactions, setTransactions }) => {
   const [description, setDescription] = useState("");
   const [type, setType] = useState(null);
   const [editMode, setEditMode] = useState(null);
-  const [activeButton, setActiveButton] = useState(null);
+  const { store, actions } = useContext(Context);
 
   const showModal = () => {
     setVisible(true);
@@ -26,31 +27,36 @@ const Wallet = ({ transactions, setTransactions }) => {
     setType(null);
   };
 
-  const addTransaction = (e) => {
-    e.preventDefault();
-    if (!amount || !description) {
-      message.error("Description and amount are required");
-      return;
-    }
-    if (!type) {
-      message.error("Please select a type (income or expense)");
-      return;
-    }
-    if (parseFloat(amount) < 0) {
-      message.error("It is not possible to enter negative numbers");
-      return;
-    }
-    const newTransaction = {
-      id: Date.now(),
-      amount: parseFloat(amount),
-      description: description,
-      type: type,
-    };
-    setTransactions([...transactions, newTransaction]);
-    setAmount("");
-    setDescription("");
-    setType(null);
-    message.success("Added successfully, to exit press 'X' or 'ESC'");
+  const addTransaction = async (transaction) => {
+    const res = await fetch(
+      process.env.BACKEND_URL + `/api/users/${store.user}/expenses`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${store.token}`,
+        },
+        body: JSON.stringify({
+          amount: parseFloat(amount),
+          date: new Date().toISOString().split("T")[0],
+          description: description,
+          user_id: store.user,
+        }),
+      }
+    );
+    const data = await res.json();
+    setTransactions(
+      [...transactions, data].map((transaction) => {
+        return {
+          id: transaction.id,
+          description: transaction.description,
+          amount: transaction.amount,
+          date: new Date(transaction.date),
+          category: transaction.category,
+          type: transaction.type,
+        };
+      })
+    );
   };
 
   const saveEditedTransaction = (e) => {
@@ -73,12 +79,15 @@ const Wallet = ({ transactions, setTransactions }) => {
   };
 
   const totalIncome = transactions
-    .filter((transaction) => transaction.type === "income")
-    .reduce((acc, transaction) => acc + transaction.amount, 0);
+    .filter((transaction) => {
+      console.log(transaction);
+      return transaction.type === "income";
+    })
+    .reduce((acc, transaction) => acc + +transaction.amount, 0);
 
   const totalExpense = transactions
     .filter((transaction) => transaction.type === "expense")
-    .reduce((acc, transaction) => acc + transaction.amount, 0);
+    .reduce((acc, transaction) => acc + +transaction.amount, 0);
 
   const difference = totalIncome - totalExpense;
 
@@ -90,12 +99,14 @@ const Wallet = ({ transactions, setTransactions }) => {
         </Button>
         <Modal
           title="Transaction"
-          visible={visible}
+          open={visible}
           onOk={editMode !== null ? saveEditedTransaction : addTransaction}
           onCancel={handleCancel}
         >
           <form
-            onSubmit={editMode !== null ? saveEditedTransaction : addTransaction}
+            onSubmit={
+              editMode !== null ? saveEditedTransaction : addTransaction
+            }
             className="transactionForm"
           >
             <input
@@ -115,7 +126,9 @@ const Wallet = ({ transactions, setTransactions }) => {
             />
             <div>
               <Button
-                className={`button expense ${type === "expense" ? "active" : ""}`}
+                className={`button expense ${
+                  type === "expense" ? "active" : ""
+                }`}
                 onClick={() => setType("expense")}
               >
                 Expense
