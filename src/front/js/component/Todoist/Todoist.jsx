@@ -25,6 +25,7 @@ const Todoist = ({ taskToEdit }) => {
   const [selectedTask, setSelectedTask] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const { getTasks } = useTodoistService();
+  const { addTask } = useTodoistService();
 
   const markTaskComplete = async (taskId) => {
     if (typeof taskId !== "string") {

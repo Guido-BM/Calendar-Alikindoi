@@ -12,7 +12,21 @@ const useTodoistService = () => {
 
   return {
     getTasks: async () =>
-      todoistApi.current.getTasks().catch((error) => console.error(error)),
+      await todoistApi.current
+        .getTasks()
+        .catch((error) => console.error(error)),
+
+    addTask: async (task) => {
+      try {
+        const response = await todoistApi.current.addTask(task);
+        return response;
+      } catch (error) {
+        console.error("Error adding task:", error);
+        throw new Error(
+          "Failed to add task. Please check your input and try again."
+        );
+      }
+    },
   };
 };
 
