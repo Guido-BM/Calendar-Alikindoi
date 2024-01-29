@@ -25,7 +25,6 @@ export const Home = () => {
     let urlObj = new URL(url);
     let token = urlObj.searchParams.get("accessToken");
     if (token) {
-      localStorage.setItem("tokenTodoist", token);
       actions.setTokenTodoist(token);
       // navigate("/home");
       // console.log(token);
