@@ -92,11 +92,12 @@ const TaskModal = () => {
             value={project}
             onChange={(value) => setProject(value)}
           >
-            {projects.map((project) => (
-              <Select.Option key={project.id} value={project.id}>
-                {project.name}
-              </Select.Option>
-            ))}
+            {projects &&
+              projects.map((project) => (
+                <Select.Option key={project.id} value={project.id}>
+                  {project.name}
+                </Select.Option>
+              ))}
           </Select>
         </div>
         <div className="input-container">
