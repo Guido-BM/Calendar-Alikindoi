@@ -28,7 +28,14 @@ const Wallet = ({ transactions, setTransactions }) => {
 
   const addTransaction = (e) => {
     e.preventDefault();
-    if (!amount || !description) return;
+    if (!amount || !description) {
+      message.error("Description and amount are required");
+      return;
+    }
+    if (!type) {
+      message.error("Please select a type (income or expense)");
+      return;
+    }
     if (parseFloat(amount) < 0) {
       message.error("It is not possible to enter negative numbers");
       return;
@@ -43,7 +50,7 @@ const Wallet = ({ transactions, setTransactions }) => {
     setAmount("");
     setDescription("");
     setType(null);
-    message.success("Added successfully, to exit press X");
+    message.success("Added successfully, to exit press 'X' or 'ESC'");
   };
 
   const saveEditedTransaction = (e) => {

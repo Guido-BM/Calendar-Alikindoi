@@ -115,30 +115,49 @@
   color: #142d4c;
 }
 .button.expense {
-  background-color: white; /* Color de fondo blanco */
-  color: #142d4c; /* Color del texto negro */
-  border: none; /* Sin borde */
-  padding: 8px 16px; /* Espaciado interno */
-  margin-right: 8px; /* Margen derecho */
-  cursor: pointer; /* Cursor de apuntar */
-  border-radius: 4px; /* Borde redondeado */
+  background-color: white;
+  color: #142d4c;
+  border: none;
+  padding: 8px 16px;
+  margin-right: 8px;
+  cursor: pointer;
+  border-radius: 4px;
 }
 
 .button.expense.active {
-  background-color: #ff6347; /* Cambia el color de fondo a rojo cuando está activo */
-  color: white; /* Color del texto blanco */
+  background-color: #ff6347;
+  color: white;
 }
 
 .button.income {
-  background-color: white; /* Color de fondo blanco */
-  color: #142d4c; /* Color del texto negro */
-  border: none; /* Sin borde */
-  padding: 8px 16px; /* Espaciado interno */
-  cursor: pointer; /* Cursor de apuntar */
-  border-radius: 4px; /* Borde redondeado */
+  background-color: white;
+  color: #142d4c;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
 }
 
 .button.income.active {
-  background-color: #32cd32; /* Cambia el color de fondo a verde cuando está activo */
-  color: white; /* Color del texto blanco */
+  background-color: #32cd32;
+  color: white; 
+}
+
+.delete-button {
+  cursor: pointer;
+  background-color: #142d4c;
+  color: #ececec;
+  border: none;
+  border-radius: 4px;
+  font-size: 10px;
+  padding: 4px 8px;
+}
+
+.transactionInput::placeholder {
+  color: #385170;
+  opacity: 1; /* Firefox */
+}
+
+.transactionInput:focus::placeholder {
+  color: transparent;
 }
