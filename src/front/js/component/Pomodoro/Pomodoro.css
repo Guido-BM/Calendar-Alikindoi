@@ -36,7 +36,7 @@
 }
 .pomodoro-container button.with-text svg {
   width: 60px;
-  float: left;
+
   margin-right: 5px;
 }
 
@@ -59,6 +59,7 @@
   display: grid;
   grid-auto-flow: column;
   justify-content: center;
+  position: relative;
 }
 .buttons-timer {
   display: grid;
@@ -88,8 +89,9 @@
   opacity: 1;
   transform: scale(3);
 }
-.img-about {
+
+/* .img-about {
   width: 5px;
   height: 5px;
   cursor: pointer;
-}
+}  */

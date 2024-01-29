@@ -6,6 +6,8 @@ import SettingsButton from "./SettingsButton";
 import React, { useContext, useState, useEffect, useRef } from "react";
 import SettingsContext from "./SettingsContext";
 import { Link } from "react-router-dom";
+import { FloatButton } from "antd";
+import { TeamOutlined } from "@ant-design/icons";
 
 const red = "#385170";
 const green = "#ececec;";
@@ -70,6 +72,7 @@ function Timer() {
 
   return (
     <div className="container-timer">
+      <div className="float-button-about"></div>
       <div>
         <CircularProgressbar
           value={percentage}
@@ -105,7 +108,8 @@ function Timer() {
               onClick={() => settingsInfo.setShowSettings(true)}
             />
           </div>
-          <div>
+
+          {/* <div>
             <Link to="/about">
               <button className="button-about">
                 <img
@@ -115,7 +119,7 @@ function Timer() {
                 />
               </button>
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
