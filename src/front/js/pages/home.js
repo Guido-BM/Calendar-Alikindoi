@@ -8,6 +8,8 @@ import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import { FloatButton } from "antd";
 import { LogoutOutlined } from "@ant-design/icons";
+import { TeamOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 import "./home.scss";
 import CardFlip from "../component/Cards/CardFlip";
@@ -39,6 +41,7 @@ export const Home = () => {
         >
           Log Out
         </FloatButton>
+
         <div className="main-content">
           <div className="main-content-holder">
             <div className="content-grid-one">
@@ -68,6 +71,14 @@ export const Home = () => {
                 </div>
               </div>
               <AliquindoiCalendar />
+              <Link to="/about">
+                <FloatButton
+                  style={{ position: "fixed", bottom: "10px", right: "10px" }}
+                  icon={<TeamOutlined />}
+                >
+                  About us
+                </FloatButton>
+              </Link>
             </div>
           </div>
         </div>
