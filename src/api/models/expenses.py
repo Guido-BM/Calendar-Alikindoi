@@ -26,6 +26,4 @@ class Expenses(db.Model):
             "amount": self.amount,
             "description": self.description,
             "date": self.date,
-            "category": self.category,
-            "source_account": self.source_account,
         }

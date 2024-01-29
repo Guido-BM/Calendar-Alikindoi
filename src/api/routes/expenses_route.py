@@ -1,6 +1,8 @@
 from flask import request, jsonify, Blueprint
 from flask_cors import CORS
 from ..services.expenses_service import ExpenseService
+from ..services.user_service import UserService
+from datetime import datetime
 
 expense_api = Blueprint('expense_api', __name__)
 CORS(expense_api)
@@ -23,8 +25,7 @@ def create_expense():
     data = request.get_json()
     amount = data.get('amount')
     description = data.get('description')
-    category = data.get('category')
-    type = data.get('type')
+    date = data.get('date')
     user_id = data.get('user_id')
 
     if amount and type and user_id:
@@ -57,3 +58,28 @@ def delete_expense_by_id(expense_id):
         return jsonify({"message": f"Expense with ID {expense_id} deleted successfully"}), 200
     else:
         return jsonify({"error": "Expense not found"}), 404
+
+
+
+
+@expense_api.route('/expenses/user/<int:user_id>', methods=['GET'])
+def get_expenses_by_user_id(user_id):
+    expenses = ExpenseService.get_expenses_by_user_id(user_id)
+    if expenses:
+        return jsonify([expense.serialize() for expense in expenses])
+    else:
+        return jsonify({"error": "User not found"}), 404
+
+@expense_api.route('/users/<int:user_id>/expenses', methods=['POST'])
+def create_expense_for_user(user_id):
+    data = request.get_json()
+    user_id = data.get('user_id')
+    amount = data.get('amount')
+    date = data.get('date')
+    description = data.get('description')
+
+    if amount and user_id and date and description:
+        new_expense = ExpenseService.create_expense(user_id,amount , date,description )
+        return jsonify(new_expense.serialize()), 201
+    else:
+        return jsonify({"error": "Amount, date, description, and user_id are required"}), 400

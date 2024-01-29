@@ -1,6 +1,8 @@
 from flask import jsonify
 from ..models.db import db
 from ..models.user import User
+from ..models.expenses import Expenses
+from datetime import datetime
 
 class UserService:
     @staticmethod
@@ -36,3 +38,18 @@ class UserService:
     def delete_user(user):
         db.session.delete(user)
         db.session.commit()
+    
+    @staticmethod
+    def create_expense(amount, description, user_id):
+    # Obtén la fecha de hoy y formatea en el formato adecuado para SQLite (YYYY-MM-DD)
+        date = datetime.today().strftime("%Y-%m-%d")
+        
+        new_expense = Expenses(
+            user_id=user_id,
+            amount=amount,
+            description=description,
+            date=date
+        )
+        db.session.add(new_expense)
+        db.session.commit()
+        return new_expense
