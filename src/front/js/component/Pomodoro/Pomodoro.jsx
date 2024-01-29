@@ -15,6 +15,7 @@ const Pomodoro = () => {
       <div className="grid-c8-content">
         <div className="text text-silver-v1">
           {/* {" "} */}
+          <h3>Pomodoro Timer</h3>
           <main>
             <SettingsContext.Provider
               value={{
