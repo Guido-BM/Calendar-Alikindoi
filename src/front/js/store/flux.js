@@ -374,9 +374,15 @@ const getState = ({ getStore, getActions, setStore }) => {
         const store = getStore();
         try {
           const weatherData = await get_weather_city(search);
-          setStore({ ...store, weatherBack: weatherData });
+          if (weatherData.cod && weatherData.cod !== 200) {
+            setStore({ ...store, weatherBack: null });
+            return false;
+          } else {
+            setStore({ ...store, weatherBack: weatherData });
+            return true;
+          }
         } catch (error) {
-          console.error("Error obteniendo el tiempo por ciudad:", error);
+          return false;
         }
       },
     },
