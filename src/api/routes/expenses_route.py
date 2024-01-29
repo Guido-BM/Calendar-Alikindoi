@@ -20,19 +20,7 @@ def get_expense_by_id(expense_id):
     else:
         return jsonify({"error": "Expense not found"}), 404
 
-@expense_api.route('/expenses', methods=['POST'])
-def create_expense():
-    data = request.get_json()
-    amount = data.get('amount')
-    description = data.get('description')
-    date = data.get('date')
-    user_id = data.get('user_id')
 
-    if amount and type and user_id:
-        new_expense = ExpenseService.create_expense(amount, description, category, type, user_id)
-        return jsonify(new_expense.serialize()), 201
-    else:
-        return jsonify({"error": "Amount, type, and user_id are required"}), 400
 
 @expense_api.route('/expenses/<int:expense_id>', methods=['PUT'])
 def update_expense(expense_id):
@@ -73,13 +61,12 @@ def get_expenses_by_user_id(user_id):
 @expense_api.route('/users/<int:user_id>/expenses', methods=['POST'])
 def create_expense_for_user(user_id):
     data = request.get_json()
-    user_id = data.get('user_id')
     amount = data.get('amount')
     date = data.get('date')
     description = data.get('description')
 
-    if amount and user_id and date and description:
-        new_expense = ExpenseService.create_expense(user_id,amount , date,description )
+    if amount and date and description:
+        new_expense = ExpenseService.create_expense(amount, date, description, user_id)
         return jsonify(new_expense.serialize()), 201
     else:
-        return jsonify({"error": "Amount, date, description, and user_id are required"}), 400
+        return jsonify({"error": "Amount, date, and description are required"}), 400

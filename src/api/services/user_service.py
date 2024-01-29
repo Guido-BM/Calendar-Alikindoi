@@ -40,7 +40,7 @@ class UserService:
         db.session.commit()
     
     @staticmethod
-    def create_expense(amount, description, user_id):
+    def create_expense(amount,date, description, user_id):
     # Obtén la fecha de hoy y formatea en el formato adecuado para SQLite (YYYY-MM-DD)
         date = datetime.today().strftime("%Y-%m-%d")
         

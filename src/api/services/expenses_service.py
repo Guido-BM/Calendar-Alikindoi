@@ -13,7 +13,7 @@ class ExpenseService:
         return Expenses.query.get(expense_id)
 
     @staticmethod
-    def create_expense(amount, description, user_id, date=None):
+    def create_expense(amount,date, description, user_id, ):
         # Obtén la fecha de hoy
         date = datetime.today()
         
@@ -43,3 +43,7 @@ class ExpenseService:
     def delete_expense(expense):
         db.session.delete(expense)
         db.session.commit()
+        
+    @staticmethod
+    def get_expenses_by_user_id(user_id):
+        return Expenses.query.filter_by(user_id=user_id).all()
