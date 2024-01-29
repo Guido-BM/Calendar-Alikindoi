@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import "./Wallet.css";
-import { Modal, Button } from "antd";
+import { Modal, Button, message } from "antd";
+import WalletBack from "./WalletBack";
 
 const Wallet = ({ transactions, setTransactions }) => {
   const [visible, setVisible] = useState(false);
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
-  const [type, setType] = useState("expense");
+  const [type, setType] = useState(null);
   const [editMode, setEditMode] = useState(null);
+  const [activeButton, setActiveButton] = useState(null);
 
   const showModal = () => {
     setVisible(true);
@@ -19,11 +21,25 @@ const Wallet = ({ transactions, setTransactions }) => {
 
   const handleCancel = () => {
     setVisible(false);
+    setAmount("");
+    setDescription("");
+    setType(null);
   };
 
   const addTransaction = (e) => {
     e.preventDefault();
-    if (!amount || !description) return;
+    if (!amount || !description) {
+      message.error("Description and amount are required");
+      return;
+    }
+    if (!type) {
+      message.error("Please select a type (income or expense)");
+      return;
+    }
+    if (parseFloat(amount) < 0) {
+      message.error("It is not possible to enter negative numbers");
+      return;
+    }
     const newTransaction = {
       id: Date.now(),
       amount: parseFloat(amount),
@@ -33,24 +49,8 @@ const Wallet = ({ transactions, setTransactions }) => {
     setTransactions([...transactions, newTransaction]);
     setAmount("");
     setDescription("");
-    setType("expense");
-  };
-
-  const deleteTransaction = (id) => {
-    const updatedTransactions = transactions.filter(
-      (transaction) => transaction.id !== id
-    );
-    setTransactions(updatedTransactions);
-  };
-
-  const editTransaction = (id) => {
-    const transactionToEdit = transactions.find(
-      (transaction) => transaction.id === id
-    );
-    setEditMode(id);
-    setAmount(transactionToEdit.amount);
-    setDescription(transactionToEdit.description);
-    setType(transactionToEdit.type);
+    setType(null);
+    message.success("Added successfully, to exit press 'X' or 'ESC'");
   };
 
   const saveEditedTransaction = (e) => {
@@ -69,7 +69,7 @@ const Wallet = ({ transactions, setTransactions }) => {
     setEditMode(null);
     setAmount("");
     setDescription("");
-    setType("expense");
+    setType(null);
   };
 
   const totalIncome = transactions
@@ -111,18 +111,19 @@ const Wallet = ({ transactions, setTransactions }) => {
               placeholder="Amount"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
+              min="0"
             />
             <div>
               <Button
-  className={`button expense ${type === "expense" ? "active" : ""}`}
-  onClick={() => setType("expense")}
->
-  Expense
-</Button>
-<Button
-  className={`button income ${type === "income" ? "active" : ""}`}
-  onClick={() => setType("income")}
->
+                className={`button expense ${type === "expense" ? "active" : ""}`}
+                onClick={() => setType("expense")}
+              >
+                Expense
+              </Button>
+              <Button
+                className={`button income ${type === "income" ? "active" : ""}`}
+                onClick={() => setType("income")}
+              >
                 Income
               </Button>
             </div>
@@ -135,11 +136,7 @@ const Wallet = ({ transactions, setTransactions }) => {
           <br />
           <h3
             className={`difference ${
-              difference > 0
-                ? "positive"
-                : difference < 0
-                ? "negative"
-                : "zero"
+              difference > 0 ? "positive" : difference < 0 ? "negative" : "zero"
             }`}
           >
             Difference: €{difference.toFixed(2)}
@@ -151,4 +148,3 @@ const Wallet = ({ transactions, setTransactions }) => {
 };
 
 export default Wallet;
-

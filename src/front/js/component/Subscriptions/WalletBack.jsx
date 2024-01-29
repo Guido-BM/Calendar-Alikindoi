@@ -19,10 +19,7 @@ const WalletBack = ({ transactions, deleteTransaction }) => {
               {transaction.type === "expense" ? "Expense" : "Income"}
             </div>
             <div>
-              {/* <button onClick={() => editTransaction(transaction.id)}>
-              Edit
-            </button> */}
-              <button onClick={() => deleteTransaction(transaction.id)}>Delete</button>
+              <button className="delete-button" onClick={() => deleteTransaction(transaction.id)}>Delete</button>
             </div>
           </div>
         ))}

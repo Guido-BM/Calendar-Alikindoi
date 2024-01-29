@@ -8,18 +8,23 @@ import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import { FloatButton } from "antd";
 import { LogoutOutlined } from "@ant-design/icons";
+
 import { TeamOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+
 
 import "./home.scss";
 import CardFlip from "../component/Cards/CardFlip";
 import { Weather } from "../component/weather/Weather";
 import { WeatherBack } from "../component/weather/WeatherBack";
 import AliquindoiCalendar from "../component/AliquindoiCalendar/AliquindoiCalendar";
+import { message } from 'antd';
+
 export const Home = () => {
   const { actions } = useContext(Context);
   const navigate = useNavigate();
   const [transactions, setTransactions] = useState([]);
+
   useEffect(() => {
     const url = window.location.href;
     let urlObj = new URL(url);
@@ -30,6 +35,16 @@ export const Home = () => {
       // console.log(token);
     }
   }, []);
+
+  const deleteTransaction = (id) => {
+    const updatedTransactions = transactions.filter(
+      (transaction) => transaction.id !== id
+    );
+    setTransactions(updatedTransactions);
+    message.success('Successfully removed');
+  };
+
+
   return (
     <>
       <div className="home" style={{ height: "100vh" }}>
@@ -51,13 +66,13 @@ export const Home = () => {
                   <Wallet
                     transactions={transactions}
                     setTransactions={setTransactions}
+                    deleteTransaction={deleteTransaction}
                   />
                 }
                 back={
                   <WalletBack
                     transactions={transactions}
-                    // editTransaction={editTransaction}
-                    // deleteTransaction={deleteTransaction}
+                    deleteTransaction={deleteTransaction}
                   />
                 }
               />
