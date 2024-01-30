@@ -89,7 +89,6 @@ export const Home = () => {
 
   useEffect(() => {
     getTransactions();
-    console.log("transactions", transactions);
   }, [store.user]);
 
   return (
@@ -114,6 +113,7 @@ export const Home = () => {
                     transactions={transactions}
                     setTransactions={setTransactions}
                     deleteTransaction={deleteTransaction}
+                    getTransactions={getTransactions}
                   />
                 }
                 back={

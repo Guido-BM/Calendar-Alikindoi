@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Wallet.css";
 import { Modal, Button, message } from "antd";
 import WalletBack from "./WalletBack";
@@ -27,7 +27,19 @@ const Wallet = ({ transactions, setTransactions }) => {
     setType(null);
   };
 
+  const setFormData = (transaction) => {
+    setAmount(transaction.amount);
+    setDescription(transaction.description);
+    setType(transaction.type);
+  };
+
   const addTransaction = async (transaction) => {
+    setFormData({
+      amount: "",
+      description: "",
+      type: null,
+    });
+    setType(null);
     const res = await fetch(
       process.env.BACKEND_URL + `/api/users/${store.user}/expenses`,
       {
@@ -37,7 +49,7 @@ const Wallet = ({ transactions, setTransactions }) => {
           Authorization: `Bearer ${store.token}`,
         },
         body: JSON.stringify({
-          amount: parseFloat(amount),
+          amount: type === "expense" ? -amount : amount,
           date: new Date().toISOString().split("T")[0],
           description: description,
           user_id: store.user,
@@ -58,6 +70,10 @@ const Wallet = ({ transactions, setTransactions }) => {
       })
     );
   };
+
+  useEffect(() => {
+    getTransactions();
+  }, [addTransaction]);
 
   const saveEditedTransaction = (e) => {
     e.preventDefault();
@@ -89,7 +105,7 @@ const Wallet = ({ transactions, setTransactions }) => {
     .filter((transaction) => transaction.type === "expense")
     .reduce((acc, transaction) => acc + +transaction.amount, 0);
 
-  const difference = totalIncome - totalExpense;
+  const difference = totalIncome + totalExpense;
 
   return (
     <>
