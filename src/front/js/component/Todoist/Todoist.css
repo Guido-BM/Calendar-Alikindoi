@@ -64,6 +64,7 @@
 
 .task-container {
   margin-bottom: 7px;
+  border-bottom: 1px solid #142d4c;
 }
 
 .inbox-container {
