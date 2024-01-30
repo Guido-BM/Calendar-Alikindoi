@@ -12,6 +12,7 @@ const PreviewLeft = ({ selectedDate, selectedEvents }) => {
     id: event.id,
     date: event.start_time.format("YYYY-MM-DD"),
     modifier: "success", // You might want to adjust this based on your needs
+    description: event.description,
     title: event.title,
     time: [event.start_time, event.end_time],
   }));

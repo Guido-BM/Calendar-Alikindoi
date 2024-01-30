@@ -21,6 +21,7 @@
   gap: 10px;
   max-height: 180px;
   overflow-y: auto;
+  scrollbar-width: none;
 }
 
 .transactionItem {
@@ -140,17 +141,26 @@
 
 .button.income.active {
   background-color: #32cd32;
-  color: white; 
+  color: white;
 }
 
 .delete-button {
   cursor: pointer;
-  background-color: #142d4c;
-  color: #ececec;
+  background-color: transparent;
+  color: #142d4c;
   border: none;
   border-radius: 4px;
   font-size: 10px;
   padding: 4px 8px;
+}
+
+#trash-button {
+  font-size: 15px;
+}
+
+.delete-button:hover {
+  background-color: #142d4c;
+  color: #9fd3c7;
 }
 
 .transactionInput::placeholder {

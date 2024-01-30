@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Wallet.css";
 import { Modal, Button, message } from "antd";
 import WalletBack from "./WalletBack";
+import { Context } from "../../store/appContext";
 
-const Wallet = ({ transactions, setTransactions }) => {
+const Wallet = ({ transactions, setTransactions, getTransactions }) => {
   const [visible, setVisible] = useState(false);
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [type, setType] = useState(null);
   const [editMode, setEditMode] = useState(null);
-  const [activeButton, setActiveButton] = useState(null);
+  const { store, actions } = useContext(Context);
 
   const showModal = () => {
     setVisible(true);
@@ -26,32 +27,52 @@ const Wallet = ({ transactions, setTransactions }) => {
     setType(null);
   };
 
-  const addTransaction = (e) => {
-    e.preventDefault();
-    if (!amount || !description) {
-      message.error("Description and amount are required");
-      return;
-    }
-    if (!type) {
-      message.error("Please select a type (income or expense)");
-      return;
-    }
-    if (parseFloat(amount) < 0) {
-      message.error("It is not possible to enter negative numbers");
-      return;
-    }
-    const newTransaction = {
-      id: Date.now(),
-      amount: parseFloat(amount),
-      description: description,
-      type: type,
-    };
-    setTransactions([...transactions, newTransaction]);
-    setAmount("");
-    setDescription("");
-    setType(null);
-    message.success("Added successfully, to exit press 'X' or 'ESC'");
+  const setFormData = (transaction) => {
+    setAmount(transaction.amount);
+    setDescription(transaction.description);
+    setType(transaction.type);
   };
+
+  const addTransaction = async (e, transaction) => {
+    e.preventDefault();
+    if (!amount || !description || !type) {
+      message.error("Please fill all the fields and select a type");
+      return;
+    }
+
+    setFormData({
+      amount: "",
+      description: "",
+      type: null,
+    });
+    setType(null);
+    const res = await fetch(
+      process.env.BACKEND_URL + `/api/users/${store.user}/expenses`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${store.token}`,
+        },
+        body: JSON.stringify({
+          amount: type === "expense" ? -amount : amount,
+          date: new Date().toISOString().split("T")[0],
+          description: description,
+          user_id: store.user,
+        }),
+      }
+    );
+    const data = await res.json();
+    if (res.ok) {
+      getTransactions(); // Asegúrate de que esta función está definida y hace lo que esperas
+    } else {
+      console.error("Error al agregar la transacción:", data);
+    }
+  };
+
+  // useEffect(() => {
+  //   getTransactions();
+  // }, [addTransaction]);
 
   const saveEditedTransaction = (e) => {
     e.preventDefault();
@@ -73,14 +94,17 @@ const Wallet = ({ transactions, setTransactions }) => {
   };
 
   const totalIncome = transactions
-    .filter((transaction) => transaction.type === "income")
-    .reduce((acc, transaction) => acc + transaction.amount, 0);
+    .filter((transaction) => {
+      console.log(transaction);
+      return transaction.type === "income";
+    })
+    .reduce((acc, transaction) => acc + +transaction.amount, 0);
 
   const totalExpense = transactions
     .filter((transaction) => transaction.type === "expense")
-    .reduce((acc, transaction) => acc + transaction.amount, 0);
+    .reduce((acc, transaction) => acc + +transaction.amount, 0);
 
-  const difference = totalIncome - totalExpense;
+  const difference = totalIncome + totalExpense;
 
   return (
     <>
@@ -90,12 +114,14 @@ const Wallet = ({ transactions, setTransactions }) => {
         </Button>
         <Modal
           title="Transaction"
-          visible={visible}
+          open={visible}
           onOk={editMode !== null ? saveEditedTransaction : addTransaction}
           onCancel={handleCancel}
         >
           <form
-            onSubmit={editMode !== null ? saveEditedTransaction : addTransaction}
+            onSubmit={
+              editMode !== null ? saveEditedTransaction : addTransaction
+            }
             className="transactionForm"
           >
             <input
@@ -115,7 +141,9 @@ const Wallet = ({ transactions, setTransactions }) => {
             />
             <div>
               <Button
-                className={`button expense ${type === "expense" ? "active" : ""}`}
+                className={`button expense ${
+                  type === "expense" ? "active" : ""
+                }`}
                 onClick={() => setType("expense")}
               >
                 Expense

@@ -29,6 +29,7 @@ const DateCellRender = ({
           />
           {showButtons && (
             <div style={{ display: "flex" }}>
+              <span>{item.description}</span>
               <EventButton
                 onCreate={handleEdit}
                 eventId={item.id}

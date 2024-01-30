@@ -12,16 +12,15 @@ import { LogoutOutlined } from "@ant-design/icons";
 import { TeamOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
-
 import "./home.scss";
 import CardFlip from "../component/Cards/CardFlip";
 import { Weather } from "../component/weather/Weather";
 import { WeatherBack } from "../component/weather/WeatherBack";
 import AliquindoiCalendar from "../component/AliquindoiCalendar/AliquindoiCalendar";
-import { message } from 'antd';
+import { message } from "antd";
 
 export const Home = () => {
-  const { actions } = useContext(Context);
+  const { actions, store } = useContext(Context);
   const navigate = useNavigate();
   const [transactions, setTransactions] = useState([]);
 
@@ -36,14 +35,63 @@ export const Home = () => {
     }
   }, []);
 
-  const deleteTransaction = (id) => {
-    const updatedTransactions = transactions.filter(
-      (transaction) => transaction.id !== id
-    );
-    setTransactions(updatedTransactions);
-    message.success('Successfully removed');
+  const mapperForTransactions = (transactions) => {
+    if (!Array.isArray(transactions)) return [];
+    else
+      return transactions.map((transaction) => {
+        return {
+          id: transaction.id,
+          description: transaction.description,
+          amount: transaction.amount,
+          date: new Date(transaction.date),
+          category: transaction.category,
+          type: transaction.amount > 0 ? "income" : "expense",
+        };
+      });
   };
 
+  const deleteTransaction = async (id) => {
+    try {
+      const res = await fetch(process.env.BACKEND_URL + `/api/expenses/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${store.token}`,
+        },
+      });
+
+      if (res.ok) {
+        const updatedTransactions = transactions.filter(
+          (transaction) => transaction.id !== id
+        );
+        setTransactions(updatedTransactions);
+        message.success("Successfully removed");
+      } else {
+        message.error("Failed to remove");
+      }
+    } catch (error) {
+      console.error(error);
+      message.error("An error occurred");
+    }
+  };
+  const getTransactions = async () => {
+    const res = await fetch(
+      process.env.BACKEND_URL + `/api/expenses/user/${store.user}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${store.token}`,
+        },
+      }
+    );
+    const data = await res.json();
+    setTransactions(mapperForTransactions(data));
+  };
+
+  useEffect(() => {
+    getTransactions();
+  }, [store.user]);
 
   return (
     <>
@@ -67,6 +115,7 @@ export const Home = () => {
                     transactions={transactions}
                     setTransactions={setTransactions}
                     deleteTransaction={deleteTransaction}
+                    getTransactions={getTransactions}
                   />
                 }
                 back={

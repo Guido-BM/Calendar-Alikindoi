@@ -53,9 +53,21 @@
 #previewLeftContainer {
   display: flex;
 }
-#eventsList span {
-  font-size: 20px;
-  font-weight: 600;
+
+#dayOfWeek {
+  color: #142d4c;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+li.listaEventosPreviewLeft {
+  border-bottom: 1px solid #142d4c44;
+}
+
+#eventsList > span {
+  font-size: 15px;
+  font-weight: 200;
 }
 #eventsList {
   height: max-content;
