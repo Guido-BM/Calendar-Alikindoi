@@ -47,6 +47,19 @@
   text-decoration: solid;
 }
 
+.button-todoist-auth {
+  background-color: #142D4C;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px 30px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
 .refresh-icon:hover {
   color: #007bff;
   animation: rotate 1s linear infinite;

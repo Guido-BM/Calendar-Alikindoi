@@ -188,7 +188,7 @@ const Todoist = ({ taskToEdit }) => {
           <h3 className="text text-silver-v1">TODOIST</h3>
         </div>
         <Button
-          type="primary"
+          className="button-todoist-auth"
           property="loading"
           onClick={() =>
           (window.location.href =
