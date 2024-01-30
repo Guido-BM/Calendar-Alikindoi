@@ -109,7 +109,12 @@ const Wallet = ({ transactions, setTransactions, getTransactions }) => {
   return (
     <>
       <div className="container-wallet">
-        <Button className="add-button" type="primary" onClick={showModal}>
+        <Button
+          id="buttoncitolindomio"
+          className="add-button"
+          type="primary"
+          onClick={showModal}
+        >
           ADD TRANSACTION
         </Button>
         <Modal
