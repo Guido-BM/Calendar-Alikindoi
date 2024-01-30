@@ -33,7 +33,13 @@ const Wallet = ({ transactions, setTransactions, getTransactions }) => {
     setType(transaction.type);
   };
 
-  const addTransaction = async (transaction) => {
+  const addTransaction = async (e, transaction) => {
+    e.preventDefault();
+    if (!amount || !description || !type) {
+      message.error("Please fill all the fields and select a type");
+      return;
+    }
+
     setFormData({
       amount: "",
       description: "",
@@ -57,18 +63,11 @@ const Wallet = ({ transactions, setTransactions, getTransactions }) => {
       }
     );
     const data = await res.json();
-    setTransactions(
-      [...transactions, data].map((transaction) => {
-        return {
-          id: transaction.id,
-          description: transaction.description,
-          amount: transaction.amount,
-          date: new Date(transaction.date),
-          category: transaction.category,
-          type: transaction.type,
-        };
-      })
-    );
+    if (res.ok) {
+      getTransactions(); // Asegúrate de que esta función está definida y hace lo que esperas
+    } else {
+      console.error("Error al agregar la transacción:", data);
+    }
   };
 
   // useEffect(() => {

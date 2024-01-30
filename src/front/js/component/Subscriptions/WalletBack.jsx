@@ -23,6 +23,7 @@ const WalletBack = ({ transactions, deleteTransaction }) => {
             <div>
               <button
                 className="delete-button"
+                id="trash-button"
                 onClick={() => deleteTransaction(transaction.id)}
               >
                 <FontAwesomeIcon icon={faTrash} />
