@@ -47,6 +47,19 @@
   text-decoration: solid;
 }
 
+.button-todoist-auth {
+  background-color: #142D4C;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px 30px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
 .refresh-icon:hover {
   color: #007bff;
   animation: rotate 1s linear infinite;
@@ -64,6 +77,7 @@
 
 .task-container {
   margin-bottom: 7px;
+  border-bottom: 1px solid #142d4c;
 }
 
 .inbox-container {
@@ -85,8 +99,8 @@ input[type='radio'] {
 /* Create a custom radio button */
 input[type='radio'] + label {
   position: relative;
-  padding-left: 20px;
-  vertical-align: middle;
+  padding-left: 25px;
+
 }
 
 input[type='radio'] + label:before {
@@ -98,6 +112,7 @@ input[type='radio'] + label:before {
   height: 13px;
   border-radius: 50%;
   opacity: 0.5;
+  border: solid;
 }
 
 input.priority-1 + label:before {
