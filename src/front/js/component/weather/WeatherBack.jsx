@@ -2,28 +2,30 @@ import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../../store/appContext";
 import WeatherIcons from "./WeatherIcons";
 import "./WeatherBack.css";
+import { message } from "antd";
 
 export const WeatherBack = () => {
   const { store, actions } = useContext(Context);
   const [search, setSearch] = useState("");
-  // const [values, setValues] = useState('');
 
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     if (e.key === "Enter") {
-      actions.getWeatherByCity(search);
+      const result = await actions.getWeatherByCity(search);
+      if (!result) {
+        message.error(`City '${search}' not found`);
+      }
       setSearch("");
     }
   };
+
   useEffect(() => {
     let timer;
     let i = 0;
     const mouthElement = document.getElementById("mouth");
-
     if (!mouthElement) {
       console.error("Elemento $mouth no encontrado.");
       return;
     }
-
     timer = setInterval(() => {
       mouthElement.classList.toggle("mouth--open");
       if (i === 6) {
@@ -31,7 +33,6 @@ export const WeatherBack = () => {
       }
       i++;
     }, 300);
-
     return () => {
       clearInterval(timer);
     };
@@ -46,7 +47,6 @@ export const WeatherBack = () => {
           <p className="description-back">{store.weatherBack?.weather[0]?.description}</p>
         </div>
       </div>
-
       <div className="temperature-info-back">
         <div className="ghost-container">
           <div className="chat-buble" id="ghost-buble"></div>
@@ -65,7 +65,6 @@ export const WeatherBack = () => {
                 <div className="eyes-l"></div>
                 <div className="eyes-r"></div>
               </div>
-              {/* <div className="mouth"></div> */}
             </div>
             <div className="torso"></div>
             <div className="hands">
@@ -75,11 +74,9 @@ export const WeatherBack = () => {
             <div className="legs"></div>
           </div>
         </div>
-
         <span className="degrees-back">
           {store.weatherBack?.main.temp.toFixed(0)}ºC
         </span>
-
         <span className="temp_range-back">
           {store.weatherBack?.main?.temp_min.toFixed(0)}ºC/
           {store.weatherBack?.main?.temp_max.toFixed(0)}ºC
@@ -88,3 +85,7 @@ export const WeatherBack = () => {
     </div>
   );
 };
+
+
+
+
