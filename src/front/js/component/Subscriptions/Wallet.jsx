@@ -4,7 +4,7 @@ import { Modal, Button, message } from "antd";
 import WalletBack from "./WalletBack";
 import { Context } from "../../store/appContext";
 
-const Wallet = ({ transactions, setTransactions }) => {
+const Wallet = ({ transactions, setTransactions, getTransactions }) => {
   const [visible, setVisible] = useState(false);
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
@@ -71,9 +71,9 @@ const Wallet = ({ transactions, setTransactions }) => {
     );
   };
 
-  useEffect(() => {
-    getTransactions();
-  }, [addTransaction]);
+  // useEffect(() => {
+  //   getTransactions();
+  // }, [addTransaction]);
 
   const saveEditedTransaction = (e) => {
     e.preventDefault();

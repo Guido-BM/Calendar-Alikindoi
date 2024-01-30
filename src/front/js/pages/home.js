@@ -36,16 +36,18 @@ export const Home = () => {
   }, []);
 
   const mapperForTransactions = (transactions) => {
-    return transactions.map((transaction) => {
-      return {
-        id: transaction.id,
-        description: transaction.description,
-        amount: transaction.amount,
-        date: new Date(transaction.date),
-        category: transaction.category,
-        type: transaction.amount > 0 ? "income" : "expense",
-      };
-    });
+    if (!Array.isArray(transactions)) return [];
+    else
+      return transactions.map((transaction) => {
+        return {
+          id: transaction.id,
+          description: transaction.description,
+          amount: transaction.amount,
+          date: new Date(transaction.date),
+          category: transaction.category,
+          type: transaction.amount > 0 ? "income" : "expense",
+        };
+      });
   };
 
   const deleteTransaction = async (id) => {
