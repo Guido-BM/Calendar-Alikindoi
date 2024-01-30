@@ -15,7 +15,7 @@ import "./Todoist.css";
 import { Button } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSyncAlt } from "@fortawesome/free-solid-svg-icons";
-import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import useTodoistService from "./useTodoistService.jsx";
 
 const Todoist = ({ taskToEdit }) => {
@@ -125,6 +125,9 @@ const Todoist = ({ taskToEdit }) => {
         </div>
         <div className="grid-c3">
           <div className="inbox-container">
+            <span className="inbox-icon">
+              <FontAwesomeIcon icon={faCheck} color="black" />
+            </span>
             <h4 className="inbox-title">Inbox</h4>
             <FontAwesomeIcon
               icon={faSyncAlt}
@@ -188,8 +191,8 @@ const Todoist = ({ taskToEdit }) => {
           type="primary"
           property="loading"
           onClick={() =>
-            (window.location.href =
-              "https://sample-service-name-gn1r.onrender.com/api/todoist/auth")
+          (window.location.href =
+            "https://sample-service-name-gn1r.onrender.com/api/todoist/auth")
           }
         >
           LogIn TODOIST

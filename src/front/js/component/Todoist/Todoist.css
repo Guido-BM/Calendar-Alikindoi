@@ -85,8 +85,8 @@ input[type='radio'] {
 /* Create a custom radio button */
 input[type='radio'] + label {
   position: relative;
-  padding-left: 20px;
-  vertical-align: middle;
+  padding-left: 25px;
+
 }
 
 input[type='radio'] + label:before {
@@ -98,6 +98,7 @@ input[type='radio'] + label:before {
   height: 13px;
   border-radius: 50%;
   opacity: 0.5;
+  border: solid;
 }
 
 input.priority-1 + label:before {
