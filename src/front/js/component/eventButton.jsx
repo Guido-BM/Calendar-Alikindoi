@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Input, Modal, TimePicker, Button } from "antd";
+import { Form, Input, Modal, TimePicker, Button, message } from "antd";
 
 const CollectionCreateForm = ({ open, onCreate, onCancel, title, eventId }) => {
   const [form] = Form.useForm();
@@ -20,7 +20,7 @@ const CollectionCreateForm = ({ open, onCreate, onCancel, title, eventId }) => {
             onCancel();
           })
           .catch((info) => {
-            // console.log('Validate Failed:', info);
+            message.error("Please check your input and try again.");
           });
       }}
     >
@@ -38,13 +38,22 @@ const CollectionCreateForm = ({ open, onCreate, onCancel, title, eventId }) => {
           rules={[
             {
               required: true,
-              message: "Please input the title of collection!",
+              message: "Please input the title!",
             },
           ]}
         >
           <Input />
         </Form.Item>
-        <Form.Item name="description" label="Description">
+        <Form.Item
+          name="description"
+          label="Description"
+          rules={[
+            {
+              required: true,
+              message: "Please input the description!",
+            },
+          ]}
+        >
           <Input.TextArea />
         </Form.Item>
         <Form.Item

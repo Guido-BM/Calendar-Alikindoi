@@ -28,8 +28,10 @@ const DateCellRender = ({
             }`}
           />
           {showButtons && (
-            <div style={{ display: "flex" }}>
-              <span>{item.description}</span>
+            <div style={{ display: "flex", flexGrow: "1" }}>
+              <span style={{ flexGrow: "1", paddingLeft: "15px" }}>
+                {item.description}
+              </span>
               <EventButton
                 onCreate={handleEdit}
                 eventId={item.id}
