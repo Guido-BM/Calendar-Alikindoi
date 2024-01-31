@@ -11,7 +11,6 @@ import {
 import "./TaskModal.css";
 import useTodoistService from "../../component/Todoist/useTodoistService.jsx";
 const TaskModal = ({ setTasks }) => {
-  // <-- Aquí recibes setTasks como una prop
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [content, setContent] = useState("");
@@ -36,7 +35,7 @@ const TaskModal = ({ setTasks }) => {
         setTasks(tasks);
       });
     }
-  }, [isModalOpen, addTask]);
+  }, [isModalOpen]);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -56,8 +55,9 @@ const TaskModal = ({ setTasks }) => {
         dueDate,
         dueDatetime,
       };
-      const response = await addTask(task).then(() => getTasks());
-      console.log(response);
+      await addTask(task);
+      const tasks = await getTasks();
+      setTasks(tasks);
       setContent("");
       setIsModalOpen(false);
     } catch (error) {
