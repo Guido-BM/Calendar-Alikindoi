@@ -7,11 +7,13 @@ import {
   DatePicker,
   AutoComplete,
   TimePicker,
+  message,
 } from "antd";
 import "./TaskModal.css";
 import useTodoistService from "../../component/Todoist/useTodoistService.jsx";
 const TaskModal = ({ setTasks }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [content, setContent] = useState("");
   const [description, setDescription] = useState("");
@@ -28,23 +30,15 @@ const TaskModal = ({ setTasks }) => {
   ];
   const { Option } = Select;
 
-  useEffect(() => {
-    if (isModalOpen) {
-      // Reemplaza esto con tu función para obtener proyectos de la API de Todoist
-      getTasks().then((tasks) => {
-        setTasks(tasks);
-      });
-    }
-  }, [isModalOpen]);
-
   const showModal = () => {
     setIsModalOpen(true);
   };
 
   const handleOk = async () => {
     try {
+      setIsLoading(true);
       if (!content) {
-        alert("Please enter a task name");
+        message.error("Please enter a task name");
         return;
       }
       const task = {
@@ -59,9 +53,16 @@ const TaskModal = ({ setTasks }) => {
       const tasks = await getTasks();
       setTasks(tasks);
       setContent("");
+      setDescription("");
+      setPriority(1);
+      setDueString("");
+      setDueDate("");
+      setDueDatetime("");
       setIsModalOpen(false);
     } catch (error) {
       console.error("Error adding task:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 

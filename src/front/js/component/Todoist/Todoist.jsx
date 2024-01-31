@@ -1,12 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import {
-  getTasks,
-  addTask,
-  updateTask,
-  deleteTask,
-  closeTask,
-  getProjects,
-} from "../../store/todoistService.js";
+
 import TaskModal from "./TaskModal.jsx";
 import TaskModalEdit from "./TaskModalEdit.jsx";
 import { Link } from "react-router-dom";
@@ -24,8 +17,7 @@ const Todoist = ({ taskToEdit }) => {
   const tokenTodoist = localStorage.getItem("tokenTodoist");
   const [selectedTask, setSelectedTask] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
-  const { getTasks } = useTodoistService();
-  const { addTask } = useTodoistService();
+  const { getTasks, addTask, closeTask } = useTodoistService();
 
   const markTaskComplete = async (taskId) => {
     if (typeof taskId !== "string") {

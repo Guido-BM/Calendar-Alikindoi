@@ -31,6 +31,8 @@ export const Home = () => {
     let token = urlObj.searchParams.get("accessToken");
     if (token) {
       actions.setTokenTodoist(token);
+    } else if (!store.tokenTodoist && localStorage.getItem("tokenTodoist")) {
+      actions.setTokenTodoist(localStorage.getItem("tokenTodoist"));
     }
   }, []);
 
