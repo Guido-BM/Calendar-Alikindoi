@@ -30,8 +30,6 @@ export const Home = () => {
     let token = urlObj.searchParams.get("accessToken");
     if (token) {
       actions.setTokenTodoist(token);
-      // navigate("/home");
-      // console.log(token);
     }
   }, []);
 
