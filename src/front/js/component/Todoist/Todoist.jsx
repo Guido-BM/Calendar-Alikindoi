@@ -157,6 +157,7 @@ const Todoist = ({ taskToEdit }) => {
                 {task.content}
                 <TaskModalEdit
                   taskToUpdate={taskToUpdate}
+                  setTasks={setTasks}
                   onClose={handleClose}
                   isModalOpen={isModalOpen}
                   setIsModalOpen={setIsModalOpen}
@@ -178,7 +179,7 @@ const Todoist = ({ taskToEdit }) => {
             />
           )}
         </div>
-        <TaskModal addNewTask={addNewTask} />
+        <TaskModal addNewTask={addNewTask} setTasks={setTasks} />
       </div>
     );
   } else {
@@ -191,8 +192,8 @@ const Todoist = ({ taskToEdit }) => {
           className="button-todoist-auth"
           property="loading"
           onClick={() =>
-          (window.location.href =
-            "https://sample-service-name-gn1r.onrender.com/api/todoist/auth")
+            (window.location.href =
+              "https://sample-service-name-gn1r.onrender.com/api/todoist/auth")
           }
         >
           LogIn TODOIST
