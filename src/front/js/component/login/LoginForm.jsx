@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import "./LoginForm.css";
 import { Context } from "../../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
+import { message } from "antd";
 
 export const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -15,9 +16,10 @@ export const LoginForm = () => {
     const loginSuccessful = await actions.setToken(email, password);
     // console.log("loginSuccessful", loginSuccessful); // add this line
     if (loginSuccessful) {
+      message.success("Welcome Back!");
       navigate("/");
     } else {
-      setErrorMessage("Credenciales incorrectas");
+      message.error("Something went wrong!");
     }
   };
   return (

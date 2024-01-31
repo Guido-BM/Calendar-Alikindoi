@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Register.css";
 import { Context } from "../../store/appContext";
+import { message } from "antd";
 
 export const Register = () => {
   const { store, actions } = useContext(Context);
@@ -23,10 +24,10 @@ export const Register = () => {
       username
     );
     if (response) {
-      alert("Usuario creado");
+      message.success("Welcome to the club!");
       navigate("/");
     } else {
-      alert("Usuario no creado");
+      message.error("Something went wrong!");
     }
   };
 
