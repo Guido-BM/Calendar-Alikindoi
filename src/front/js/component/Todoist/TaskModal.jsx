@@ -109,13 +109,6 @@ const TaskModal = ({ setTasks }) => {
           </Select>
         </div>
         <div className="input-container">
-          <label className="input-label">Due Date Selector</label>
-          <AutoComplete
-            options={dueStringOptions.map((option) => ({ value: option }))}
-            value={dueString}
-            onChange={(value) => setDueString(value)}
-            placeholder="Due String"
-          />
           <DatePicker
             className="date-picker"
             format="YYYY-MM-DD"
