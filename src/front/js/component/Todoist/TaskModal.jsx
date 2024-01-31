@@ -56,7 +56,7 @@ const TaskModal = () => {
         dueDatetime,
         project_id: project,
       };
-      const response = await addTask(task);
+      const response = await addTask(task).then(() => getTasks());
       console.log(response);
       setContent("");
       setProject(null);
