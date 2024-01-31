@@ -18,6 +18,7 @@ import { Weather } from "../component/weather/Weather";
 import { WeatherBack } from "../component/weather/WeatherBack";
 import AliquindoiCalendar from "../component/AliquindoiCalendar/AliquindoiCalendar";
 import { message } from "antd";
+import CardWallet from "../component/Cards/CardWallet";
 
 export const Home = () => {
   const { actions, store } = useContext(Context);
@@ -109,7 +110,7 @@ export const Home = () => {
             <div className="content-grid-one">
               <CardFlip front={<Weather />} back={<WeatherBack />} />
               {/* <Cards /> */}
-              <CardFlip
+              <CardWallet
                 front={
                   <Wallet
                     transactions={transactions}
