@@ -1,12 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import {
-  getTasks,
-  addTask,
-  updateTask,
-  deleteTask,
-  closeTask,
-  getProjects,
-} from "../../store/todoistService.js";
+import { closeTask } from "../../store/todoistService.js";
 import TaskModal from "./TaskModal.jsx";
 import TaskModalEdit from "./TaskModalEdit.jsx";
 import { Link } from "react-router-dom";
@@ -81,7 +74,17 @@ const Todoist = ({ taskToEdit }) => {
 
   const addNewTask = (newTask) => {
     setTasks((prevTasks) => [...prevTasks, newTask]);
+    getTasks().then((tasks) => {
+      setTasks(tasks);
+    }
+    )
   };
+
+  const setTask = (task) => {
+    getTasks().then((tasks) => {
+      setTasks(tasks);
+    })
+  }
 
   const handleEditClick = (event, task) => {
     setSelectedTask(task);
@@ -178,7 +181,7 @@ const Todoist = ({ taskToEdit }) => {
             />
           )}
         </div>
-        <TaskModal addNewTask={addNewTask} />
+        <TaskModal addNewTask={addNewTask} setTasks={setTask} />
       </div>
     );
   } else {
