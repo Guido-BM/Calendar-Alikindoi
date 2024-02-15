@@ -18,6 +18,7 @@ import { Weather } from "../component/weather/Weather";
 import { WeatherBack } from "../component/weather/WeatherBack";
 import AliquindoiCalendar from "../component/AliquindoiCalendar/AliquindoiCalendar";
 import { message } from "antd";
+import CardWallet from "../component/Cards/CardWallet";
 
 export const Home = () => {
   const { actions, store } = useContext(Context);
@@ -30,8 +31,8 @@ export const Home = () => {
     let token = urlObj.searchParams.get("accessToken");
     if (token) {
       actions.setTokenTodoist(token);
-      // navigate("/home");
-      // console.log(token);
+    } else if (!store.tokenTodoist && localStorage.getItem("tokenTodoist")) {
+      actions.setTokenTodoist(localStorage.getItem("tokenTodoist"));
     }
   }, []);
 
@@ -109,7 +110,7 @@ export const Home = () => {
             <div className="content-grid-one">
               <CardFlip front={<Weather />} back={<WeatherBack />} />
               {/* <Cards /> */}
-              <CardFlip
+              <CardWallet
                 front={
                   <Wallet
                     transactions={transactions}

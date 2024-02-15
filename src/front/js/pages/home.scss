@@ -74,7 +74,11 @@ a {
   display: flex;
   min-height: 100vh;
 }
-
+div.ant-picker-panel *{
+    overflow: auto !important; 
+    scrollbar-width: none !important; 
+    padding: 0 !important;
+}
 /* commons */
 .lg-value {
   font-size: 24px;

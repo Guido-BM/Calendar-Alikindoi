@@ -5,6 +5,7 @@ import { Context } from "../store/appContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt, faPlus } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
+import { message } from "antd";
 
 const PreviewLeft = ({ selectedDate, selectedEvents }) => {
   const { store, actions } = useContext(Context);
@@ -17,6 +18,10 @@ const PreviewLeft = ({ selectedDate, selectedEvents }) => {
     time: [event.start_time, event.end_time],
   }));
   const addEvents = async (values) => {
+    if (!Array.isArray(values.time)) {
+      message.error("Event not created, select a time range");
+      return;
+    }
     const [start, end] = values.time;
 
     // Ajusta las horas, minutos y segundos de la fecha seleccionada
@@ -59,6 +64,10 @@ const PreviewLeft = ({ selectedDate, selectedEvents }) => {
     actions.saveEvent(event);
   };
   const updateEvent = async (values) => {
+    if (!Array.isArray(values.time)) {
+      message.error("Event not created, select a time range");
+      return;
+    }
     const [start, end] = values.time;
     // Ajusta las horas, minutos y segundos de la fecha seleccionada
     const eventStart = new Date(

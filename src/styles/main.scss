@@ -5,7 +5,11 @@
 @import "./_footer.scss";
 #app {
   font-size: $font-size;
-  background-color: #9fd3c7;
+  background-color: #9FD3C7;
   height: 100vh;
   background-image: url("../front/img/bg-2.png");
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
 }

@@ -7,19 +7,21 @@ import {
   DatePicker,
   AutoComplete,
   TimePicker,
+  message,
 } from "antd";
-import { getProjects, addProject } from "../../store/todoistService.js";
 import "./TaskModal.css";
 import useTodoistService from "../../component/Todoist/useTodoistService.jsx";
-const TaskModal = () => {
+const TaskModal = ({ setTasks }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const [content, setContent] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState(1);
   const [dueString, setDueString] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [dueDatetime, setDueDatetime] = useState("");
-  const { addTask } = useTodoistService();
+  const { addTask, getTasks } = useTodoistService();
   const dueStringOptions = [
     "next Monday",
     "Tomorrow",
@@ -27,15 +29,6 @@ const TaskModal = () => {
     "next week",
   ];
   const { Option } = Select;
-  const [projects, setProjects] = useState([]);
-  const [project, setProject] = useState(null);
-
-  useEffect(() => {
-    if (isModalOpen) {
-      // Reemplaza esto con tu función para obtener proyectos de la API de Todoist
-      getProjects().then(setProjects);
-    }
-  }, [isModalOpen]);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -43,8 +36,9 @@ const TaskModal = () => {
 
   const handleOk = async () => {
     try {
+      setIsLoading(true);
       if (!content) {
-        alert("Please select a Project and enter a task name");
+        message.error("Please enter a task name");
         return;
       }
       const task = {
@@ -54,15 +48,21 @@ const TaskModal = () => {
         dueString,
         dueDate,
         dueDatetime,
-        project_id: project,
       };
-      const response = await addTask(task);
-      console.log(response);
+      await addTask(task);
+      const tasks = await getTasks();
+      setTasks(tasks);
       setContent("");
-      setProject(null);
+      setDescription("");
+      setPriority(1);
+      setDueString("");
+      setDueDate("");
+      setDueDatetime("");
       setIsModalOpen(false);
     } catch (error) {
       console.error("Error adding task:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -85,20 +85,6 @@ const TaskModal = () => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <div className="input-container">
-          <label className="input-label">Project</label>
-          <Select
-            placeholder="Select Project"
-            value={project}
-            onChange={(value) => setProject(value)}
-          >
-            {projects.map((project) => (
-              <Select.Option key={project.id} value={project.id}>
-                {project.name}
-              </Select.Option>
-            ))}
-          </Select>
-        </div>
         <div className="input-container">
           <Input
             placeholder="Enter task content"
@@ -123,13 +109,6 @@ const TaskModal = () => {
           </Select>
         </div>
         <div className="input-container">
-          <label className="input-label">Due Date Selector</label>
-          <AutoComplete
-            options={dueStringOptions.map((option) => ({ value: option }))}
-            value={dueString}
-            onChange={(value) => setDueString(value)}
-            placeholder="Due String"
-          />
           <DatePicker
             className="date-picker"
             format="YYYY-MM-DD"

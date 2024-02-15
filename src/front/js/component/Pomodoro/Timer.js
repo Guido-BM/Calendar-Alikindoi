@@ -6,7 +6,7 @@ import SettingsButton from "./SettingsButton";
 import React, { useContext, useState, useEffect, useRef } from "react";
 import SettingsContext from "./SettingsContext";
 import { Link } from "react-router-dom";
-import { FloatButton } from "antd";
+import { FloatButton, message } from "antd";
 import { TeamOutlined } from "@ant-design/icons";
 
 const red = "#385170";
@@ -43,7 +43,7 @@ function Timer() {
       secondsLeftRef.current = nextSeconds;
     }
 
-    secondsLeftRef.current = settingsInfo.workMinutes * 60;
+    // secondsLeftRef.current = settingsInfo.workMinutes * 60;
     setSecondsLeft(secondsLeftRef.current);
 
     const interval = setInterval(() => {
@@ -51,6 +51,7 @@ function Timer() {
         return;
       }
       if (secondsLeftRef.current === 0) {
+        message.info("Time is up!");
         return switchMode();
       }
 

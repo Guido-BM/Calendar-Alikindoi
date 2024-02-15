@@ -39,7 +39,7 @@ const Wallet = ({ transactions, setTransactions, getTransactions }) => {
       message.error("Please fill all the fields and select a type");
       return;
     }
-
+  
     setFormData({
       amount: "",
       description: "",
@@ -64,9 +64,10 @@ const Wallet = ({ transactions, setTransactions, getTransactions }) => {
     );
     const data = await res.json();
     if (res.ok) {
-      getTransactions(); // Asegúrate de que esta función está definida y hace lo que esperas
+      getTransactions();
+      message.success('Transaction created');
     } else {
-      console.error("Error al agregar la transacción:", data);
+      console.error("Error adding transaction:", data);
     }
   };
 

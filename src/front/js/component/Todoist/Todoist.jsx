@@ -17,8 +17,7 @@ const Todoist = ({ taskToEdit }) => {
   const tokenTodoist = localStorage.getItem("tokenTodoist");
   const [selectedTask, setSelectedTask] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
-  const { getTasks } = useTodoistService();
-  const { addTask } = useTodoistService();
+  const { getTasks, addTask, closeTask } = useTodoistService();
 
   const markTaskComplete = async (taskId) => {
     if (typeof taskId !== "string") {
@@ -160,6 +159,7 @@ const Todoist = ({ taskToEdit }) => {
                 {task.content}
                 <TaskModalEdit
                   taskToUpdate={taskToUpdate}
+                  setTasks={setTasks}
                   onClose={handleClose}
                   isModalOpen={isModalOpen}
                   setIsModalOpen={setIsModalOpen}
